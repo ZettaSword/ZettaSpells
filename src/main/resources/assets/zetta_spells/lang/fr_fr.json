@@ -41,7 +41,7 @@
   "spellbook.byAuthor": "Livre de sorts de %s",
   "spellbook.shift_for_details": "Appuyez sur la touche Maj pour voir le sort.",
 
-  "spell.zetta_spells.heat_healing": "Guérison par Chaleur",
+  "spell.zetta_spells.heat_healing": "Soin de Chaleur",
   "spell.zetta_spells.heat_healing.desc": "Soigne considérablement le lanceur de sort. Si le lanceur de sort a trop de points de vie pour le feu, celui-ci se mettra à brûler et laissera des traces de feu derrière lui.",
 
   "spell.zetta_spells.magic_restoration": "Restauration magique",
