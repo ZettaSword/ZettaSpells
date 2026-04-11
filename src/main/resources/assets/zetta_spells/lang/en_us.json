@@ -77,6 +77,12 @@
   "spell.zetta_spells.summon_bee": "Summon Bee",
   "spell.zetta_spells.summon_bee.desc": "You summon Bees so they can BEE with you to fight of your enemies!",
 
+  "spell.zetta_spells.explosion": "Explosion",
+  "spell.zetta_spells.explosion.desc": "A spell to create explosion at the pointed place!",
+
+  "spell.zetta_spells.pull": "Pull",
+  "spell.zetta_spells.pull.desc": "Pull entities to you... though not sure you want to attract zombies.",
+
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
 

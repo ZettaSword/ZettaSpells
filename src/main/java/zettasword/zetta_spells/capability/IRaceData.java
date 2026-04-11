@@ -13,6 +13,8 @@ public interface IRaceData {
 
     void addSpellKnowledge(Spell spell, int add_knowledge);
 
+    void setSpellKnowledge(Spell spell, int knowledge_set);
+
     void setRace(String race);
     String getRace();
 

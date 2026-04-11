@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -12,6 +13,7 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.TextProcessingUtil;
 import zettasword.zetta_spells.system.spellcreation.light.WordsDynamicLighting;
@@ -68,6 +70,16 @@ public class MagicWordsCreator {
                     }
                 }
             }
+
+            if (target.getTargetEntity() instanceof LivingEntity living) {
+                if (current.equals("watero")) {
+                    if (!level.isClientSide) {
+                        Alchemy.apply(living, 60, 0, MobEffects.WATER_BREATHING);
+                    }
+                }
+            }
+
+
 
             previous = current;
         }

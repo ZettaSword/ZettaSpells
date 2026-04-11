@@ -71,6 +71,13 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
     }
 
     @Override
+    public void setSpellKnowledge(Spell spell, int knowledge_set){
+        if (spell instanceof NoneSpell) return;
+        spellsKnowledge.put(spell, Math.max(knowledge_set, 0));
+        sync();
+    }
+
+    @Override
     public void setRace(String race) {
         this.race=race;
         sync();

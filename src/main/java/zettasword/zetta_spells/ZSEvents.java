@@ -45,7 +45,6 @@ import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
-import zettasword.zetta_spells.items.NecromancerStaffItem;
 import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.system.Alchemy;
@@ -234,8 +233,6 @@ public class ZSEvents {
             // Create the Soul Vessel
             DeathVesselEntity vessel = new DeathVesselEntity(ZSEntities.DEATH_VESSEL.get(), level);
             vessel.setPos(dyingEntity.position());
-            CompoundTag persistentData = dyingEntity.getPersistentData();
-            persistentData.putBoolean(TAG_RESURRECTED, true);
 
             // Store the data
             vessel.storeEntityData(dyingEntity);
@@ -252,7 +249,8 @@ public class ZSEvents {
         CompoundTag persistentData = entity.getPersistentData();
 
         // 3. Check if drops should be suppressed
-        if (persistentData.getBoolean(TAG_RESURRECTED)) {
+        if (persistentData.contains(TAG_RESURRECTED) && persistentData.getBoolean(TAG_RESURRECTED)) {
+            ZettaSpellsMod.LOGGER.warn("Resurrected entity: {}", entity.getName().getString());
             event.setCanceled(true); // Prevent all drops
             persistentData.remove(TAG_RESURRECTED); // Cleanup tag
         }
@@ -299,8 +297,9 @@ public class ZSEvents {
                 // Adding to spell potency and more!
                 if (knowledge > 0 && !event.getLevel().isClientSide){
                     SpellModifiers mods = event.getModifiers();
-                    mods.set(SpellModifiers.POTENCY, Math.max(mods.get(SpellModifiers.POTENCY) + (knowledge * 0.0001F), 5.0F));
+                    mods.set(SpellModifiers.POTENCY, Math.min(mods.get(SpellModifiers.POTENCY) + (knowledge * 0.0001F), 100.0F)); // Yeah, crazy stuff, I know.
                     mods.set(SpellModifiers.COST, Math.max(mods.get(SpellModifiers.POTENCY) - (knowledge * 0.0001F), 0.5F));
+                    event.getModifiers().combine(mods);
                 }
             });
         }

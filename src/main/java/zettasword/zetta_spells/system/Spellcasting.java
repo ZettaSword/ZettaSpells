@@ -315,6 +315,7 @@ public class Spellcasting {
                             sigil.setPos(caster.getPosition(1.0F));
                             world.addFreshEntity(sigil);
                         }
+
                         sigilDefault = false;
                     }
                 }

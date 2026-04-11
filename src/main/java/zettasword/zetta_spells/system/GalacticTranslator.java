@@ -23,11 +23,11 @@ public class GalacticTranslator {
             "ᑑ", // Q
             "∷", // R
             "ᓭ", // S
-            "ℸ ̣̣", // T (Note: Contains combining character)
+            "ℸ ̣̣", // T
             "⚍", // U
             "⍊", // V
             "∴", // W
-            "̇̇/", // X (Note: Contains combining character)
+            "̇̇/", // X
             "||", // Y
             "⨅"  // Z
     };

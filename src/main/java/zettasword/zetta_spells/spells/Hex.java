@@ -18,6 +18,7 @@ import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.NeutralMob;
@@ -29,7 +30,10 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class Hex extends RaySpell {
     public Hex(){
@@ -43,16 +47,20 @@ public class Hex extends RaySpell {
     @Override
     protected boolean onEntityHit(CastContext ctx, EntityHitResult entityHit, Vec3 origin) {
         if (entityHit.getEntity() instanceof LivingEntity living){
-            int amount = (int) living.getActiveEffects().stream().filter(effect ->
-                    (!effect.getEffect().isBeneficial() && !(effect.getEffect() instanceof CurseMobEffect))).count();
+            int amount = (int) living.getActiveEffects().stream().filter(effectInstance -> !effectInstance.getEffect().isBeneficial()).count();
             if (amount == 0) return false;
             if (!ctx.world().isClientSide){
+                List<MobEffect> list = Lists.newArrayList();
                 living.getActiveEffects().forEach(effect -> {
-                    if (!effect.getEffect().isBeneficial() && !(effect.getEffect() instanceof CurseMobEffect)){
-                        living.removeEffect(effect.getEffect());
+                    if (effect != null && !effect.getEffect().isBeneficial()){
+                        list.add(effect.getEffect());
                     }
                 });
-                return MagicDamageSource.causeMagicDamage(ctx.caster(), living, 4 * amount, EBDamageSources.MAGIC);
+                for (MobEffect effect : list){
+                    living.removeEffect(effect);
+                }
+                living.hurt(MagicDamageSource.causeDirectMagicDamage(ctx.caster(), EBDamageSources.MAGIC),
+                        4 * amount * ctx.modifiers().get(SpellModifiers.POTENCY));
             }
             return true;
         }

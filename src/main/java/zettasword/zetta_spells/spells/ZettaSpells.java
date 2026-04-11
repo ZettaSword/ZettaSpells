@@ -21,6 +21,9 @@ public class ZettaSpells {
     public static final RegistryObject<Spell> SUMMON_RABBIT = SPELLS.register("summon_rabbit", SummonRabbit::new);
     public static final RegistryObject<Spell> ORIGIN = SPELLS.register("origin", Origin::new);
     public static final RegistryObject<Spell> SUMMON_BEE = SPELLS.register("summon_bee", SummonBee::new);
+    public static final RegistryObject<Spell> EXPLOSION = SPELLS.register("explosion", ExplosionSpell::new);
+    public static final RegistryObject<Spell> PULL = SPELLS.register("pull", Pull::new);
+
 
     //TODO: Add sounds to sounds.json for all spells...
 }

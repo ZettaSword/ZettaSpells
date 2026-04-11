@@ -1,8 +1,14 @@
 package zettasword.zetta_spells;
 
+import com.binaris.wizardry.content.command.argument.SpellArgument;
+import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.datagen.provider.EBRecipeProvider;
 import com.binaris.wizardry.setup.registries.EBCreativeTabs;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.logging.LogUtils;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -14,6 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,6 +39,7 @@ import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.spells.ZettaSpells;
+import zettasword.zetta_spells.system.commands.SpellKnowledgeCommand;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ZettaSpellsMod.MODID)
@@ -100,6 +108,11 @@ public class ZettaSpellsMod
             event.accept(ZSItems.NECROMANCER_STAFF);
             event.accept(ZSItems.GOLDEN_ASTRAL_DIAMOND);
         }
+    }
+
+    @SubscribeEvent
+    public void registerCommands(RegisterCommandsEvent event) {
+        SpellKnowledgeCommand.register(event);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
