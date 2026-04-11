@@ -1,0 +1,88 @@
+{
+  "item.zetta_spells.unfinished_spellbook": "Livre de Sort inachevé",
+  "item.zetta_spells.finished_spellbook": "Livre de Sort",
+  "item.zetta_spells.finished_spellbook_fail": "Vous n'avez pas assez de mana pour lancer le sort !",
+  "item.zetta_spells.golden_astral_diamond": "Diamant astral doré",
+  "item.zetta_spells.golden_astral_diamond.desc": "À utiliser sur n'importe quel sbire pour prolonger sa durée de vie indéfiniment.",
+  "item.zetta_spells.necromancer_staff": "Bâton de Nécromancien",
+  "item.zetta_spells.necromancer_staff.desc": "Utilise-le sur votre sbire pour faire quelque chose.",
+  "item.zetta_spells.necromancer_staff.use1": "Je reste ici, Maître !",
+  "item.zetta_spells.necromancer_staff.use2": "Je vous suis, Maître !",
+  "item.zetta_spells.necromancer_staff.mode.command": "Mode: Commander Sbire",
+  "item.zetta_spells.necromancer_staff.mode.equip": "Mode : Équiper Sbire",
+  "item.zetta_spells.necromancer_staff.mode.toggle": "Appuyez sur Maj + Clic droit pour basculer entre les modes",
+  "item.zetta_spells.necromancer_staff.mode.command.active": "Réglage du Bâton : Mode Commande",
+  "item.zetta_spells.necromancer_staff.mode.equip.active": "Réglage du Bâton : Mode Équipement",
+  "item.zetta_spells.necromancer_staff.equip.success": "Objet équipé sur le sbire !",
+  "item.zetta_spells.necromancer_staff.equip.empty": "Pour équiper un objet, tenez-le dans votre autre main !",
+  "block.zetta_spells.passable_block": "Rune de Barrière Magique",
+  "block.zetta_spells.ore_conversion_block": "Rune de Conversion du Minerai",
+  "block.zetta_spells.levitation_sigil_block": "Rune de lévitation",
+  "block.zetta_spells.advanced_levitation_sigil_block": "Rune de lévitation avancée",
+  "screen.zetta_spells.writer": "Sort",
+  "gui.zetta_spells.textbox": "Écrivez votre sort ici",
+  "gui.zetta_spells.textbox_name": "Livre de Sort",
+  "gui.zetta_spells.textbox1": "Nom",
+  "gui.zetta_spells.textbox2": "Sort",
+  "gui.zetta_spells.confirm": "Confirmer",
+  "entity.zetta_spells.tenebria_will_sigil": "Rune de Volonté de Tenebria",
+  "entity.zetta_spells.tenebria_protection_sigil": "Rune de Protection de Tenebria",
+  "entity.zetta_spells.minion_rabbit": "Lapin",
+  "enchantment.zetta_spells.enhance_armament": "Renforcement",
+  "enchantment.zetta_spells.enhance_armament.desc": "Améliore la capacité à infliger des dégâts et à détruire les blocs.",
+  "enchantment.zetta_spells.release_recollection": "Libération des Souvenirs",
+  "enchantment.zetta_spells.release_recollection.desc": "Libère les souvenirs contenus dans cet objet.",
+  "enchantment.zetta_spells.frost_aspect": "Aura de Givre",
+  "enchantment.zetta_spells.frost_aspect.desc": "Immobilise les cibles pendant 10 secondes à chaque coup.",
+  "race.cooldown": "Vous devez attendre avant de recommencer.",
+  "spell_knowledge.learning": "Apprentissage d'un sort. Progression : %s %%",
+  "spell_knowledge.learned": "Sort appris !",
+
+  "spellbook.byAuthor": "Livre de sorts de %s",
+  "spellbook.shift_for_details": "Appuyez sur la touche Maj pour voir le sort.",
+
+  "spell.zetta_spells.heat_healing": "Soin de Chaleur",
+  "spell.zetta_spells.heat_healing.desc": "Soigne considérablement le lanceur de sort. Si le lanceur de sort a trop de points de vie pour le feu, celui-ci se mettra à brûler et laissera des traces de feu derrière lui.",
+
+  "spell.zetta_spells.magic_restoration": "Restauration magique",
+  "spell.zetta_spells.magic_restoration.desc": "Crée une structure sur le lanceur de sort qui restaure le mana d'un objet qu'il tient. Elle neutralise les propriétés du mana, puis le transforme en mana de l'objet, le transférant ainsi.",
+
+  "spell.zetta_spells.magic_barrier": "Barrière magique",
+  "spell.zetta_spells.magic_barrier.desc": "Conjure une rune sur un bloc. Les entités maléfiques ne peuvent la franchir à pied, contrairement à toutes les autres.",
+
+  "spell.zetta_spells.turn_minion": "Transformer en Sbire",
+  "spell.zetta_spells.turn_minion.desc": "Faites baisser la santé d'un monstre à un niveau inférieur au vôtre, puis utilisez ce sort pour le transformer en sbire pendant un certain temps. Utilisez ensuite le Diamant astral doré sur le serviteur pour le rendre immortel.",
+
+  "spell.zetta_spells.ore_conversion": "Conversion de Minerai",
+  "spell.zetta_spells.ore_conversion.desc": "Crée un Rune sur un block, qui transforme le minerai lancé à l'intérieur en un autre. 9 charbons = 1 lingot de fer. 6 lingots de fer = 1 émeraude. 24 émeraudes = 1 diamant. 64 diamants = 1 diamant astral.",
+
+  "spell.zetta_spells.levitation_sigil": "Rune de Lévitation",
+  "spell.zetta_spells.levitation_sigil.desc": "Conjure une rune sur un bloc qui fait s'élever les entités vivantes.",
+
+  "spell.zetta_spells.advanced_levitation_sigil": "Rune de Lévitation Avancée",
+  "spell.zetta_spells.advanced_levitation_sigil.desc": "Conjure une rune sur un bloc qui propulse les entitées vivantes dans le ciel. Il s'agit d'un niveau avancé de maitrise dans le monde de la magie, permettant d'exercer un effet puissant sur les entités.",
+
+  "spell.zetta_spells.resurrect": "Résurrection",
+  "spell.zetta_spells.resurrect.desc": "Grâce à ce manuscrit, vous pouvez ramener un mort à la vie pour en faire votre serviteur, mais seulement pour une durée limitée. À moins que vous n'utilisiez un diamant astral doré. Certaines âmes puissantes ne peuvent pas être ressuscitées !",
+
+  "spell.zetta_spells.hex": "Hex",
+  "spell.zetta_spells.hex.desc": "« Le Chevalier Nocturne a créé ce sort qui transforme tous les effets négatifs subis par la cible en dégâts magiques directs. Plus la cible subit d'effets négatifs, plus Hex est efficace ! »",
+
+  "spell.zetta_spells.summon_rabbit": "Invocation - Lapin",
+  "spell.zetta_spells.summon_rabbit.desc": "Tu invoques quelques lapins et ils sont formidables. Ils te serviront de sbires.",
+
+  "spell.zetta_spells.origin": "Origine",
+  "spell.zetta_spells.origin.desc": "SInvoque une source d'énergie sur ton ennemi, ou sur toi-même si tu es en mode furtif, ce qui provoquera des effets différents selon l'objet que tu tiens !",
+
+  "spell.zetta_spells.summon_bee": "Invocation - Abeilles",
+  "spell.zetta_spells.summon_bee.desc": "Tu invoques des abeilles pour qu'elles te rejoignent et t'aident à combattre tes ennemis !",
+
+  "effect.zetta_spells.undead": "Bénédiction des Morts-vivants",
+  "effect.zetta_spells.undead.desc": "Bénédiction de Tenebria, qui confère temporairement la vie de mort-vivant et rend passives toutes les créatures de type mort-vivant.",
+
+  "effect.zetta_spells.heat": "Chaleur",
+  "effect.zetta_spells.heat.desc": "Se produit lorsque vous soignez trop avec « Soin de chaleur ».",
+
+  "effect.zetta_spells.magic_restoration": "Restauration magique",
+  "effect.zetta_spells.magic_restoration.desc": "Restaure la mana dans votre main ou votre main secondaire."
+}
