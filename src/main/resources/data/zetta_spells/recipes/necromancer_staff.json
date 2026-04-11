@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  S",
+    " W ",
+    "W  "
+  ],
+  "key": {
+    "S": { "item": "minecraft:skeleton_skull" },
+    "W": { "item": "minecraft:stick" }
+  },
+  "result": {
+    "item": "zetta_spells:necromancer_staff",
+    "count": 1
+  },
+  "criteria": {
+    "has_skull": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:skeleton_skull"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_skull"]
+  ]
+}

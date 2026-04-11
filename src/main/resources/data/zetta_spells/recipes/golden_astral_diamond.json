@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "GDG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:gold_nugget" },
+    "D": { "item": "ebwizardry:astral_diamond" }
+  },
+  "result": {
+    "item": "zetta_spells:golden_astral_diamond",
+    "count": 1
+  },
+  "criteria": {
+    "has_as_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["ebwizardry:astral_diamond"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_as_diamond"]
+  ]
+}

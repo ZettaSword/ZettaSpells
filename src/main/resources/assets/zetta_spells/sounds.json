@@ -1,0 +1,15 @@
+{
+  "spell.heat_healing": {
+    "category": "spells",
+    "sounds": [
+      "fire/fire"
+    ]
+  },
+  "spell.summon_rabbit": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ]
+  }
+}

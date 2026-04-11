@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "zetta_spells:block/ore_conversion_block"
+    }
+  }
+}

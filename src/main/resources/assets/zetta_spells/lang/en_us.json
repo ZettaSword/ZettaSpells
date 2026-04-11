@@ -1,0 +1,88 @@
+{
+  "item.zetta_spells.unfinished_spellbook": "Unfinished Spellbook",
+  "item.zetta_spells.finished_spellbook": "Spellbook",
+  "item.zetta_spells.finished_spellbook_fail": "Not enough mana to cast the spell!",
+  "item.zetta_spells.golden_astral_diamond": "Golden Astral Diamond",
+  "item.zetta_spells.golden_astral_diamond.desc": "Use on any minion to extend its lifetime to eternity.",
+  "item.zetta_spells.necromancer_staff": "Necromancer Staff",
+  "item.zetta_spells.necromancer_staff.desc": "Use on your minion to do something.",
+  "item.zetta_spells.necromancer_staff.use1": "Staying on place, Master!",
+  "item.zetta_spells.necromancer_staff.use2": "Following you, Master!",
+  "item.zetta_spells.necromancer_staff.mode.command": "Mode: Command Minion",
+  "item.zetta_spells.necromancer_staff.mode.equip": "Mode: Equip Minion",
+  "item.zetta_spells.necromancer_staff.mode.toggle": "Shift+Right Click to toggle mode",
+  "item.zetta_spells.necromancer_staff.mode.command.active": "Staff set to: Command Mode",
+  "item.zetta_spells.necromancer_staff.mode.equip.active": "Staff set to: Equip Mode",
+  "item.zetta_spells.necromancer_staff.equip.success": "Item equipped to minion!",
+  "item.zetta_spells.necromancer_staff.equip.empty": "Hold an item in your other hand to equip!",
+  "block.zetta_spells.passable_block": "Magic Barrier Construct",
+  "block.zetta_spells.ore_conversion_block": "Ore Conversion Construct",
+  "block.zetta_spells.levitation_sigil_block": "Levitation Sigil Construct",
+  "block.zetta_spells.advanced_levitation_sigil_block": "Advanced Levitation Sigil Construct",
+  "screen.zetta_spells.writer": "Spell",
+  "gui.zetta_spells.textbox": "Write Spell here",
+  "gui.zetta_spells.textbox_name": "Spellbook",
+  "gui.zetta_spells.textbox1": "Name",
+  "gui.zetta_spells.textbox2": "Spell",
+  "gui.zetta_spells.confirm": "Confirm",
+  "entity.zetta_spells.tenebria_will_sigil": "Tenebria Will Sigil",
+  "entity.zetta_spells.tenebria_protection_sigil": "Tenebria Protection Sigil",
+  "entity.zetta_spells.minion_rabbit": "Rabbit",
+  "enchantment.zetta_spells.enhance_armament": "Enhance Armament",
+  "enchantment.zetta_spells.enhance_armament.desc": "Enhances capabilities to harm and to break blocks.",
+  "enchantment.zetta_spells.release_recollection": "Release Recollection",
+  "enchantment.zetta_spells.release_recollection.desc": "Releases memories of what item knows.",
+  "enchantment.zetta_spells.frost_aspect": "Frost Aspect",
+  "enchantment.zetta_spells.frost_aspect.desc": "Freezes entities for 10 seconds per hit.",
+  "race.cooldown": "You need to wait until doing it once more.",
+  "spell_knowledge.learning": "Learning spell. Progress: %s %%",
+  "spell_knowledge.learned": "Spell Learned!",
+
+  "spellbook.byAuthor": "Spellbook by %s",
+  "spellbook.shift_for_details": "Press shift to see the Spell.",
+
+  "spell.zetta_spells.heat_healing": "Heat Healing",
+  "spell.zetta_spells.heat_healing.desc": "Heals caster greatly. If caster has too much health for fire - it will start burning, and will leave fire behind.",
+
+  "spell.zetta_spells.magic_restoration": "Magic Restoration",
+  "spell.zetta_spells.magic_restoration.desc": "Creates a construct on caster, that restores mana in one item held. It turns properties of mana to neutral and then changes it to item's mana, transferring it.",
+
+  "spell.zetta_spells.magic_barrier": "Magic Barrier",
+  "spell.zetta_spells.magic_barrier.desc": "Conjures small sigil on block, that evil entities cannot bypass by walking, but any others can.",
+
+  "spell.zetta_spells.turn_minion": "Turn Minion",
+  "spell.zetta_spells.turn_minion.desc": "Reduce any monster's health below lower than yours, then use this spell to make turn it minion for some time. Use Golden Astral Diamond on minion afterwards to make it infinite.",
+
+  "spell.zetta_spells.ore_conversion": "Ore Conversion",
+  "spell.zetta_spells.ore_conversion.desc": "Conjures small sigil on block, that converts ore thrown inside it into another. 9 Coal = 1 Iron Ingot. 6 Iron Ingot = 1 Emerald. 24 Emeralds = 1 Diamond. 64 Diamonds = 1 Astral Diamond.",
+
+  "spell.zetta_spells.levitation_sigil": "Levitation Sigil",
+  "spell.zetta_spells.levitation_sigil.desc": "Conjures small sigil on block that makes living entities go up.",
+
+  "spell.zetta_spells.advanced_levitation_sigil": "Master Levitation Sigil",
+  "spell.zetta_spells.advanced_levitation_sigil.desc": "Conjures small sigil on block that sends living entities to the sky. This is advanced level of scheming in magic world, allowing to have powerful effect on entities.",
+
+  "spell.zetta_spells.resurrect": "Resurrect",
+  "spell.zetta_spells.resurrect.desc": "Because of this manuscript you can bring someone dead to live to be your minion, but for limited time. Unless you use Golden Astral Diamond. Some powerful souls cannot be resurrected!",
+
+  "spell.zetta_spells.hex": "Hex",
+  "spell.zetta_spells.hex.desc": "Nocturne Knight written this spell, that turns all negative effects target has into direct magic damage. The more negative effects target has - the better Hex works!",
+
+  "spell.zetta_spells.summon_rabbit": "Summon Rabbits",
+  "spell.zetta_spells.summon_rabbit.desc": "You summon few rabbits, those rabbits are great, you might say. They will act as your minions.",
+
+  "spell.zetta_spells.origin": "Origin",
+  "spell.zetta_spells.origin.desc": "Summon origin upon your enemy, or yourself if sneaking, causing different effects depending on Item you hold!",
+
+  "spell.zetta_spells.summon_bee": "Summon Bee",
+  "spell.zetta_spells.summon_bee.desc": "You summon Bees so they can BEE with you to fight of your enemies!",
+
+  "effect.zetta_spells.undead": "Blessing of Undead",
+  "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
+
+  "effect.zetta_spells.heat": "Heat",
+  "effect.zetta_spells.heat.desc": "Happens when caster is overhealing with Heat Healing.",
+
+  "effect.zetta_spells.magic_restoration": "Magic Restoration",
+  "effect.zetta_spells.magic_restoration.desc": "Restores mana in caster main/offhand."
+}

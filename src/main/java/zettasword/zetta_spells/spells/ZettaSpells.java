@@ -1,0 +1,26 @@
+package zettasword.zetta_spells.spells;
+
+import com.binaris.wizardry.api.content.spell.Spell;
+import com.binaris.wizardry.core.registry.EBRegistries;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+import zettasword.zetta_spells.blocks.LevitationSigilBlock;
+
+public class ZettaSpells {
+    public static final DeferredRegister<Spell> SPELLS = DeferredRegister.create(EBRegistries.SPELL, "zetta_spells");
+
+    public static final RegistryObject<Spell> HEAT_HEALING = SPELLS.register("heat_healing", HeatHealing::new);
+    public static final RegistryObject<Spell> MAGIC_RESTORATION = SPELLS.register("magic_restoration", MagicRestoration::new);
+    public static final RegistryObject<Spell> MAGIC_BARRIER = SPELLS.register("magic_barrier", MagicBarrier::new);
+    public static final RegistryObject<Spell> TURN_MINION = SPELLS.register("turn_minion", TurnMinion::new);
+    public static final RegistryObject<Spell> ORE_CONVERSION = SPELLS.register("ore_conversion", OreConversion::new);
+    public static final RegistryObject<Spell> LEVITATION_SIGIL = SPELLS.register("levitation_sigil", LevitationSigil::new);
+    public static final RegistryObject<Spell> ADVANCED_LEVITATION_SIGIL = SPELLS.register("advanced_levitation_sigil", AdvancedLevitationSigil::new);
+    public static final RegistryObject<Spell> RESURRECT = SPELLS.register("resurrect", Resurrect::new);
+    public static final RegistryObject<Spell> HEX = SPELLS.register("hex", Hex::new);
+    public static final RegistryObject<Spell> SUMMON_RABBIT = SPELLS.register("summon_rabbit", SummonRabbit::new);
+    public static final RegistryObject<Spell> ORIGIN = SPELLS.register("origin", Origin::new);
+    public static final RegistryObject<Spell> SUMMON_BEE = SPELLS.register("summon_bee", SummonBee::new);
+
+    //TODO: Add sounds to sounds.json for all spells...
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "zetta_spells:item/necromancer_staff"
+  }
+}
