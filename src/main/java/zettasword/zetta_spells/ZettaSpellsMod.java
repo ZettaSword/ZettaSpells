@@ -1,24 +1,11 @@
 package zettasword.zetta_spells;
 
-import com.binaris.wizardry.content.command.argument.SpellArgument;
-import com.binaris.wizardry.core.platform.Services;
-import com.binaris.wizardry.datagen.provider.EBRecipeProvider;
-import com.binaris.wizardry.setup.registries.EBCreativeTabs;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.logging.LogUtils;
-import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -40,6 +27,7 @@ import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.spells.ZettaSpells;
 import zettasword.zetta_spells.system.commands.SpellKnowledgeCommand;
+import zettasword.zetta_spells.system.spellcreation.actions.SpellWords;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ZettaSpellsMod.MODID)
@@ -59,6 +47,8 @@ public class ZettaSpellsMod
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         //BLOCKS.register(modEventBus);
+
+        SpellWords.register(modEventBus);
 
         ZSEffects.EFFECTS.register(modEventBus);
         ZSEntities.ENTITY_TYPES.register(modEventBus);

@@ -57,6 +57,7 @@ public class GoldenAsDiamondItem extends Item {
                 MinionData data = Services.OBJECT_DATA.getMinionData(mob);
                 if (data != null && data.getLifetime() > 0) {
                     data.setLifetime(-1);
+                    mob.setPersistenceRequired();
                     if (player.level().isClientSide) {
                         for (int j = 0; (float) j < 20; ++j) {
                             double x = mob.xo + level.random.nextDouble() * (double) 2.0F - (double) 1.0F;

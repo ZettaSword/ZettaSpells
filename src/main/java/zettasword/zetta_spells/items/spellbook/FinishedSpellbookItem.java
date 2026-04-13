@@ -17,6 +17,8 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.system.Spellcasting;
 import zettasword.zetta_spells.system.TextProcessingUtil;
+import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
+import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 
 import java.util.List;
 
@@ -54,7 +56,8 @@ public class FinishedSpellbookItem extends Item implements IManaStoringItem, IWo
             if (cost == 0) cost = 10;
             cost = Math.max(10, (cost * cost)/5);
             if (this.getMana(stack) >= cost || player.isCreative()){
-                Spellcasting.spellCast(level, player, hand, text);
+                //Spellcasting.spellCast(level, player, hand, text);
+                SpellCreator.spellCast(new SpellCreateContext(level, player, hand), text);
                 if (!level.isClientSide) {
                     player.displayClientMessage(Component.literal(stack.getHoverName().getString()), true);
                 }
@@ -65,7 +68,7 @@ public class FinishedSpellbookItem extends Item implements IManaStoringItem, IWo
                 return InteractionResultHolder.fail(stack);
             }
 
-            this.consumeMana(stack, cost, player);
+            //this.consumeMana(stack, cost, player);
             return InteractionResultHolder.sidedSuccess(stack,level.isClientSide);
         }
         

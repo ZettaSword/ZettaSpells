@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
  */
 public class TextProcessingUtil {
 
-    // Updated Regex: Matches alphanumerics, allowing them to be chained by colons (e.g., minecraft:zombie)
-    // Preserves original behavior of separating pure letters from pure numbers unless linked by ':'
-    private static final Pattern WORD_PATTERN = Pattern.compile("(\\p{L}+|\\p{N}+)(:(\\p{L}+|\\p{N}+))*");
+    // Updated Regex: Matches alphanumerics and underscores, allowing them to be chained by colons
+    // (e.g., minecraft:zombie, mod:item_name).
+    private static final Pattern WORD_PATTERN = Pattern.compile("[\\p{L}\\p{N}_]+(:[\\p{L}\\p{N}_]+)*");
 
     /**
      * Extracts alphanumeric words from the input string, filters out symbols/punctuation,

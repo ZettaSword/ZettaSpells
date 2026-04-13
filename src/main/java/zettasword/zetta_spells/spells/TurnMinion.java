@@ -79,12 +79,9 @@ public class TurnMinion extends RaySpell {
         if (data == null) return false;
         data.setSummoned(true);
         data.setOwnerUUID(caster.getUUID());
-        setLifetime(minion, (int) (2400 * modifiers.get(SpellModifiers.DURATION)));
+        setLifetime(minion, (int) Math.max((2400 * modifiers.get(SpellModifiers.DURATION)), 1200));
         data.setShouldFollowOwner(true);
         data.updateGoals();
-        if (minion instanceof PathfinderMob pathfinderMob){ // Idk, I think this should help with reacting when minion is attacked by other mobs.
-            pathfinderMob.goalSelector.addGoal(2, new HurtByTargetGoal(pathfinderMob));
-        }
         if (minion.getAttribute(Attributes.ATTACK_DAMAGE) != null)
             minion.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(new AttributeModifier(POTENCY_ATTRIBUTE_MODIFIER, modifiers.get(SpellModifiers.POTENCY) - 1, AttributeModifier.Operation.MULTIPLY_TOTAL));
         if (minion.getAttribute(Attributes.MAX_HEALTH) != null)

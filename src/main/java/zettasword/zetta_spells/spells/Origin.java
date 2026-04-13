@@ -13,11 +13,15 @@ import com.binaris.wizardry.setup.registries.EBDamageSources;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.item.EnchantedGoldenAppleItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -60,7 +64,7 @@ public class Origin extends RaySpell {
             if (stack.getItem() instanceof ISpellCastingItem) return false;
             boolean flag = false;
             if (!ctx.world().isClientSide) {
-                if (stack.getItem() == Items.BLAZE_POWDER && !MagicDamageSource.isEntityImmune(EBDamageSources.FIRE, target)) {
+                if ((stack.getItem() == Items.BLAZE_POWDER || stack.getItem() == Items.FIREWORK_STAR) && !MagicDamageSource.isEntityImmune(EBDamageSources.FIRE, target)) {
                     target.setSecondsOnFire(30);
                     MagicDamageSource.causeMagicDamage(ctx.caster(), target, 4, EBDamageSources.FIRE);
                     flag=true;
@@ -84,6 +88,31 @@ public class Origin extends RaySpell {
                 if (stack.getItem() == Items.FEATHER){
                     Alchemy.applyNotHiding(target, MobEffects.LEVITATION, 30, 0, ctx.caster());
                     flag=true;
+                }
+
+                if (stack.getItem() == Items.POTION){
+                    for(MobEffectInstance mobeffectinstance : PotionUtils.getMobEffects(stack)) {
+                        if (mobeffectinstance.getEffect().isInstantenous()) {
+                            mobeffectinstance.getEffect().applyInstantenousEffect(ctx.caster(), ctx.caster(), target, mobeffectinstance.getAmplifier(), 1.0D);
+                        } else {
+                            target.addEffect(new MobEffectInstance(mobeffectinstance));
+                        }
+                    }
+                    flag = true;
+                }
+
+                if (stack.getItem() == Items.GOLDEN_APPLE){
+                    target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
+                    target.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0));
+                    flag = true;
+                }
+
+                if (stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE){
+                    target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 400, 1));
+                    target.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000, 0));
+                    target.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 6000, 0));
+                    target.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 3));
+                    flag = true;
                 }
 
                 if (flag) stack.shrink(1);

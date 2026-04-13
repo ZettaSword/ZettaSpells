@@ -15,6 +15,7 @@
   "item.zetta_spells.necromancer_staff.mode.equip.active": "Staff set to: Equip Mode",
   "item.zetta_spells.necromancer_staff.equip.success": "Item equipped to minion!",
   "item.zetta_spells.necromancer_staff.equip.empty": "Hold an item in your other hand to equip!",
+  "item.zetta_spells.necromancer_staff.equip.change_name": "Minion name was changed!",
   "block.zetta_spells.passable_block": "Magic Barrier Construct",
   "block.zetta_spells.ore_conversion_block": "Ore Conversion Construct",
   "block.zetta_spells.levitation_sigil_block": "Levitation Sigil Construct",
@@ -82,6 +83,9 @@
 
   "spell.zetta_spells.pull": "Pull",
   "spell.zetta_spells.pull.desc": "Pull entities to you... though not sure you want to attract zombies.",
+
+  "spell.zetta_spells.summon_warden": "Summon Warden",
+  "spell.zetta_spells.summon_warden.desc": "Summon darkness from the depths to fight on your side!",
 
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",

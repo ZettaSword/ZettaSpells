@@ -19,6 +19,7 @@ import zettasword.zetta_spells.system.TextProcessingUtil;
 import zettasword.zetta_spells.system.spellcreation.light.WordsDynamicLighting;
 
 import java.util.List;
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
 public class MagicWordsCreator {

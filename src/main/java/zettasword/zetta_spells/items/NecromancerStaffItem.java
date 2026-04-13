@@ -108,22 +108,9 @@ public class NecromancerStaffItem extends Item {
                                 : InteractionHand.MAIN_HAND;
                         ItemStack itemToEquip = player.getItemInHand(otherHand).copy();
 
+                        if (!mob.isAlive()) return InteractionResultHolder.pass(stack);
                         if (!itemToEquip.isEmpty()) {
-                            EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(itemToEquip);
-                            ItemStack currentEquipped = mob.getItemBySlot(slot);
-
-                            // Drop current item if present
-                            ReplaceArmor.dropCurrentSlotItem(level, mob, currentEquipped);
-                            mob.setItemSlot(slot, ItemStack.EMPTY);
-
-                            // Equip new item and consume from player
-                            mob.setItemSlot(slot, itemToEquip);
-                            player.setItemInHand(otherHand, ItemStack.EMPTY);
-                            player.inventoryMenu.broadcastChanges();
-
-                            if (!level.isClientSide) {
-                                player.displayClientMessage(Component.translatable("item.zetta_spells.necromancer_staff.equip.success"), true);
-                            }
+                            applyItemToMinion(level, player, mob, itemToEquip, otherHand);
                         } else if (!level.isClientSide) {
                             player.displayClientMessage(Component.translatable("item.zetta_spells.necromancer_staff.equip.empty"), true);
                         }
@@ -152,6 +139,34 @@ public class NecromancerStaffItem extends Item {
             }
         }
         return InteractionResultHolder.pass(stack);
+    }
+
+    public static void applyItemToMinion(@NotNull Level level, @NotNull Player player, Mob mob, ItemStack itemToEquip, InteractionHand otherHand) {
+        if (itemToEquip.getItem() == Items.NAME_TAG){
+            mob.setCustomName(itemToEquip.getHoverName());
+            mob.setPersistenceRequired();
+            player.setItemInHand(otherHand, ItemStack.EMPTY);
+            player.inventoryMenu.broadcastChanges();
+            if (!level.isClientSide) {
+                player.displayClientMessage(Component.translatable("item.zetta_spells.necromancer_staff.equip.change_name"), true);
+            }
+            return;
+        }
+        EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(itemToEquip);
+        ItemStack currentEquipped = mob.getItemBySlot(slot);
+
+        // Drop current item if present
+        ReplaceArmor.dropCurrentSlotItem(level, mob, currentEquipped);
+        mob.setItemSlot(slot, ItemStack.EMPTY);
+
+        // Equip new item and consume from player
+        mob.setItemSlot(slot, itemToEquip);
+        player.setItemInHand(otherHand, ItemStack.EMPTY);
+        player.inventoryMenu.broadcastChanges();
+
+        if (!level.isClientSide) {
+            player.displayClientMessage(Component.translatable("item.zetta_spells.necromancer_staff.equip.success"), true);
+        }
     }
 
     // ===== MODE MANAGEMENT =====
