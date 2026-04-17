@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import zettasword.zetta_spells.capability.RaceDataHolder;
+import zettasword.zetta_spells.capability.spellcaster.SpellcasterData;
 import zettasword.zetta_spells.items.spellbook.SpellbookWriterScreen;
 
 @OnlyIn(Dist.CLIENT)

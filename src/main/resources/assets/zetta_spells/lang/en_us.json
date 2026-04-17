@@ -87,6 +87,9 @@
   "spell.zetta_spells.summon_warden": "Summon Warden",
   "spell.zetta_spells.summon_warden.desc": "Summon darkness from the depths to fight on your side!",
 
+  "spell.zetta_spells.turn_spellcaster": "Turn Spellcaster",
+  "spell.zetta_spells.turn_spellcaster.desc": "Turns monster into spellcaster!... It is bad idea to use it on others, I guess.",
+
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
 

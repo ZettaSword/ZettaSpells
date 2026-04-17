@@ -27,6 +27,9 @@ public class ZettaSpells {
     // 1.2.0
     //public static final RegistryObject<Spell> SUMMON_WARDEN = SPELLS.register("summon_warden", SummonWarden::new);
 
+    //1.4.0
+    public static final RegistryObject<Spell> TURN_SPELLCASTER = SPELLS.register("turn_spellcaster", TurnSpellcaster::new);
+
 
     //TODO: Add sounds to sounds.json for all spells...
 }

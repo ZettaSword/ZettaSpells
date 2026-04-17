@@ -24,12 +24,12 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingBreatheEvent;
@@ -37,17 +37,18 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import zettasword.zetta_spells.capability.IRaceData;
 import zettasword.zetta_spells.capability.Race;
 import zettasword.zetta_spells.capability.RaceDataHolder;
+import zettasword.zetta_spells.capability.spellcaster.ISpellcasterData;
+import zettasword.zetta_spells.capability.spellcaster.SpellcasterData;
 import zettasword.zetta_spells.enchantments.ZSEnchantments;
 import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
-import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.particles.Alteria;
@@ -173,12 +174,27 @@ public class ZSEvents {
             Race.get(livingEntity).ifPresent((race)-> {if (race.getAbilityCooldown() > 0) race.reduceAbilityCooldown(20);});
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event){
+        event.register(ISpellcasterData.class);
+        event.register(IRaceData.class);
+    }
+
     @SubscribeEvent
     public static void attachCapability(final AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
             event.addCapability(RaceDataHolder.LOCATION, new RaceDataHolder.Provider(player));
         }
+        if (!(event.getObject() instanceof Player) && event.getObject() instanceof LivingEntity living){
+            event.addCapability(SpellcasterData.LOCATION, new SpellcasterData.Provider(living));
+        }
+    }
+
+    private static boolean canBeSpellcaster(Mob mob) {
+        // Exclude bosses, players, vehicles, etc.
+        return !(mob instanceof net.minecraft.world.entity.boss.enderdragon.EnderDragon) &&
+                !(mob instanceof net.minecraft.world.entity.boss.wither.WitherBoss) &&
+                mob.getType().getCategory() != net.minecraft.world.entity.MobCategory.MISC;
     }
 
     @OnlyIn(Dist.DEDICATED_SERVER)
