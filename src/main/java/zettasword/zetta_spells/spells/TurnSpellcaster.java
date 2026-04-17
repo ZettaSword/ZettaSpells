@@ -70,7 +70,7 @@ public class TurnSpellcaster extends RaySpell {
             // Assign spells based on target type
             List<Spell> spells = new ArrayList<>();
             spells.add(Spells.MAGIC_MISSILE);
-            EntityUtil.populateSpells(spells, Elements.FIRE, false, 3, target.getRandom());
+            EntityUtil.populateSpells(spells, Elements.MAGIC, false, 3, target.getRandom());
             data.setSpells(spells);
 
             // Scale power based on modifiers
