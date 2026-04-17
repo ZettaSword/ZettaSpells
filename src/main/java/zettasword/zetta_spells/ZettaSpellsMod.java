@@ -1,10 +1,12 @@
 package zettasword.zetta_spells;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -27,6 +29,7 @@ import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.spells.ZettaSpells;
 import zettasword.zetta_spells.system.commands.SpellKnowledgeCommand;
+import zettasword.zetta_spells.system.loot.ZSLootFunctions;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWords;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -57,6 +60,7 @@ public class ZettaSpellsMod
         // Register items
         ZSItems.ITEMS.register(modEventBus);
         ZettaSpells.SPELLS.register(modEventBus);
+        //ZSLootFunctions.register(modEventBus);
         MixinBootstrap.init();
 
         // Register ourselves for server and other game events we are interested in
@@ -100,12 +104,14 @@ public class ZettaSpellsMod
         }
     }
 
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event) {
         SpellKnowledgeCommand.register(event);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {

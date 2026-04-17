@@ -28,6 +28,8 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingBreatheEvent;
@@ -54,7 +56,7 @@ import java.util.Random;
 
 import static zettasword.zetta_spells.mob_effects.MagicRestorationMobEffect.rechargeMana;
 
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
+@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ZSEvents {
 
     @SubscribeEvent
@@ -137,6 +139,7 @@ public class ZSEvents {
         }
     }
 
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onMiningSpeed(PlayerEvent.BreakSpeed event){
         if (event.getEntity().getMainHandItem().getEnchantmentLevel(ZSEnchantments.ENHANCE_ARMAMENT.get()) > 0){
@@ -144,6 +147,7 @@ public class ZSEvents {
         }
     }
 
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onTick(TickEvent.PlayerTickEvent event){
         Player livingEntity = event.player;
@@ -169,31 +173,7 @@ public class ZSEvents {
             Race.get(livingEntity).ifPresent((race)-> {if (race.getAbilityCooldown() > 0) race.reduceAbilityCooldown(20);});
     }
 
-    @SubscribeEvent
-    public static void onPlayerInteract(PlayerInteractEvent.EntityInteractSpecific event) {
-        if (event.getEntity().level().isClientSide) return;
-        if (!(event.getTarget() instanceof LivingEntity target)) return;
-
-        Player player = event.getEntity();
-
-        if (!Race.get(player).isPresent()) return;
-        if (target.getMobType() != MobType.UNDEAD) return;
-
-        /*Race.get(player).ifPresent((race)->{
-            if (race.getRace().equals("vampire") && player.isCrouching()){
-                if (race.getAbilityCooldown() == 0) {
-                    race.setAbilityCooldown(200);
-                    target.hurt(target.damageSources().magic(), 4);
-                    player.heal(3);
-                    event.setCancellationResult(InteractionResult.SUCCESS);
-                    event.setCanceled(true);
-                }else{
-                    player.sendSystemMessage(Component.translatable("race.cooldown"));
-                }
-            }
-        });*/
-    }
-
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void attachCapability(final AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
@@ -201,6 +181,7 @@ public class ZSEvents {
         }
     }
 
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         if (!event.isWasDeath()) return; // Only copy data when player respawns after death
@@ -215,6 +196,7 @@ public class ZSEvents {
 
     private static final String TAG_RESURRECTED = "zetta_spells:no_drop";
 
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity dyingEntity = event.getEntity();
@@ -243,6 +225,7 @@ public class ZSEvents {
         }
     }
 
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
@@ -355,16 +338,7 @@ public class ZSEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        if (event.getItemStack().is(ZSItems.NECROMANCER_STAFF.get())) {
-            event.setCanceled(true); // Stops vanilla armor swap
-
-            // Run your custom usage here
-            event.getItemStack().use(event.getLevel(), event.getEntity(), event.getHand());
-        }
-    }
-
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onBreath(LivingBreatheEvent event){
         if (event.getEntity() instanceof Player player){

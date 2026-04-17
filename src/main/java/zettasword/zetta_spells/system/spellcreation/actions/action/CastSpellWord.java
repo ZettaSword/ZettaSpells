@@ -2,12 +2,10 @@ package zettasword.zetta_spells.system.spellcreation.actions.action;
 
 import com.binaris.wizardry.api.content.data.WizardData;
 import com.binaris.wizardry.api.content.spell.Spell;
-import com.binaris.wizardry.api.content.spell.internal.EntityCastContext;
 import com.binaris.wizardry.api.content.spell.internal.PlayerCastContext;
 import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.Spells;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
@@ -15,6 +13,10 @@ import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 import java.util.List;
 
 public class CastSpellWord extends SpellWord {
+    public CastSpellWord() {
+        super("cast_spell");
+    }
+
     /**
      * Allows us to get if key things are considered. Like if there is a word, and is a current target is a spider, and more, obviously.
      *

@@ -1,6 +1,6 @@
 package zettasword.zetta_spells.items.spellbook;
 
-import com.binaris.wizardry.api.content.item.IManaStoringItem;
+import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.item.IWorkbenchItem;
 import com.binaris.wizardry.api.content.util.DrawingUtils;
 import com.binaris.wizardry.api.content.util.WorkbenchUtils;
@@ -22,7 +22,7 @@ import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 
 import java.util.List;
 
-public class FinishedSpellbookItem extends Item implements IManaStoringItem, IWorkbenchItem {
+public class FinishedSpellbookItem extends Item implements IManaItem, IWorkbenchItem {
     public FinishedSpellbookItem(Properties properties) {
         super(properties.durability(1000));
     }

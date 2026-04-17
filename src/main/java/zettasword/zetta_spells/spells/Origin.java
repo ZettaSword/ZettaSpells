@@ -1,7 +1,7 @@
 package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
-import com.binaris.wizardry.api.content.item.ISpellCastingItem;
+import com.binaris.wizardry.api.content.item.ICastItem;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
@@ -60,8 +60,8 @@ public class Origin extends RaySpell {
 
     private static boolean originEffect(CastContext ctx, @Nullable LivingEntity target) {
         if (target != null){
-            ItemStack stack = ctx.caster().getMainHandItem().getItem() instanceof ISpellCastingItem ? ctx.caster().getOffhandItem() : ctx.caster().getMainHandItem();
-            if (stack.getItem() instanceof ISpellCastingItem) return false;
+            ItemStack stack = ctx.caster().getMainHandItem().getItem() instanceof ICastItem ? ctx.caster().getOffhandItem() : ctx.caster().getMainHandItem();
+            if (stack.getItem() instanceof ICastItem) return false;
             boolean flag = false;
             if (!ctx.world().isClientSide) {
                 if ((stack.getItem() == Items.BLAZE_POWDER || stack.getItem() == Items.FIREWORK_STAR) && !MagicDamageSource.isEntityImmune(EBDamageSources.FIRE, target)) {

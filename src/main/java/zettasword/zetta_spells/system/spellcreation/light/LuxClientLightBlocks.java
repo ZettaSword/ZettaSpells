@@ -18,8 +18,6 @@ import zettasword.zetta_spells.ZettaSpellsMod;
 import java.util.HashSet;
 import java.util.Set;
 
-import static zettasword.zetta_spells.system.spellcreation.light.WordsDynamicLighting.isHoldingLux;
-
 // Client-side only dynamic lighting (actual game light)
 @Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID,value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LuxClientLightBlocks {

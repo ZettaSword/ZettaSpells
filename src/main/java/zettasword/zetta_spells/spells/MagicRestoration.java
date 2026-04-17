@@ -6,7 +6,6 @@ import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.content.spell.abstr.BuffSpell;
-import com.binaris.wizardry.setup.registries.EBItems;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import net.minecraft.world.effect.MobEffectInstance;

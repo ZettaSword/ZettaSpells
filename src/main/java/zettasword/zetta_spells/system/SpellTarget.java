@@ -4,8 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 
 public class SpellTarget {
-    public Entity targetEntity = null;
-    public BlockPos targetPos = null;
+    private Entity targetEntity = null;
+    private BlockPos targetPos = null;
 
     public SpellTarget(Entity targetEntity){
         setTarget(targetEntity);

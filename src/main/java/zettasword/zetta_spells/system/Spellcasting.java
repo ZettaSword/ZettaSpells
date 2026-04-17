@@ -6,10 +6,10 @@ import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.data.ImbuementEnchantData;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.util.BlockUtil;
+import com.binaris.wizardry.api.content.util.CastItemUtils;
 import com.binaris.wizardry.api.content.util.EntityUtil;
 import com.binaris.wizardry.api.content.util.RayTracer;
-import com.binaris.wizardry.api.content.util.WandHelper;
-import com.binaris.wizardry.content.item.WizardArmorItem;
+import com.binaris.wizardry.content.item.armor.WizardArmorItem;
 import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.*;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
@@ -67,7 +67,7 @@ public class Spellcasting {
         boolean particlesDefault = true;
         boolean sigilDefault = true;
         Direction hit_direction = Direction.UP;
-        SpellModifiers modifiers = WandHelper.calculateModifiers(caster.getItemInHand(hand), caster, Spells.NONE);
+        SpellModifiers modifiers = CastItemUtils.calculateModifiers(caster.getItemInHand(hand), caster, Spells.NONE);
         for (int i = 0; i < words.size(); ++i){
             String current = words.get(i);
             String next = getNext(words, i, 1);
@@ -84,9 +84,6 @@ public class Spellcasting {
             // Returns target to caster.
             if (current.equals("lita")){
                 target.setTarget(caster);
-                if (world.isClientSide){
-                    Alteria.spawnParticles(world, caster.getPosition(1.0F), next);
-                }
             }
 
             // Raycast one entity and it's position, or one block.

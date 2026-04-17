@@ -29,4 +29,5 @@ public class ZSItems {
 
     public static final RegistryObject<Item> GOLDEN_ASTRAL_DIAMOND = ITEMS.register("golden_astral_diamond", GoldenAsDiamondItem::new);
     public static final RegistryObject<Item> NECROMANCER_STAFF = ITEMS.register("necromancer_staff", NecromancerStaffItem::new);
+    public static final RegistryObject<SpellWordItem> SPELLWORD_ITEM = ITEMS.register("spellword_item", SpellWordItem::new);
 }

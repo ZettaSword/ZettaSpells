@@ -1,6 +1,7 @@
 package zettasword.zetta_spells.system.spellcreation;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -8,6 +9,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,21 +19,21 @@ import zettasword.zetta_spells.ZettaSpellsMod;
 import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.TextProcessingUtil;
-import zettasword.zetta_spells.system.spellcreation.light.WordsDynamicLighting;
 
 import java.util.List;
-import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
 public class MagicWordsCreator {
 
-    @SubscribeEvent
+    @OnlyIn(Dist.DEDICATED_SERVER)
+    @SubscribeEvent()
     public static void chatEventServer(ServerChatEvent event){
         ServerPlayer player = event.getPlayer();
         SpellCreateContext ctx = new SpellCreateContext(player.level(), player, InteractionHand.MAIN_HAND);
         spellCast(ctx, event.getRawText());
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void chatEventClient(ClientChatEvent event){
         Minecraft mc = Minecraft.getInstance();

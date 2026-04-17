@@ -2,7 +2,7 @@ package zettasword.zetta_spells.mob_effects;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.effect.MagicMobEffect;
-import com.binaris.wizardry.api.content.item.IManaStoringItem;
+import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +17,7 @@ public class MagicRestorationMobEffect extends MagicMobEffect {
     }
 
     public static boolean rechargeMana(@NotNull LivingEntity livingEntity, int amplifier, ItemStack stack) {
-        if (stack.getItem() instanceof IManaStoringItem manaStoringItem){
+        if (stack.getItem() instanceof IManaItem manaStoringItem){
             if (manaStoringItem.isManaFull(stack)) return false;
             manaStoringItem.rechargeMana(stack, 2 * amplifier);
             if (livingEntity instanceof Player player){

@@ -8,8 +8,10 @@ import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpellsMod;
 import zettasword.zetta_spells.system.spellcreation.actions.action.ApplyEffectWord;
+import zettasword.zetta_spells.system.spellcreation.actions.action.BreakBlockWord;
 import zettasword.zetta_spells.system.spellcreation.actions.action.CastSpellWord;
 import zettasword.zetta_spells.system.spellcreation.actions.shape.RayWord;
+import zettasword.zetta_spells.system.spellcreation.actions.shape.SelfWord;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -25,10 +27,12 @@ public class SpellWords {
 
     // Shapes
     public static final RegistryObject<SpellWord> RAY = SPELL_WORDS.register("ray", RayWord::new);
+    public static final RegistryObject<SpellWord> SELF = SPELL_WORDS.register("self", SelfWord::new);
 
     // Actions
     public static final RegistryObject<SpellWord> APPLY_EFFECT = SPELL_WORDS.register("apply_effect", ApplyEffectWord::new);
     public static final RegistryObject<SpellWord> CAST = SPELL_WORDS.register("cast", CastSpellWord::new);
+    public static final RegistryObject<SpellWord> BREAK_BLOCK = SPELL_WORDS.register("break_block", BreakBlockWord::new);
 
 
     /** Yay

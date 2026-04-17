@@ -1,11 +1,10 @@
 package zettasword.zetta_spells.network;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
-import zettasword.zetta_spells.capability.RaceDataHolder;
 
 import java.util.function.Supplier;
 
@@ -17,8 +16,9 @@ public class RaceCapabilitySyncPacketS2C {
         this.data = data;
     }
 
-    public RaceCapabilitySyncPacketS2C(FriendlyByteBuf buf) {
-        this.data = buf.readNbt();
+    // ✅ Decoder must be a static method that returns a new instance
+    public static RaceCapabilitySyncPacketS2C decode(FriendlyByteBuf buf) {
+        return new RaceCapabilitySyncPacketS2C(buf.readNbt());
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -26,15 +26,17 @@ public class RaceCapabilitySyncPacketS2C {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() ->{
-            Minecraft minecraft = Minecraft.getInstance();
-            Player player = minecraft.player;
-            if (player == null) return;
-            player.getCapability(RaceDataHolder.INSTANCE).ifPresent(d -> d.deserializeNBT(this.getData()));
-        });
+        ctx.get().enqueueWork(() ->
+                // ✅ Delegate ALL client logic to a separate client-only class
+                // This class (RaceCapabilitySyncPacketS2C) now has ZERO client-only references
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                        ClientPacketHandlers.applyRaceSync(data)
+                )
+        );
         ctx.get().setPacketHandled(true);
     }
 
+    // ✅ Keep this if other classes need to read the data (optional)
     public CompoundTag getData() {
         return data;
     }

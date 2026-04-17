@@ -1,7 +1,7 @@
 package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
-import com.binaris.wizardry.api.content.item.ISpellCastingItem;
+import com.binaris.wizardry.api.content.item.ICastItem;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
@@ -46,7 +46,7 @@ public class ReplaceArmor extends RaySpell {
     @Override
     protected boolean onEntityHit(CastContext ctx, EntityHitResult entityHit, Vec3 origin) {
         if (entityHit.getEntity() instanceof Mob mob) {
-            InteractionHand first_hand = ctx.caster().getMainHandItem().getItem() instanceof ISpellCastingItem ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+            InteractionHand first_hand = ctx.caster().getMainHandItem().getItem() instanceof ICastItem ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
             ItemStack stack1 = ctx.caster().getItemInHand(first_hand).copy();
             if (!stack1.isEmpty()) {
                 EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack1);

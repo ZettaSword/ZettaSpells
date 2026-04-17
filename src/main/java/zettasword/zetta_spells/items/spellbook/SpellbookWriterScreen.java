@@ -8,9 +8,11 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import zettasword.zetta_spells.network.PacketHandler;
 
-
+@OnlyIn(Dist.CLIENT)
 public class SpellbookWriterScreen extends Screen {
     private static final Component TITLE = Component.translatable("screen.zetta_spells.writer");
     private static final Component SPELL_NAME = Component.translatable("gui.zetta_spells.textbox1");

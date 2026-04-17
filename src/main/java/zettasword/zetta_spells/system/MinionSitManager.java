@@ -1,6 +1,7 @@
 package zettasword.zetta_spells.system;
 
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,6 +14,7 @@ public class MinionSitManager {
     public static void onEntityTick(LivingEvent.LivingTickEvent event) {
         if (event.getEntity().level().isClientSide) return; // Only handle on server
         if (!(event.getEntity() instanceof Mob mob)) return;
+        if (event.getEntity() instanceof Player) return;
 
         // If this minion is sitting, lock its movement
         if (mob.getPersistentData().getBoolean("sitting")){

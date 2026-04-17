@@ -40,9 +40,11 @@ public class PacketHandler {
                 .consumerMainThread(SubmitWriterTextPacket::handle)
                 .add();
 
+        // In PacketHandler.register():
         INSTANCE.messageBuilder(RaceCapabilitySyncPacketS2C.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(RaceCapabilitySyncPacketS2C::encode)
-                .decoder(RaceCapabilitySyncPacketS2C::new)
-                .consumerMainThread(RaceCapabilitySyncPacketS2C::handle).add();
+                .decoder(RaceCapabilitySyncPacketS2C::decode)  // ✅ Must be static method reference
+                .consumerMainThread(RaceCapabilitySyncPacketS2C::handle)
+                .add();
     }
 }

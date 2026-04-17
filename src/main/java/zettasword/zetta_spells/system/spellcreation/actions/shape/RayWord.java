@@ -21,6 +21,10 @@ import java.util.List;
 
 public class RayWord extends SpellWord {
 
+    public RayWord() {
+        super("ray");
+    }
+
     /**
      * Allows us to get if key things are considered. Like if there is a word, and is a current target is a spider, and more, obviously.
      *

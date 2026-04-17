@@ -50,18 +50,7 @@ public class WordsDynamicLighting {
 
         if (!isHoldingLux(player)) return;
 
-        PoseStack poseStack = event.getPoseStack();
-        poseStack.pushPose();
-
-        // 1. Interpolated player position
-        float partial = event.getPartialTick();
-        double px = player.xo + (player.getX() - player.xo) * partial;
-        double py = player.yo + (player.getY() - player.yo) * partial + player.getEyeHeight() / 2.0;
-        double pz = player.zo + (player.getZ() - player.zo) * partial;
-
-        // 2. Convert to camera-relative space
-        Vec3 camPos = mc.gameRenderer.getMainCamera().getPosition();
-        poseStack.translate(px - camPos.x, py - camPos.y, pz - camPos.z);
+        PoseStack poseStack = getPoseStack(event, player, mc);
 
         // 3. Setup render state
         RenderSystem.enableBlend();
@@ -80,6 +69,22 @@ public class WordsDynamicLighting {
         RenderSystem.enableDepthTest();
         RenderSystem.disableBlend();
         poseStack.popPose();
+    }
+
+    private static @NotNull PoseStack getPoseStack(RenderLevelStageEvent event, LocalPlayer player, Minecraft mc) {
+        PoseStack poseStack = event.getPoseStack();
+        poseStack.pushPose();
+
+        // 1. Interpolated player position
+        float partial = event.getPartialTick();
+        double px = player.xo + (player.getX() - player.xo) * partial;
+        double py = player.yo + (player.getY() - player.yo) * partial + player.getEyeHeight() / 2.0;
+        double pz = player.zo + (player.getZ() - player.zo) * partial;
+
+        // 2. Convert to camera-relative space
+        Vec3 camPos = mc.gameRenderer.getMainCamera().getPosition();
+        poseStack.translate(px - camPos.x, py - camPos.y, pz - camPos.z);
+        return poseStack;
     }
 
     public static boolean isHoldingLux(LocalPlayer player) {

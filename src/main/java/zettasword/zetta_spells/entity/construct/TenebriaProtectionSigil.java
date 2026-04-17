@@ -2,9 +2,7 @@ package zettasword.zetta_spells.entity.construct;
 
 import com.binaris.wizardry.api.content.entity.construct.ScaledConstructEntity;
 import com.binaris.wizardry.api.content.util.EntityUtil;
-import com.binaris.wizardry.api.content.util.MagicDamageSource;
-import com.binaris.wizardry.content.item.WizardArmorItem;
-import com.binaris.wizardry.setup.registries.EBDamageSources;
+import com.binaris.wizardry.content.item.armor.WizardArmorItem;
 import com.binaris.wizardry.setup.registries.EBMobEffects;
 import com.binaris.wizardry.setup.registries.Elements;
 import net.minecraft.core.BlockPos;
