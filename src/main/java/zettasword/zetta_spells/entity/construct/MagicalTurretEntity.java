@@ -20,12 +20,12 @@ public class MagicalTurretEntity extends MagicConstructEntity {
 
     public MagicalTurretEntity(EntityType<? extends Entity> type, Level level) {
         super(type, level);
-        this.lifetime = ZettaSpells.MAGIC_TURRET.get().property(DefaultProperties.DURATION);
+        //this.lifetime = ZettaSpells.MAGIC_TURRET.get().property(DefaultProperties.DURATION);
     }
 
     public MagicalTurretEntity(Level level){
         super(ZSEntities.MAGICAL_TURRET.get(), level);
-        this.lifetime = ZettaSpells.MAGIC_TURRET.get().property(DefaultProperties.DURATION);
+        //this.lifetime = ZettaSpells.MAGIC_TURRET.get().property(DefaultProperties.DURATION);
     }
 
     @Override
