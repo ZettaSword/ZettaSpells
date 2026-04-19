@@ -58,6 +58,7 @@ public class ZettaSpellsMod
         ZSEntities.ENTITY_TYPES.register(modEventBus);
         ZSEnchantments.ENCHANTMENTS.register(modEventBus);
         ZSBlocks.BLOCKS.register(modEventBus);
+        ZSEntities.BLOCK_E_TYPES.register(modEventBus);
         // Register items
         ZSItems.ITEMS.register(modEventBus);
         ZettaSpells.SPELLS.register(modEventBus);
@@ -81,9 +82,6 @@ public class ZettaSpellsMod
     {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
-
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
 
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 

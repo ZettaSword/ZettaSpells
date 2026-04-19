@@ -3,10 +3,12 @@ package zettasword.zetta_spells.entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.animal.Rabbit;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.blocks.ZSBlocks;
 import zettasword.zetta_spells.entity.construct.*;
 
 public class ZSEntities {
@@ -68,4 +70,14 @@ public class ZSEntities {
                     .updateInterval(10)
                     .build("death_vessel")
     );
+
+    public static final RegistryObject<EntityType<MagicalTurretEntity>> MAGICAL_TURRET = ENTITY_TYPES.register("magical_turret",
+            () -> EntityType.Builder.<MagicalTurretEntity>of(MagicalTurretEntity::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f) // Width, Height (Adjust to fit your model)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("magical_turret")
+    );
+
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpellsMod.MODID);
 }

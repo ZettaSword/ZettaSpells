@@ -8,7 +8,7 @@ import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.renderers.*;
 
 @Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientModEvents {
+public class ClientZSEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -25,9 +25,15 @@ public class ClientModEvents {
         event.registerEntityRenderer(ZSEntities.TENEBRIA_PROTECTION_SIGIL.get(),
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpellsMod.location("textures/sigils/tenebria_will.png"), 0.2F, false));
 
+        event.registerEntityRenderer(ZSEntities.MAGICAL_TURRET.get(),
+                (ctx) -> new MagicalTurretEntityRenderer(ctx, 0.2F, false));
+
         // Entities that are invisible to the player's eyes.
        // event.registerEntityRenderer(ZSEntities.GRAVITATIONAL_PULL_ENTITY.get(), ZSNothingRender::new);
         event.registerEntityRenderer(ZSEntities.MAGIC_CHAINS.get(), HelixChainRenderer::new);
         event.registerEntityRenderer(ZSEntities.DEATH_VESSEL.get(), ZSNothingRender::new);
+
+        // Block Entities
+
     }
 }

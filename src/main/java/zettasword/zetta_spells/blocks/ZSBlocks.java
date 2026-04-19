@@ -3,6 +3,7 @@ package zettasword.zetta_spells.blocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -38,4 +39,5 @@ public class ZSBlocks {
                     .noOcclusion()
                     .strength(0.1f)
                     .sound(SoundType.WOOL), 9));
+
 }

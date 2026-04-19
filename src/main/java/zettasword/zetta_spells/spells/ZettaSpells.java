@@ -1,10 +1,19 @@
 package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.content.spell.Spell;
+import com.binaris.wizardry.api.content.spell.SpellAction;
+import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
+import com.binaris.wizardry.content.entity.construct.FireRingConstruct;
+import com.binaris.wizardry.content.spell.DefaultProperties;
+import com.binaris.wizardry.content.spell.abstr.ConstructSpell;
 import com.binaris.wizardry.core.registry.EBRegistries;
+import com.binaris.wizardry.setup.registries.Elements;
+import com.binaris.wizardry.setup.registries.SpellTiers;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.blocks.LevitationSigilBlock;
+import zettasword.zetta_spells.entity.construct.MagicalTurretEntity;
 
 public class ZettaSpells {
     public static final DeferredRegister<Spell> SPELLS = DeferredRegister.create(EBRegistries.SPELL, "zetta_spells");
@@ -29,7 +38,13 @@ public class ZettaSpells {
 
     //1.4.0
     public static final RegistryObject<Spell> TURN_SPELLCASTER = SPELLS.register("turn_spellcaster", TurnSpellcaster::new);
-
-
+/*
+    public static final RegistryObject<Spell> MAGIC_TURRET = SPELLS.register("magic_turret", () -> new ConstructSpell<>(MagicalTurretEntity::new, false).floor(false)
+            .assignProperties(SpellProperties.builder()
+                    .assignBaseProperties(SpellTiers.ADVANCED, Elements.MAGIC, SpellType.CONSTRUCT, SpellAction.POINT, 50, 10, 100)
+                    .add(DefaultProperties.DURATION, 1200)
+                    .build()
+            ));
+*/
     //TODO: Add sounds to sounds.json for all spells...
 }
