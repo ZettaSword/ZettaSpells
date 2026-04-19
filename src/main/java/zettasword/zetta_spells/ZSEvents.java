@@ -273,34 +273,35 @@ public class ZSEvents {
             WizardData wizardData = Services.OBJECT_DATA.getWizardData(player);
 
             if (!spellData.hasSpellBeenDiscovered(spell)) return;
+            if (Config.learningSystem){
+                Race.get(player).ifPresent((data) -> {
+                    int knowledge = data.getSpellKnowledge(spell);
+                    float chance = (float) EBConfig.FORFEIT_CHANCE.get();
+                    if (ArtifactChannel.isEquipped(player, EBItems.AMULET_WISDOM.get())) chance *= 0.5F;
+                    if (knowledge < 12){
+                        Random random = wizardData.getRandom();
+                        float roll = random.nextFloat();
+                        Forfeit forfeit = ForfeitRegistry.getRandomForfeit(random, spell.getTier(), spell.getElement());
+                        if (forfeit == null) return;
+                        boolean shouldTrigger = roll < chance;
+                        if (shouldTrigger){
+                            forfeit.apply(event.getLevel(), player);
 
-            Race.get(player).ifPresent((data) -> {
-                int knowledge = data.getSpellKnowledge(spell);
-                float chance = (float) EBConfig.FORFEIT_CHANCE.get();
-                if (ArtifactChannel.isEquipped(player, EBItems.AMULET_WISDOM.get())) chance *= 0.5F;
-                if (knowledge < 12){
-                    Random random = wizardData.getRandom();
-                    float roll = random.nextFloat();
-                    Forfeit forfeit = ForfeitRegistry.getRandomForfeit(random, spell.getTier(), spell.getElement());
-                    if (forfeit == null) return;
-                    boolean shouldTrigger = roll < chance;
-                    if (shouldTrigger){
-                        forfeit.apply(event.getLevel(), player);
-
-                        if (player instanceof ServerPlayer) EBAdvancementTriggers.SPELL_FAILURE.triggerFor(player);
-                        EntityUtil.playSoundAtPlayer(player, forfeit.getSound(), 1, 1);
-                        event.setCanceled(true);
+                            if (player instanceof ServerPlayer) EBAdvancementTriggers.SPELL_FAILURE.triggerFor(player);
+                            EntityUtil.playSoundAtPlayer(player, forfeit.getSound(), 1, 1);
+                            event.setCanceled(true);
+                        }
                     }
-                }
 
-                // Adding to spell potency and more!
-                if (knowledge > 0 && !event.getLevel().isClientSide){
-                    SpellModifiers mods = event.getModifiers();
-                    mods.set(SpellModifiers.POTENCY, Math.min(mods.get(SpellModifiers.POTENCY) + (knowledge * 0.0001F), 100.0F)); // Yeah, crazy stuff, I know.
-                    mods.set(SpellModifiers.COST, Math.max(mods.get(SpellModifiers.POTENCY) - (knowledge * 0.0001F), 0.5F));
-                    event.getModifiers().combine(mods);
-                }
-            });
+                    // Adding to spell potency and more!
+                    if (knowledge > 0 && !event.getLevel().isClientSide){
+                        SpellModifiers mods = event.getModifiers();
+                        mods.set(SpellModifiers.POTENCY, Math.min(mods.get(SpellModifiers.POTENCY) + (knowledge * 0.0001F), 100.0F)); // Yeah, crazy stuff, I know.
+                        mods.set(SpellModifiers.COST, Math.max(mods.get(SpellModifiers.POTENCY) - (knowledge * 0.0001F), 0.5F));
+                        event.getModifiers().combine(mods);
+                    }
+                });
+            }
         }
     }
 
@@ -313,29 +314,31 @@ public class ZSEvents {
             if (event.isCanceled()) return;
             Level level = event.getLevel();
             Spell spell = event.getSpell(); // For read-ability
-            if (Services.OBJECT_DATA.getSpellManagerData(player).hasSpellBeenDiscovered(spell) && !player.isCreative()) {
-                Race.get(player).ifPresent((data) -> {
-                    data.addSpellKnowledge(spell, 1);
-                    int knowledge = data.getSpellKnowledge(spell);
-                    if (knowledge < 12) {
-                        if (!level.isClientSide) {
-                            player.displayClientMessage(Component.translatable("spell_knowledge.learning",
-                                    (int) ((knowledge / 12F) * 100F)).withStyle(ChatFormatting.YELLOW), true);
+            if (Config.learningSystem){
+                if (Services.OBJECT_DATA.getSpellManagerData(player).hasSpellBeenDiscovered(spell) && !player.isCreative()) {
+                    Race.get(player).ifPresent((data) -> {
+                        data.addSpellKnowledge(spell, 1);
+                        int knowledge = data.getSpellKnowledge(spell);
+                        if (knowledge < 12) {
+                            if (!level.isClientSide) {
+                                player.displayClientMessage(Component.translatable("spell_knowledge.learning",
+                                        (int) ((knowledge / 12F) * 100F)).withStyle(ChatFormatting.YELLOW), true);
+                            }
+                            if (level.isClientSide){
+                                player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP);
+                            }
                         }
-                        if (level.isClientSide){
-                            player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP);
+                        if (knowledge == 12){
+                            if (!level.isClientSide)
+                                player.displayClientMessage(Component.translatable("spell_knowledge.learned").withStyle(ChatFormatting.GOLD), true);
+                            if (level.isClientSide){
+                                Alteria.spawnEnchantmentParticles(player, 20, 2.0D, 2.0D);
+                                player.playSound(SoundEvents.PLAYER_LEVELUP);
+                            }
                         }
-                    }
-                    if (knowledge == 12){
-                        if (!level.isClientSide)
-                            player.displayClientMessage(Component.translatable("spell_knowledge.learned").withStyle(ChatFormatting.GOLD), true);
-                        if (level.isClientSide){
-                            Alteria.spawnEnchantmentParticles(player, 20, 2.0D, 2.0D);
-                            player.playSound(SoundEvents.PLAYER_LEVELUP);
-                        }
-                    }
-                });
+                    });
 
+                }
             }
 
             if (player.hasEffect(ZSEffects.UNDEAD.get()) && !level.isClientSide) {
