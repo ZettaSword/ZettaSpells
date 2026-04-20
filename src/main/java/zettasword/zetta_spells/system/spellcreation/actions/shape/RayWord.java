@@ -34,7 +34,7 @@ public class RayWord extends SpellWord {
      **/
     @Override
     public boolean shouldCast(SpellCreateContext ctx, List<String> words, int i) {
-        return words.get(i).equals("rute");
+        return words.get(i).equals("ray");
     }
 
     /**

@@ -5,10 +5,10 @@ import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 
 import java.util.List;
 
-public class SelfWord extends SpellWord {
+public class SigilWord extends SpellWord {
 
-    public SelfWord() {
-        super("self");
+    public SigilWord() {
+        super("sigil");
     }
 
     /**
@@ -20,7 +20,7 @@ public class SelfWord extends SpellWord {
      **/
     @Override
     public boolean shouldCast(SpellCreateContext ctx, List<String> words, int i) {
-        return words.get(i).equals("self");
+        return words.get(i).equals("sigil");
     }
 
     /**
@@ -32,7 +32,10 @@ public class SelfWord extends SpellWord {
      **/
     @Override
     public boolean cast(SpellCreateContext ctx, List<String> words, int i) {
-        ctx.setTarget(ctx.getCaster());
-        return true;
+        if (i >= 0 && i < words.size()) {
+            List<String> toCast = words.subList(i + 1, words.size());
+            return true;
+        }
+        return false;
     }
 }

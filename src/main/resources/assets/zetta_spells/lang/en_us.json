@@ -101,18 +101,20 @@
 
   "item.zetta_spells.spellword_item": "Spell-word Tablet",
 
+  "spellword.zetta_spells.general_item_desc": "Craft Unfinished Spellbook and create your own spell with this word.",
+
   "spellword.zetta_spells.ray": "Ray",
-  "spellword.zetta_spells.ray.description": "Fires a magical ray in the targeted direction",
+  "spellword.zetta_spells.ray.description": "Fires a magical ray in the targeted direction, it will set target of the spell, it will be entity or block.\n Example spell: 'Ray break!'",
 
   "spellword.zetta_spells.self": "Self",
-  "spellword.zetta_spells.self.description": "Applies effects to the caster",
+  "spellword.zetta_spells.self.description": "Switches caster to be the target of the spell.\n Example spell: 'Ray apply slowness, self apply speed.'",
 
-  "spellword.zetta_spells.apply_effect": "Apply Effect",
-  "spellword.zetta_spells.apply_effect.description": "Inflicts or grants a status effect",
+  "spellword.zetta_spells.apply_effect": "Apply",
+  "spellword.zetta_spells.apply_effect.description": "Inflicts a status effect of your choice, in your spell simply write 'apply speed' to get speed.\n Example spell: 'Apply speed. Mod num range 30 Ray. Mod num duration 30. Mod num amplification 2. Apply decay!'",
 
   "spellword.zetta_spells.cast": "Cast",
-  "spellword.zetta_spells.cast.description": "Cast spell you discovered at ease!",
+  "spellword.zetta_spells.cast.description": "Cast spell you discovered at ease!\n Example spell: 'Cast magic_missile!'",
 
-  "spellword.zetta_spells.break_block": "Break Block Tablet",
-  "spellword.zetta_spells.break_block.description": "Breaks the targeted block."
+  "spellword.zetta_spells.break_block": "Break",
+  "spellword.zetta_spells.break_block.description": "Breaks the targeted block.\n Example spell: 'Break!'"
 }

@@ -1,7 +1,6 @@
 package zettasword.zetta_spells.system.spellcreation;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import zettasword.zetta_spells.system.SpellTarget;
@@ -16,12 +15,11 @@ import java.util.Map;
 public class SpellCreator {
 
     public static void spellCast(SpellCreateContext context, String spell) {
-        if (SpellWord.getCurrentMana(context) <= 0) return;
+        if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return;
         Level world = context.getWorld();
         LivingEntity caster = context.getCaster();
         SpellTarget target = context.getTarget();
-        boolean creative = false;
-        if (caster instanceof Player player) creative = player.isCreative();
+        boolean creative = context.isCreative();
 
         // Starting the spell-creation.
         List<String> words = TextProcessingUtil.extractWords(spell);

@@ -46,7 +46,7 @@ public abstract class SpellWord {
     public void addTooltip(ItemStack context, @Nullable Level level,
                            List<Component> tooltip, TooltipFlag flag) {
         Component description = Component.translatable(
-                "spellword." + registryName.getNamespace() + "." + registryName.getPath() + ".description").withStyle(ChatFormatting.GRAY);
+                "spellword." + registryName.getNamespace() + "." + registryName.getPath() + ".description").withStyle(ChatFormatting.GOLD);
         if (!description.getString().isEmpty()) {
             tooltip.add(description);
         }

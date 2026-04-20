@@ -26,7 +26,7 @@ public class BreakBlockWord extends SpellWord {
      **/
     @Override
     public boolean shouldCast(SpellCreateContext ctx, List<String> words, int i) {
-        return words.get(i).equals("uter") && ctx.getCaster() instanceof Player;
+        return words.get(i).equals("break") && ctx.getCaster() instanceof Player;
     }
 
     /**

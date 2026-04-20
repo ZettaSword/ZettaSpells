@@ -2,6 +2,7 @@ package zettasword.zetta_spells.system.spellcreation.actions.action;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
+import net.minecraft.ResourceLocationException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,7 +28,7 @@ public class ApplyEffectWord extends SpellWord {
      **/
     @Override
     public boolean shouldCast(SpellCreateContext ctx, List<String> words, int i) {
-        return ctx.getPrevious().equals("apote") && ForgeRegistries.MOB_EFFECTS.containsKey(ResourceLocation.parse(words.get(i)));
+        return ctx.getPrevious().equals("apply");
     }
 
     /**
@@ -42,22 +43,78 @@ public class ApplyEffectWord extends SpellWord {
         LivingEntity living = living(ctx.getTarget().getTargetEntity());
         if (living == null) return false;
         try {
-            MobEffect mobEffect = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.parse(words.get(i)));
+            // Get effect name from command words
+            if (i >= words.size()) return false;
+            String effectName = words.get(i);
+
+            MobEffect mobEffect = findMobEffect(effectName);
+            if (mobEffect == null) return false;
+
             int duration = ctx.getMods().getOrDefault("duration", SVar.init(10)).getInt();
             int amplification = ctx.getMods().getOrDefault("amplification", SVar.init(1)).getInt();
-            if (mobEffect != null && consumeMana(ctx, amplification*(duration * 2))) {
-                if (!ctx.getWorld().isClientSide) {
-                    living.addEffect(new MobEffectInstance(mobEffect, duration * 20,
-                             amplification - 1, false, false));
-                }
-                // Client side
-                if (ctx.getWorld().isClientSide) {
-                    ParticleBuilder.create(EBParticles.BUFF).entity(living).color(mobEffect.getColor()).spawn(ctx.getWorld());
-                }
 
+            if (consumeMana(ctx, amplification * (duration * 2))) {
+                // Server side: apply effect
+                if (!ctx.getWorld().isClientSide) {
+                    living.addEffect(new MobEffectInstance(
+                            mobEffect,
+                            duration * 20,           // ticks
+                            amplification - 1,       // amplifier is 0-based
+                            false, false             // no particles, no icon
+                    ));
+                }
+                // Client side: spawn visual feedback
+                if (ctx.getWorld().isClientSide) {
+                    ParticleBuilder.create(EBParticles.BUFF)
+                            .entity(living)
+                            .color(mobEffect.getColor())
+                            .spawn(ctx.getWorld());
+                }
                 return true;
             }
-        }catch (Exception ignore){}
+        } catch (Exception ignore) {
+        }
         return false;
+    }
+
+    /**
+     * Resolves a MobEffect from a name string with flexible matching:
+     * 1. Exact ResourceLocation match (e.g., "minecraft:speed", "modid:effect")
+     * 2. Fallback to "minecraft:" prefix for vanilla effects (e.g., "speed" → "minecraft:speed")
+     * 3. Optional: linear search by path only if ambiguous matches are acceptable
+     *
+     * @param name The effect name from user input
+     * @return The resolved MobEffect, or null if not found
+     */
+    private MobEffect findMobEffect(String name) {
+        if (name == null || name.isBlank()) return null;
+
+        // ── 1. Try exact ResourceLocation match first ──────────────────────
+        try {
+            ResourceLocation exactLoc = ResourceLocation.parse(name);
+            MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(exactLoc);
+            if (effect != null) return effect;
+        } catch (ResourceLocationException e) {
+            // Invalid format (e.g., missing colon in modid:path), continue to fallback
+        }
+
+        // ── 2. Try vanilla fallback: assume "minecraft:" prefix ─────────────
+        if (!name.contains(":")) {
+            ResourceLocation vanillaLoc = ResourceLocation.tryBuild("minecraft", name);
+            if (vanillaLoc != null) {
+                MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(vanillaLoc);
+                if (effect != null) return effect;
+            }
+        }
+
+        // ── 3. Optionality ───────
+        for (MobEffect effect : ForgeRegistries.MOB_EFFECTS) {
+            ResourceLocation loc = ForgeRegistries.MOB_EFFECTS.getKey(effect);
+            if (loc != null && loc.getPath().equalsIgnoreCase(name)) {
+                return effect; // First match wins
+            }
+        }
+
+        return null; // Not found
     }
 }

@@ -31,6 +31,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingBreatheEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -51,6 +52,7 @@ import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.system.Alchemy;
+import zettasword.zetta_spells.system.loot.ZSLootTables;
 import zettasword.zetta_spells.system.particles.Alteria;
 
 import java.util.Random;
@@ -195,6 +197,15 @@ public class ZSEvents {
         return !(mob instanceof net.minecraft.world.entity.boss.enderdragon.EnderDragon) &&
                 !(mob instanceof net.minecraft.world.entity.boss.wither.WitherBoss) &&
                 mob.getType().getCategory() != net.minecraft.world.entity.MobCategory.MISC;
+    }
+
+    @SubscribeEvent
+    public static void onLootTableLoadEvent(LootTableLoadEvent event) {
+        ZSLootTables.applyInjections((location, pool) -> {
+            if (event.getName().equals(location)) {
+                event.getTable().addPool(pool);
+            }
+        });
     }
 
     @OnlyIn(Dist.DEDICATED_SERVER)

@@ -100,4 +100,35 @@ public class SpellCreateContext {
     public void setPrevious(String previous) {
         this.previous = previous;
     }
+
+    public boolean isCreative(){
+        return this.caster instanceof Player player && player.isCreative();
+    }
+
+    /** Quick method to get SVar without making code look too messy!
+     * @param mod Name of SVar player defined before.
+     * @param fallback Fallback in case something goes wrong, like there is no defined value in the spell.
+     * @return Returns SVar, modification of the spellword spell.
+     */
+    public SVar getMod(String mod, int fallback){
+        return getMods().getOrDefault(mod, SVar.init(fallback));
+    }
+
+    /** Quick method to get SVar without making code look too messy!
+     * @param mod Name of SVar player defined before.
+     * @param fallback Fallback in case something goes wrong, like there is no defined value in the spell.
+     * @return Returns SVar, modification of the spellword spell.
+     */
+    public SVar getMod(String mod, boolean fallback){
+        return getMods().getOrDefault(mod, SVar.init(fallback));
+    }
+
+    /** Quick method to get SVar without making code look too messy!
+     * @param mod Name of SVar player defined before.
+     * @param fallback Fallback in case something goes wrong, like there is no defined value in the spell.
+     * @return Returns SVar, modification of the spellword spell.
+     */
+    public SVar getMod(String mod, String fallback){
+        return getMods().getOrDefault(mod, SVar.init(fallback));
+    }
 }

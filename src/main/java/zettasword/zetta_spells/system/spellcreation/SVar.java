@@ -42,6 +42,20 @@ public class SVar {
         return valueInt;
     }
 
+    /** To not allow negative values. **/
+    public int getIntSafe() {
+        return Math.max(valueInt, 0);
+    }
+
+
+    /** To not allow negative values.
+     * @param min Math.max returns the higher number, usually it is valueInt, but if caster defines it as -1 when it will return this.
+     * @return Returns the higher of two values.
+     */
+    public int getIntSafe(int min) {
+        return Math.max(valueInt, min);
+    }
+
     public void setInt(int valueInt) {
         this.valueInt = valueInt;
     }

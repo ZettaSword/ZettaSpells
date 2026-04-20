@@ -65,6 +65,8 @@ public class ZettaSpellsMod
         //ZSLootFunctions.register(modEventBus);
         MixinBootstrap.init();
 
+        ZSLootFunctions.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 

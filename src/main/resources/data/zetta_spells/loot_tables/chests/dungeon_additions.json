@@ -1,0 +1,28 @@
+{
+  "pools": [
+    {
+      "name": "zetta_spells",
+      "rolls": {
+        "min": 1,
+        "max": 3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zetta_spells:spellword_item",
+          "weight": 40,
+          "functions": [
+            {
+              "function": "zetta_spells:set_spellword"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zetta_spells:golden_astral_diamond",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

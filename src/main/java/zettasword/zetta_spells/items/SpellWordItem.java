@@ -66,6 +66,7 @@ public class SpellWordItem extends Item {
             () -> tooltip.add(Component.literal("Invalid or missing spellword")
                 .withStyle(ChatFormatting.RED))
         );
+        tooltip.add(Component.translatable("spellword.zetta_spells.general_item_desc").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
         super.appendHoverText(stack, level, tooltip, flag);
     }
     

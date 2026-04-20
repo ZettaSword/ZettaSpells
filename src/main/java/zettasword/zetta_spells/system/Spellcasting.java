@@ -9,6 +9,7 @@ import com.binaris.wizardry.api.content.util.BlockUtil;
 import com.binaris.wizardry.api.content.util.CastItemUtils;
 import com.binaris.wizardry.api.content.util.EntityUtil;
 import com.binaris.wizardry.api.content.util.RayTracer;
+import com.binaris.wizardry.content.item.SpellBookItem;
 import com.binaris.wizardry.content.item.armor.WizardArmorItem;
 import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.*;
@@ -371,7 +372,6 @@ public class Spellcasting {
                         living.setSecondsOnFire(duration);
                     }
                 }
-
                 if (current.equals("mundo") && !world.isClientSide){
                     MagicChains entity = new MagicChains(world);
                     entity.setPos(target.getTargetPos().getCenter());
