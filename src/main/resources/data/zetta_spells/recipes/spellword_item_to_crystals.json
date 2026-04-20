@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "zetta_spells:spellword_item"
+    }
+  ],
+  "result": {
+    "item": "ebwizardry:magic_crystal",
+    "count": 4
+  }
+}
