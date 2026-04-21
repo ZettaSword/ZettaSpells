@@ -11,6 +11,9 @@ import zettasword.zetta_spells.system.spellcreation.actions.action.ApplyEffectWo
 import zettasword.zetta_spells.system.spellcreation.actions.action.BreakBlockWord;
 import zettasword.zetta_spells.system.spellcreation.actions.action.CastSpellWord;
 import zettasword.zetta_spells.system.spellcreation.actions.action.SummonWord;
+import zettasword.zetta_spells.system.spellcreation.actions.operations.FilterWord;
+import zettasword.zetta_spells.system.spellcreation.actions.operations.IfWord;
+import zettasword.zetta_spells.system.spellcreation.actions.operations.ShiftPosWord;
 import zettasword.zetta_spells.system.spellcreation.actions.shape.BlockAreaWord;
 import zettasword.zetta_spells.system.spellcreation.actions.shape.EntityAreaWord;
 import zettasword.zetta_spells.system.spellcreation.actions.shape.RayWord;
@@ -40,11 +43,20 @@ public class SpellWords {
     public static final RegistryObject<SpellWord> BREAK_BLOCK = SPELL_WORDS.register("break_block", BreakBlockWord::new);
     public static final RegistryObject<SpellWord> SUMMON = SPELL_WORDS.register("summon", SummonWord::new);
 
+    // Operations
+    public static final RegistryObject<SpellWord> FILTER = SPELL_WORDS.register("filter", FilterWord::new);
+    public static final RegistryObject<SpellWord> IF = SPELL_WORDS.register("if", IfWord::new);
+    public static final RegistryObject<SpellWord> SHIFT_POSITION = regSpellWord(ShiftPosWord::new);
+
 
     /** Yay
      */
     public static void register(IEventBus modEventBus) {
         SPELL_WORDS.register(modEventBus);
+    }
+
+    public static RegistryObject<SpellWord> regSpellWord(final Supplier<SpellWord> sup){
+        return SPELL_WORDS.register(sup.get().getRegistryName().getPath(), sup);
     }
 
     public static Optional<SpellWord> getAction(ResourceLocation id) {

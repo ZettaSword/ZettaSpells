@@ -62,23 +62,27 @@ public class RayWord extends SpellWord {
         // So caster can't get chosen.
         if (rayTrace.getType() == HitResult.Type.MISS){
             ctx.clearTargets();
+            ctx.stopSpell();
         }
 
         if (rayTrace instanceof EntityHitResult entityHit && rayTrace.getType() == HitResult.Type.ENTITY) {
             if (ctx.filter().test(entityHit.getEntity())) {
+                ctx.clearTargets();
                 ctx.addTarget(entityHit.getEntity());
             }else{
                 ctx.clearTargets();
+                ctx.stopSpell();
             }
             range = origin.distanceTo(rayTrace.getLocation());
         } else if (rayTrace instanceof BlockHitResult blockHit && rayTrace.getType() == HitResult.Type.BLOCK) {
+            ctx.clearTargets();
             ctx.addTarget(blockHit.getBlockPos());
             ctx.setHitDirection(blockHit.getDirection());
             range = origin.distanceTo(rayTrace.getLocation());
         }
 
 
-        if (world.isClientSide && ctx.getTarget().getTargetPos() != null){
+        if (world.isClientSide && !ctx.getTargets().isEmpty() && ctx.getTarget().getTargetPos() != null){
             BlockPos targetPos = ctx.getTarget().getTargetPos();
 
             double x = targetPos.getX();

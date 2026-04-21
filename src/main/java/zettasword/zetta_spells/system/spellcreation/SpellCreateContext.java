@@ -11,8 +11,8 @@ import org.apache.commons.compress.utils.Lists;
 import zettasword.zetta_spells.system.SpellTarget;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 /** Class for temporary storing some information about the spell being made. **/
@@ -20,11 +20,14 @@ public class SpellCreateContext {
     private Level world = null;
     private LivingEntity caster = null;
     private InteractionHand hand = null;
-    private Map<String, SVar> mods = null;
+    private HashMap<String, SVar> mods = null;
     private List<SpellTarget> targets = Lists.newArrayList();
     private Direction hit_direction = Direction.UP;
     private String previous = "";
     private Predicate<Entity> filter = entity -> true;
+    private Predicate<SpellCreateContext> ifs = context -> true;
+    // Switch it with stopSpell() only if there is real need. It stops the spell completely.
+    private boolean stopSpell = false;
 
 
     public SpellCreateContext(Level world, LivingEntity caster, InteractionHand hand){
@@ -33,11 +36,12 @@ public class SpellCreateContext {
         this.targets.add(new SpellTarget(caster));
         this.hand = hand;
         // Default modifications are stored here!
-        this.mods = Map.of("range", SVar.init(14),
-                "amplification", SVar.init(1),
-                "duration", SVar.init(10),
-                "power", SVar.init(1),
-                "ignorelivingentities", SVar.init(false));
+        this.mods = new HashMap<>();
+        this.mods.put("range", SVar.init(14));
+        this.mods.put("amplification", SVar.init(1));
+        this.mods.put("duration", SVar.init(10));
+        this.mods.put("power", SVar.init(1));
+        this.mods.put("ignorelivingentities", SVar.init(false));
     }
 
     public SpellCreateContext(){}
@@ -66,11 +70,11 @@ public class SpellCreateContext {
         this.hand = hand;
     }
 
-    public Map<String, SVar> getMods() {
+    public HashMap<String, SVar> getMods() {
         return mods;
     }
 
-    public void setMods(Map<String, SVar> mods) {
+    public void setMods(HashMap<String, SVar> mods) {
         this.mods = mods;
     }
 
@@ -173,5 +177,22 @@ public class SpellCreateContext {
 
     public void setFilter(Predicate<Entity> filter) {
         this.filter = filter;
+    }
+
+    public Predicate<SpellCreateContext> getIf() {
+        return ifs;
+    }
+
+    public void setIf(Predicate<SpellCreateContext> ifs) {
+        this.ifs = ifs;
+    }
+
+    /** You can use this to stop spell from further building up. **/
+    public void stopSpell(){
+        this.stopSpell = true;
+    }
+
+    public boolean shouldStopSpell() {
+        return stopSpell;
     }
 }

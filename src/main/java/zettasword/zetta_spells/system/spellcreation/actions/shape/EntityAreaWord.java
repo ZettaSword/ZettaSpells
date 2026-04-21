@@ -1,5 +1,6 @@
 package zettasword.zetta_spells.system.spellcreation.actions.shape;
 
+import com.binaris.wizardry.api.content.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
@@ -12,7 +13,7 @@ import zettasword.zetta_spells.system.spellcreation.actions.bases.TargetSpellWor
 
 import java.util.List;
 
-public class EntityAreaWord extends TargetSpellWord {
+public class EntityAreaWord extends SpellWord {
 
     public EntityAreaWord() {
         super("entity_area");
@@ -34,20 +35,19 @@ public class EntityAreaWord extends TargetSpellWord {
      * Replaces default cast method with this one instead, which now returns True if any of this method cast will success();
      *
      * @param ctx    Context of the spell.
-     * @param target SpellTarget.
      * @param words  Words used in the spell.
      * @param i      Current index in [words], so you can understand where we are at in the spell.
      **/
     @Override
-    public boolean cast(SpellCreateContext ctx, SpellTarget target, List<String> words, int i) {
-        int range = ctx.getMod("range", 5).getIntSafe();
-        BlockPos pos = target.getTargetPos();
+    public boolean cast(SpellCreateContext ctx, List<String> words, int i) {
+        if (ctx.getTargets().isEmpty()) return false;
+        int range = ctx.getMod("area", 5).getInt();
+        BlockPos pos = ctx.getTarget().getTargetPos();
         if (pos != null){
-            List<Entity> entities = ctx.getWorld().getEntities(ctx.getCaster(), AABB.ofSize(pos.getCenter(), range, range, range), ctx.filter());
+            List<Entity> entities = EntityUtil.getEntitiesInRange(ctx.getWorld(), pos.getX(), pos.getY(), pos.getZ(), range, Entity.class);
+            entities.removeIf(t -> !ctx.filter().test(t));
             ctx.clearTargets();
-            for (Entity entity : entities){
-                ctx.addTarget(entity);
-            }
+            entities.forEach(ctx::addTarget);
             success();
         }
         return isSuccess();

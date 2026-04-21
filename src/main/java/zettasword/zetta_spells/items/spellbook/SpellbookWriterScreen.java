@@ -56,8 +56,8 @@ public class SpellbookWriterScreen extends Screen {
         // Text input box
         textBox = new EditBox(
             minecraft.font, 
-            guiLeft + 15, guiTop + 35, 
-            backgroundWidth - 30, 20,
+            guiLeft - 80, guiTop + 35,
+            backgroundWidth + 200, 20,
             Component.translatable("gui.zetta_spells.textbox")
         );
         textBox.setMaxLength(1000);
@@ -113,7 +113,7 @@ public class SpellbookWriterScreen extends Screen {
         guiGraphics.drawCenteredString(
                 minecraft.font,
                 SPELL,
-                guiLeft, guiTop + 45,
+                guiLeft - 100, guiTop + 45,
                 0xd1d1d1
         );
         
@@ -124,7 +124,7 @@ public class SpellbookWriterScreen extends Screen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         // Submit on Enter key
         if (keyCode == 257 || keyCode == 335) { // ENTER keys
-            if (!textBox.getValue().isEmpty()) {
+            if (modifiers == 0 && !textBox.getValue().isEmpty()) {
                 confirmButton.onPress();
                 return true;
             }

@@ -1,4 +1,4 @@
-package zettasword.zetta_spells.system.spellcreation.actions.shape;
+package zettasword.zetta_spells.system.spellcreation.actions.operations;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;

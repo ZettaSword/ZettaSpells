@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 public class SpellTarget {
     private Entity targetEntity = null;
     private BlockPos targetPos = null;
+    private boolean isMarkedForRemoval = false;
 
     public SpellTarget(Entity targetEntity){
         setTarget(targetEntity);
@@ -33,5 +34,13 @@ public class SpellTarget {
 
     public void setTargetPos(BlockPos pos){
         this.targetPos = pos;
+    }
+
+    public boolean isMarkedForRemoval() {
+        return isMarkedForRemoval;
+    }
+
+    public void setMarkedForRemoval(boolean markedForRemoval) {
+        isMarkedForRemoval = markedForRemoval;
     }
 }

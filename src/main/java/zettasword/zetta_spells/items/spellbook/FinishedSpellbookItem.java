@@ -49,7 +49,7 @@ public class FinishedSpellbookItem extends Item implements IManaItem, IWorkbench
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         
-        if (stack.hasTag() && stack.getTag().contains("written_text")) {
+        if (stack.hasTag() && stack.getTag() != null && stack.getTag().contains("written_text")) {
             stack.getTag().putString("author", player.getName().getString());
             String text = stack.getTag().getString("written_text");
             int cost = TextProcessingUtil.extractWords(text).size();
@@ -57,7 +57,12 @@ public class FinishedSpellbookItem extends Item implements IManaItem, IWorkbench
             cost = Math.max(10, (cost * cost)/5);
             if (this.getMana(stack) >= cost || player.isCreative()){
                 //Spellcasting.spellCast(level, player, hand, text);
-                SpellCreator.spellCast(new SpellCreateContext(level, player, hand), text);
+                // Caster can split spell onto pieces.
+                String[] texts = text.split(";");
+                for (String fragment : texts) {
+                    if (fragment.isEmpty()) continue;
+                    SpellCreator.spellCast(new SpellCreateContext(level, player, hand), fragment);
+                }
                 if (!level.isClientSide) {
                     player.displayClientMessage(Component.literal(stack.getHoverName().getString()), true);
                 }

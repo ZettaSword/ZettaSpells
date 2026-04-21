@@ -9,8 +9,8 @@ import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWords;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SpellCreator {
 
@@ -24,7 +24,7 @@ public class SpellCreator {
         // Starting the spell-creation.
         List<String> words = TextProcessingUtil.extractWords(spell);
         String previous = "";
-        Map<String, SVar> mods = context.getMods();
+        HashMap<String, SVar> mods = context.getMods();
 
         for (int i = 0; i<words.size();i++){
             String current = words.get(i);
@@ -40,14 +40,20 @@ public class SpellCreator {
                 if(action.shouldCast(context, words, i) && !action.cast(context, words, i) && !creative){
                     if (SpellWord.getCurrentMana(context) <= 0) break;
                 }
+
+                if (!context.getIf().test(context)){
+                    context.stopSpell();
+                    break;
+                }
             }
+            if (context.shouldStopSpell()) break;
 
             previous = current;
             context.setPrevious(current);
         }
     }
 
-    public static void processVariable(Map<String, SVar> mods, String type, String key, String value){
+    public static void processVariable(HashMap<String, SVar> mods, String type, String key, String value){
         SVar mod = null;
         if (type.equals("num") || type.equals("number")) {
             try {
@@ -59,6 +65,7 @@ public class SpellCreator {
         if (type.equals("word") || type.equals("string")) mod = SVar.init(!value.isEmpty() ? value : "empty");
         // Add nothing if mod is false.
         if (mod == null) return;
+        if (key == null) return;
         mods.put(key, mod);
     }
 
@@ -91,5 +98,21 @@ public class SpellCreator {
             return new Vec3(x,y,z);
         }
         return null;
+    }
+
+    public static int getInt(String next){
+        try {
+            return Integer.parseInt(next);
+        }catch (Exception ignore){
+            return 0;
+        }
+    }
+
+    public static int getInt(String next, int fallback){
+        try {
+            return Integer.parseInt(next);
+        }catch (Exception ignore){
+            return fallback;
+        }
     }
 }

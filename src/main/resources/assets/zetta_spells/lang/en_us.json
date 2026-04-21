@@ -26,6 +26,7 @@
   "gui.zetta_spells.textbox1": "Name",
   "gui.zetta_spells.textbox2": "Spell",
   "gui.zetta_spells.confirm": "Confirm",
+  "gui.narration.edit_box.multiline": "Multi-line text editor. Use arrow keys to navigate, Ctrl+C/V for copy/paste, mouse wheel to scroll.",
   "entity.zetta_spells.tenebria_will_sigil": "Tenebria Will Sigil",
   "entity.zetta_spells.tenebria_protection_sigil": "Tenebria Protection Sigil",
   "entity.zetta_spells.minion_rabbit": "Rabbit",
@@ -119,14 +120,21 @@
   "spellword.zetta_spells.break_block.description": "Breaks the targeted block. \n Example spell: 'Break!'",
 
   "spellword.zetta_spells.block_area": "Affect Block Area",
-  "spellword.zetta_spells.block_area.description": "Marks blocks in an area to be target of the spell. \n Example spell: 'Num range 15 Ray, num range 4, break!'",
+  "spellword.zetta_spells.block_area.description": "Marks blocks in an area to be target of the spell. \n Example spell: 'Num range 15 Ray. Num area 4, affect block area, break!'",
 
   "spellword.zetta_spells.entity_area": "Affect Entity Area",
-  "spellword.zetta_spells.entity_area.description": "Marks entities in an area to be target of the spell. Supports Filter. \n Example spell: 'Num range 15, affect entity area! Num duration 30 Apply decay!' \n 'Num range 20 affect entity area, apply speed.'",
+  "spellword.zetta_spells.entity_area.description": "Marks entities in an area to be target of the spell. Supports Filter. \n Example spell: 'Num area 15, affect entity area! Num duration 30 Apply decay!' \n 'Num area 10 affect entity area, apply speed.'",
 
   "spellword.zetta_spells.summon": "Summon",
   "spellword.zetta_spells.summon.description": "You can summon almost anyone with this word, though you should define health, count, duration. (you can also define name) \n Example spell: 'Ray, number duration 15, num health 10, num count 1, summon zombie'",
 
   "spellword.zetta_spells.filter": "Filter",
-  "spellword.zetta_spells.filter.description": "Allows you to filter targets of the spell to be different. Should be BEFORE using shape word. Supports: living, undead, none. \n Example spell: 'Filter undead, num range 15 affect entity area, apply decay.'"
+  "spellword.zetta_spells.filter.description": "Allows you to filter targets of the spell to be different. Should be BEFORE using shape word. Supports: living, undead, none. \n Example spell: 'Filter undead, num area 15 affect entity area, apply decay.'",
+
+  "spellword.zetta_spells.if": "If",
+  "spellword.zetta_spells.if.description": "Define something that will stop the spell 'if' something is not aligning! You can use ';' to split the spell on fragments. In example spell - there are two fragments. 1 Fragment = 1 Spell. \n Example spell: 'If sneaking ray apply levitation; If not sneaking apply levitation'",
+
+  "spellword.zetta_spells.shift_pos": "Shift Position",
+  "spellword.zetta_spells.shift_pos.description": "Allows you to shift current first position (usually a caster position, or raycasted target position) relative to the caster. You can shift it to: back, forth, left, right, down, up, and look (look takes what you're looking on basically). \n Example spell: 'Ray break! Num shift 1 shift position forth break, shift position forth break.' \n Tunnel Mine:'Ray break! Num shift 1 shift position up break, shift position right break, shift pos down break shift pos down break, shift pos left break, shift position left break, shift position up break shift position up break.'"
+
 }
