@@ -58,18 +58,25 @@ public class RayWord extends SpellWord {
         Vec3 endpoint = origin.add(look.scale(range));
         HitResult rayTrace = RayTracer.rayTrace(world, caster, origin, endpoint, 0.0F, false, Entity.class,
                 ctx.getMod("ignorelivingentities",false).getBoolean() ? EntityUtil::isLiving : RayTracer.ignoreEntityFilter(caster));
-        if (rayTrace instanceof EntityHitResult entityHit) {
-            ctx.addTarget(entityHit.getEntity());
-            range = origin.distanceTo(rayTrace.getLocation());
-        } else if (rayTrace instanceof BlockHitResult blockHit) {
-            ctx.addTarget(blockHit.getBlockPos());
-            ctx.setHitDirection(blockHit.getDirection());
-            range = origin.distanceTo(rayTrace.getLocation());
-        }
+
         // So caster can't get chosen.
         if (rayTrace.getType() == HitResult.Type.MISS){
             ctx.clearTargets();
         }
+
+        if (rayTrace instanceof EntityHitResult entityHit && rayTrace.getType() == HitResult.Type.ENTITY) {
+            if (ctx.filter().test(entityHit.getEntity())) {
+                ctx.addTarget(entityHit.getEntity());
+            }else{
+                ctx.clearTargets();
+            }
+            range = origin.distanceTo(rayTrace.getLocation());
+        } else if (rayTrace instanceof BlockHitResult blockHit && rayTrace.getType() == HitResult.Type.BLOCK) {
+            ctx.addTarget(blockHit.getBlockPos());
+            ctx.setHitDirection(blockHit.getDirection());
+            range = origin.distanceTo(rayTrace.getLocation());
+        }
+
 
         if (world.isClientSide && ctx.getTarget().getTargetPos() != null){
             BlockPos targetPos = ctx.getTarget().getTargetPos();
