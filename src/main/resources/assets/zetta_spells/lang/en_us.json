@@ -104,17 +104,29 @@
   "spellword.zetta_spells.general_item_desc": "Craft Unfinished Spellbook and create your own spell with this word.",
 
   "spellword.zetta_spells.ray": "Ray",
-  "spellword.zetta_spells.ray.description": "Fires a magical ray in the targeted direction, it will set target of the spell, it will be entity or block.\n Example spell: 'Ray break!'",
+  "spellword.zetta_spells.ray.description": "Fires a magical ray in the targeted direction, it will set target of the spell, it will be entity or block. \n Example spell: 'Ray break!' \n 'Number range 30. Ray break!'",
 
   "spellword.zetta_spells.self": "Self",
-  "spellword.zetta_spells.self.description": "Switches caster to be the target of the spell.\n Example spell: 'Ray apply slowness, self apply speed.'",
+  "spellword.zetta_spells.self.description": "Switches caster to be the only target of the spell. \n Example spell: 'Ray apply slowness, self apply speed.'",
 
   "spellword.zetta_spells.apply_effect": "Apply",
-  "spellword.zetta_spells.apply_effect.description": "Inflicts a status effect of your choice, in your spell simply write 'apply speed' to get speed.\n Example spell: 'Apply speed. Mod num range 30 Ray. Mod num duration 30. Mod num amplification 2. Apply decay!'",
+  "spellword.zetta_spells.apply_effect.description": "Inflicts a status effect of your choice, in your spell simply write 'apply speed' to get speed. \n Example spell: 'Apply speed. Num range 30, Ray. Num duration 30, num amplification 2. Apply decay!'",
 
   "spellword.zetta_spells.cast": "Cast",
   "spellword.zetta_spells.cast.description": "Cast spell you discovered at ease!\n Example spell: 'Cast magic_missile!'",
 
   "spellword.zetta_spells.break_block": "Break",
-  "spellword.zetta_spells.break_block.description": "Breaks the targeted block.\n Example spell: 'Break!'"
+  "spellword.zetta_spells.break_block.description": "Breaks the targeted block. \n Example spell: 'Break!'",
+
+  "spellword.zetta_spells.block_area": "Affect Block Area",
+  "spellword.zetta_spells.block_area.description": "Marks blocks in an area to be target of the spell. \n Example spell: 'Num range 15 Ray, num range 4, break!'",
+
+  "spellword.zetta_spells.entity_area": "Affect Entity Area",
+  "spellword.zetta_spells.entity_area.description": "Marks entities in an area to be target of the spell. Supports Filters (filter undead or filter living as examples) \n Example spell: 'Num range 15, affect entity area! Num duration 30 Apply decay!' \n 'Num range 20 affect entity area, apply speed.'",
+
+  "spellword.zetta_spells.summon": "Summon",
+  "spellword.zetta_spells.summon.description": "You can summon almost anyone with this word, though you should define health, count, duration. (you can also define name) \n Example spell: 'Ray, number duration 15, num health 10, num count 1, summon zombie'",
+
+  "spellword.zetta_spells.filter": "Filter",
+  "spellword.zetta_spells.filter.description": "Allows you to filter targets of the spell to be different. Should be BEFORE using shape word. \n Example spell: 'Filter undead, num range 15 affect entity area, apply decay.'"
 }

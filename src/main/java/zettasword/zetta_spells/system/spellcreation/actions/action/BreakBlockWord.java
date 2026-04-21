@@ -6,13 +6,14 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.particles.Alteria;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
-import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
+import zettasword.zetta_spells.system.spellcreation.actions.bases.TargetSpellWord;
 
 import java.util.List;
 
-public class BreakBlockWord extends SpellWord {
+public class BreakBlockWord extends TargetSpellWord {
     public BreakBlockWord() {
         super("break_block");
     }
@@ -29,26 +30,20 @@ public class BreakBlockWord extends SpellWord {
         return words.get(i).equals("break") && ctx.getCaster() instanceof Player;
     }
 
-    /**
-     * Use this to cast the spell you've made and registered.
-     *
-     * @param ctx   Context of the spell.
-     * @param words Words used in the spell.
-     * @param i     Current index in [words], so you can understand where we are at in the spell.
-     **/
     @Override
-    public boolean cast(SpellCreateContext ctx, List<String> words, int i) {
+    public boolean cast(SpellCreateContext ctx, SpellTarget target, List<String> words, int i) {
         Level world = ctx.getWorld();
-        BlockPos pos = ctx.getTarget().getTargetPos();
+        BlockPos pos = target.getTargetPos();
         LivingEntity caster = ctx.getCaster();
-        if (!world.isEmptyBlock(pos) && consumeMana(ctx, 10)){
+        if (!world.isEmptyBlock(pos) && consumeMana(ctx, 10)) {
             if (!world.isClientSide && BlockUtil.canBreak((Player) caster, world, pos, false)) {
                 world.destroyBlock(pos, true, caster);
             }
-            if (world.isClientSide){
+            if (world.isClientSide) {
                 Alteria.spawnBlockOutlineParticles(world, pos, ParticleTypes.HAPPY_VILLAGER, 5);
             }
+            success();
         }
-        return false;
+        return isSuccess();
     }
 }

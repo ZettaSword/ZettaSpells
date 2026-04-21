@@ -7,9 +7,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.apache.commons.compress.utils.Lists;
 import zettasword.zetta_spells.system.SpellTarget;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /** Class for temporary storing some information about the spell being made. **/
 public class SpellCreateContext {
@@ -17,15 +21,16 @@ public class SpellCreateContext {
     private LivingEntity caster = null;
     private InteractionHand hand = null;
     private Map<String, SVar> mods = null;
-    private SpellTarget target = null;
+    private List<SpellTarget> targets = Lists.newArrayList();
     private Direction hit_direction = Direction.UP;
     private String previous = "";
+    private Predicate<Entity> filter = entity -> true;
 
 
     public SpellCreateContext(Level world, LivingEntity caster, InteractionHand hand){
         this.world = world;
         this.caster = caster;
-        this.target = new SpellTarget(caster);
+        this.targets.add(new SpellTarget(caster));
         this.hand = hand;
         // Default modifications are stored here!
         this.mods = Map.of("range", SVar.init(14),
@@ -70,19 +75,40 @@ public class SpellCreateContext {
     }
 
     public SpellTarget getTarget() {
-        return target;
+        return targets.get(0);
     }
 
+    public List<SpellTarget> getTargets() {
+        return targets;
+    }
+
+    // Difference between SET and ADD is that when SET we make it singular target only.
+
     public void setTarget(Entity target) {
-        this.target = new SpellTarget(target);
+        this.targets.clear();
+        this.targets.add(new SpellTarget(target));
     }
 
     public void setTarget(BlockPos target) {
-        this.target = new SpellTarget(target);
+        this.targets.clear();
+        this.targets.add(new SpellTarget(target));
     }
 
     public void setTarget(SpellTarget target){
-        this.target = target;
+        this.targets.clear();
+        this.targets.add(target);
+    }
+
+    public void addTarget(Entity target){
+        this.targets.add(new SpellTarget(target));
+    }
+
+    public void addTarget(BlockPos target){
+        this.targets.add(new SpellTarget(target));
+    }
+
+    public void addTarget(SpellTarget target){
+        this.targets.add(target);
     }
 
     public Direction getHitDirection() {
@@ -130,5 +156,22 @@ public class SpellCreateContext {
      */
     public SVar getMod(String mod, String fallback){
         return getMods().getOrDefault(mod, SVar.init(fallback));
+    }
+
+    @Nullable
+    public SVar getMod(String mod){
+        return getMods().get(mod) == null ? null : getMods().get(mod);
+    }
+
+    public void clearTargets() {
+        this.targets.clear();
+    }
+
+    public Predicate<Entity> filter() {
+        return filter;
+    }
+
+    public void setFilter(Predicate<Entity> filter) {
+        this.filter = filter;
     }
 }

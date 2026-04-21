@@ -1,19 +1,25 @@
 package zettasword.zetta_spells.system.spellcreation.actions.action;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
+import com.binaris.wizardry.api.content.entity.construct.MagicConstructEntity;
+import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
+import zettasword.zetta_spells.spells.TurnMinion;
 import zettasword.zetta_spells.system.ArcaneColor;
+import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SVar;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
@@ -55,6 +61,8 @@ public class SummonWord extends SpellWord {
      */
     @Override
     public boolean cast(SpellCreateContext ctx, List<String> words, int i) {
+        SpellTarget target = ctx.getTarget();
+        if (target == null) return false;
         // ── Validate input ────────────────────────────────────────────────
         if (i >= words.size()) return false;
         String entityName = words.get(i);
@@ -66,7 +74,7 @@ public class SummonWord extends SpellWord {
 
 
         // ── Get target position ───────────────────────────────────────────
-        Vec3 targetPos = ctx.getTarget().getTargetPos().getCenter();
+        Vec3 targetPos = target.getTargetPos().getCenter();
 
         Level level = ctx.getWorld();
 
@@ -77,6 +85,8 @@ public class SummonWord extends SpellWord {
         int duration = ctx.getMods().getOrDefault("duration", SVar.init(10)).getIntSafe();
         int health = ctx.getMods().getOrDefault("health", SVar.init(1)).getIntSafe();
 
+        SVar name = ctx.getMod("name");
+
         // ── Mana cost: base + scaling ────────────────────────────
         int baseCost = 10;
         int totalCost = (baseCost + (count * 5)) + duration + (health / 5);
@@ -85,6 +95,7 @@ public class SummonWord extends SpellWord {
         // ── Server-side: spawn entities ───────────────────────────────────
         if (!level.isClientSide) {
             for (int c = 0; c < count; c++) {
+                boolean summon = false;
                 Entity entity = entityType.create(level);
                 if (entity == null) break;
 
@@ -100,10 +111,21 @@ public class SummonWord extends SpellWord {
                         0f
                 );
 
+                if (entity instanceof Mob mob) {
+                    TurnMinion.turnMinion(ctx.getCaster(), new SpellModifiers(), mob);
+                    TurnMinion.setLifetime(mob, duration * 20);
+                    if (name != null) mob.setCustomName(Component.literal(name.getString()));
+                    summon = true;
+                }
+
+                if (entity instanceof MagicConstructEntity construct) {
+                    construct.setCaster(ctx.getCaster());
+                    construct.lifetime = duration * 20;
+                    summon = true;
+                }
                 // Optional: set persistent if needed (prevents despawn)
                 // entity.setPersistenceRequired();
-
-                level.addFreshEntity(entity);
+                if (summon) level.addFreshEntity(entity);
             }
         }
 
@@ -115,7 +137,6 @@ public class SummonWord extends SpellWord {
                     .time(40)
                     .spawn(level);
         }
-
         return true;
     }
 

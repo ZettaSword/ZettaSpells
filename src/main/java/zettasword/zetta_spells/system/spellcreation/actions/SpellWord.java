@@ -18,6 +18,8 @@ import java.util.List;
 /** Base class of SpellAction to register stuff. Can be a shape, and action to do, or etc. **/
 public abstract class SpellWord {
     private final ResourceLocation registryName;
+    /** This one exists and used for defining if action was success or not **/
+    private boolean success = false;
 
     public SpellWord(ResourceLocation registryName) {
         this.registryName = registryName;
@@ -93,5 +95,21 @@ public abstract class SpellWord {
             return manaStoringItem.getMana(stack);
         }
         return 0;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void success(){
+        this.success = true;
+    }
+
+    public void fail(){
+        this.success = false;
     }
 }

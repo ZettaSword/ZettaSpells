@@ -18,7 +18,7 @@ public class SpellCreator {
         if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return;
         Level world = context.getWorld();
         LivingEntity caster = context.getCaster();
-        SpellTarget target = context.getTarget();
+        List<SpellTarget> targets = context.getTargets();
         boolean creative = context.isCreative();
 
         // Starting the spell-creation.
@@ -29,7 +29,10 @@ public class SpellCreator {
         for (int i = 0; i<words.size();i++){
             String current = words.get(i);
             String next = next(words, i+1);
-            if (previous.equals("mod") && !next.isEmpty() && nextExist(words, i+2)){
+            if (!next.isEmpty() && nextExist(words, i+2)){
+                // Something like "Num duration 30" or "Truth destroy false" or "word element magic"
+                // to set Duration to 30, Destroy to False, and Element to Magic.
+                // Caster can define own parameters, it's spellwords job to check if those exist.
                 processVariable(mods, current, next, next(words, i+2));
             }
 
@@ -44,16 +47,16 @@ public class SpellCreator {
         }
     }
 
-    public static void processVariable(Map<String, SVar> mods, String key, String type, String value){
+    public static void processVariable(Map<String, SVar> mods, String type, String key, String value){
         SVar mod = null;
-        if (type.equals("num")) {
+        if (type.equals("num") || type.equals("number")) {
             try {
                 mod = SVar.init(Integer.parseInt(value));
             } catch (Exception ignore) {
             }
         }
-        if (type.equals("truth")) mod = SVar.init(Boolean.getBoolean(value));
-        if (type.equals("word")) mod = SVar.init(!value.isEmpty() ? value : "empty");
+        if (type.equals("truth") || type.equals("boolean")) mod = SVar.init(Boolean.getBoolean(value));
+        if (type.equals("word") || type.equals("string")) mod = SVar.init(!value.isEmpty() ? value : "empty");
         // Add nothing if mod is false.
         if (mod == null) return;
         mods.put(key, mod);
