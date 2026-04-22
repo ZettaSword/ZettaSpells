@@ -308,6 +308,9 @@ public class ZSEvents {
                     RegistryUtils.setSpell(spellbook, ZSSpells.CUSTOM_PLAYER_SPELL.get());
                     if (spell == null) continue;
                     CustomPlayerSpell.setCustomSpell(stack, slot.index, spell);
+
+                    String spellName = spellbook.getHoverName().getString();
+                    CustomPlayerSpell.setCustomSpellName(stack, slot.index, spellName);
                 }
             }
         }
