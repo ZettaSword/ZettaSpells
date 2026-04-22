@@ -2,6 +2,7 @@
   "item.zetta_spells.unfinished_spellbook": "Unfinished Spellbook",
   "item.zetta_spells.finished_spellbook": "Spellbook",
   "item.zetta_spells.finished_spellbook_fail": "Not enough mana to cast the spell!",
+  "item.zetta_spells.finished_spellbook_copy": "Spell is copied to Clipboard!",
   "item.zetta_spells.golden_astral_diamond": "Golden Astral Diamond",
   "item.zetta_spells.golden_astral_diamond.desc": "Use on any minion to extend its lifetime to eternity.",
   "item.zetta_spells.necromancer_staff": "Necromancer Staff",
@@ -138,5 +139,6 @@
   "spellword.zetta_spells.shift_pos.description": "Allows you to shift current first position (usually a caster position, or raycasted target position) relative to the caster. You can shift it to: back, forth, left, right, down, up, and look (look takes what you're looking on basically). \n Example spell: 'Ray break! Num shift 1 shift position forth break, shift position forth break.' \n Tunnel Mine:'Ray break! Num shift 1 shift position up break, shift position right break, shift pos down break shift pos down break, shift pos left break, shift position left break, shift position up break shift position up break.'",
 
   "spellword.zetta_spells.place_block": "Place",
-  "spellword.zetta_spells.place_block.description": "Places the block to target position, you must hold it in opposite hand. \n Example spell: 'Ray place!' \n Mage Hand spell: 'If not sneaking Num range 100, truth ignoreliving true ray! Shift position direction, place; If sneaking Num range 100, truth ignoreliving true, ray, break!'"
+  "spellword.zetta_spells.place_block.description": "Places the block to target position, you must hold it in opposite hand. \n Example spell: 'Ray place!' \n Mage Hand spell: 'If not sneaking Num range 100, truth ignoreliving true ray! Shift position direction, place; If sneaking Num range 100, truth ignoreliving true, ray, break!'",
+  "item.zetta_spells.finished_spellbook_added": "Bound Spell to Chant."
 }

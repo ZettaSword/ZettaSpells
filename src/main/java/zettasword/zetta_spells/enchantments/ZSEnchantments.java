@@ -6,11 +6,11 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 public class ZSEnchantments {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS =
-            DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, ZettaSpellsMod.MODID);
+            DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, ZettaSpells.MODID);
 
     // Register the "Enhance Armament" Enchantment
     // It is set as Treasure Only so it can't be gotten via Enchanting Table (fits SAO lore)

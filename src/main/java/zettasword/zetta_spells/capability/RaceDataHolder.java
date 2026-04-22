@@ -18,7 +18,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.NetworkDirection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.network.RaceCapabilitySyncPacketS2C;
 
@@ -27,7 +27,7 @@ import java.util.Map;
 
 
 public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData {
-    public static final ResourceLocation LOCATION = ZettaSpellsMod.location("race_data");
+    public static final ResourceLocation LOCATION = ZettaSpells.location("race_data");
     public static final Capability<RaceDataHolder> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
     private String race = "human";

@@ -9,7 +9,6 @@ import com.binaris.wizardry.api.content.util.BlockUtil;
 import com.binaris.wizardry.api.content.util.CastItemUtils;
 import com.binaris.wizardry.api.content.util.EntityUtil;
 import com.binaris.wizardry.api.content.util.RayTracer;
-import com.binaris.wizardry.content.item.SpellBookItem;
 import com.binaris.wizardry.content.item.armor.WizardArmorItem;
 import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.*;
@@ -39,7 +38,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.capability.RaceDataHolder;
 import zettasword.zetta_spells.enchantments.ZSEnchantments;
 import zettasword.zetta_spells.entity.construct.*;
@@ -329,7 +328,7 @@ public class Spellcasting {
                             Alchemy.apply(living, MobEffects.POISON, 600, 0);
                             // Visual effects to show Tenebria's Attention
                             CosmeticSigil sigil = new CosmeticSigil(world);
-                            sigil.setLocation(ZettaSpellsMod.location("textures/sigils/old/circle_vampires.png"));
+                            sigil.setLocation(ZettaSpells.location("textures/sigils/old/circle_vampires.png"));
                             sigil.lifetime = 40;
                             sigil.setCaster(caster);
                             sigil.setPos(caster.getPosition(1.0F));

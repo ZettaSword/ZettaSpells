@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.renderers.*;
 
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = ZettaSpells.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientZSEvents {
 
     @SubscribeEvent
@@ -17,13 +17,13 @@ public class ClientZSEvents {
                 (ctx) -> new CosmeticSigilRenderer(ctx, 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.TENEBRIA_WILL_SIGIL.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpellsMod.location("textures/sigils/tenebria_will.png"), 0.2F, false));
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.SYSTEM_CALL.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpellsMod.location("textures/sigils/system_call.png"), 0.2F, false));
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/system_call.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.TENEBRIA_PROTECTION_SIGIL.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpellsMod.location("textures/sigils/tenebria_will.png"), 0.2F, false));
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.MAGICAL_TURRET.get(),
                 (ctx) -> new MagicalTurretEntityRenderer(ctx, 0.2F, false));

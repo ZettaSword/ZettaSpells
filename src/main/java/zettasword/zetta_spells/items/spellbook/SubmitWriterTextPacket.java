@@ -1,13 +1,15 @@
 package zettasword.zetta_spells.items.spellbook;
 
+import com.binaris.wizardry.api.content.util.RegistryUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.items.ZSItems;
+import zettasword.zetta_spells.spells.ZSSpells;
 
 import java.util.function.Supplier;
 
@@ -43,18 +45,18 @@ public class SubmitWriterTextPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player == null) {
-                ZettaSpellsMod.LOGGER.warn("Received SubmitWriterTextPacket from null player");
+                ZettaSpells.LOGGER.warn("Received SubmitWriterTextPacket from null player");
                 return;
             }
 
             // ✅ Server-side validation (never trust client input)
             if (text.length() > MAX_TEXT_LENGTH || name.length() > MAX_NAME_LENGTH) {
-                ZettaSpellsMod.LOGGER.warn("Player {} sent oversized text/name", player.getName().getString());
+                ZettaSpells.LOGGER.warn("Player {} sent oversized text/name", player.getName().getString());
                 return;
             }
 
             if (name.isBlank() || text.isBlank()) {
-                ZettaSpellsMod.LOGGER.debug("Player {} sent empty writer content", player.getName().getString());
+                ZettaSpells.LOGGER.debug("Player {} sent empty writer content", player.getName().getString());
                 return;
             }
 
@@ -63,14 +65,15 @@ public class SubmitWriterTextPacket {
             // ✅ Check both hands for writer item
             for (InteractionHand hand : InteractionHand.values()) {
                 ItemStack stack = player.getItemInHand(hand);
-                if (stack.is(ZSItems.WRITER_ITEM.get())) {
+                if (stack.is(ZSItems.UNFINISHED_SPELLBOOK.get())) {
                     // ✅ Create new written item with sanitized NBT data
-                    ItemStack writtenStack = new ItemStack(ZSItems.WRITTEN_ITEM.get());
+                    ItemStack writtenStack = new ItemStack(ZSItems.FINISHED_SPELLBOOK.get());
                     var tag = writtenStack.getOrCreateTag();
                     tag.putString("written_text", text.trim());      // ✅ Trim whitespace
                     tag.putString("author", player.getName().getString()); // ✅ Store author
                     tag.putLong("written_time", player.level().getGameTime()); // ✅ Timestamp
                     writtenStack.setHoverName(Component.literal(name.trim()));
+                    RegistryUtils.setSpell(writtenStack, ZSSpells.CUSTOM_PLAYER_SPELL.get());
 
                     // ✅ Replace item in hand
                     player.setItemInHand(hand, writtenStack);
@@ -90,7 +93,7 @@ public class SubmitWriterTextPacket {
             }
 
             if (!converted) {
-                ZettaSpellsMod.LOGGER.warn("Player {} tried to submit writer text but had no writer item",
+                ZettaSpells.LOGGER.warn("Player {} tried to submit writer text but had no writer item",
                         player.getName().getString());
                 // ✅ Optional: Send error feedback to player
                 // player.sendSystemMessage(Component.translatable("error.zetta_spells.no_writer")

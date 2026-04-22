@@ -1,7 +1,6 @@
 package zettasword.zetta_spells.system.spellcreation;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -15,14 +14,14 @@ import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.TextProcessingUtil;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
+@Mod.EventBusSubscriber(modid = ZettaSpells.MODID)
 public class MagicWordsCreator {
 
    // @OnlyIn(Dist.DEDICATED_SERVER)
@@ -33,7 +32,7 @@ public class MagicWordsCreator {
         spellCast(ctx, event.getRawText());
     }
 
-    //@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void chatEventClient(ClientChatEvent event){
         Minecraft mc = Minecraft.getInstance();

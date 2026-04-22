@@ -8,7 +8,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public final class ZSLootTables {
     }
 
     private static ResourceLocation register(String location) {
-        return register(ZettaSpellsMod.location(location));
+        return register(ZettaSpells.location(location));
     }
 
     private static ResourceLocation register(ResourceLocation location) {

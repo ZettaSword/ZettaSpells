@@ -5,13 +5,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.ZSEntities;
 
-import javax.annotation.Nonnull;
-
 public class CosmeticSigil extends ScaledConstructEntity {
-    public ResourceLocation location = ZettaSpellsMod.location("textures/sigils/old/circle_arcane.png");
+    public ResourceLocation location = ZettaSpells.location("textures/sigils/old/circle_arcane.png");
 
     public CosmeticSigil(EntityType<?> type, Level world) {
         super(type, world);

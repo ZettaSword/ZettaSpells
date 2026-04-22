@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.system.spellcreation.actions.action.*;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.FilterWord;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.IfWord;
@@ -22,10 +22,10 @@ import java.util.function.Supplier;
 
 public class SpellWords {
     // Unique registry key
-    public static final ResourceLocation REGISTRY_KEY = ResourceLocation.fromNamespaceAndPath(ZettaSpellsMod.MODID, "spell_words");
+    public static final ResourceLocation REGISTRY_KEY = ResourceLocation.fromNamespaceAndPath(ZettaSpells.MODID, "spell_words");
 
     // DeferredRegister for SpellAction
-    public static final DeferredRegister<SpellWord> SPELL_WORDS = DeferredRegister.create(REGISTRY_KEY, ZettaSpellsMod.MODID);
+    public static final DeferredRegister<SpellWord> SPELL_WORDS = DeferredRegister.create(REGISTRY_KEY, ZettaSpells.MODID);
     public static final Supplier<IForgeRegistry<SpellWord>> SPELL_WORD = SPELL_WORDS.makeRegistry(() -> new RegistryBuilder<SpellWord>().disableSaving().disableOverrides());
 
     // Shapes
@@ -67,7 +67,7 @@ public class SpellWords {
 
     public static Optional<SpellWord> getAction(String id) {
         if (!id.contains(":")) {
-            id = ZettaSpellsMod.MODID + ":" + id;
+            id = ZettaSpells.MODID + ":" + id;
         }
         ResourceLocation loc = ResourceLocation.tryParse(id);
         return loc != null ? getAction(loc) : Optional.empty();

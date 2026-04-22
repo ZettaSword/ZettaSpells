@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 
 import javax.annotation.Nullable;
@@ -26,7 +26,7 @@ public abstract class SpellWord {
     }
 
     public SpellWord(String spellword) {
-        this.registryName = ResourceLocation.fromNamespaceAndPath(ZettaSpellsMod.MODID, spellword);
+        this.registryName = ResourceLocation.fromNamespaceAndPath(ZettaSpells.MODID, spellword);
     }
 
     public ResourceLocation getRegistryName() {

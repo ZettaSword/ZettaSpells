@@ -1,35 +1,61 @@
 package zettasword.zetta_spells.items.spellbook;
 
+import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.item.IWorkbenchItem;
+import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.util.DrawingUtils;
+import com.binaris.wizardry.api.content.util.RegistryUtils;
 import com.binaris.wizardry.api.content.util.WorkbenchUtils;
+import com.binaris.wizardry.content.item.SpellBookItem;
+import com.binaris.wizardry.setup.registries.Spells;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.system.Spellcasting;
+import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.TextProcessingUtil;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 
 import java.util.List;
 
-public class FinishedSpellbookItem extends Item implements IManaItem, IWorkbenchItem {
+public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, IWorkbenchItem {
     public FinishedSpellbookItem(Properties properties) {
         super(properties.durability(1000));
+    }
+
+
+    @Override
+    public void onCraftedBy(@NotNull ItemStack stack, @NotNull Level level, @NotNull Player player) {
+        Spell spell = RegistryUtils.getSpell(stack);
+        if (spell == Spells.NONE) RegistryUtils.setSpell(stack, ZSSpells.CUSTOM_PLAYER_SPELL.get());
+    }
+
+    @Override
+    public @NotNull Component getName(@NotNull ItemStack stack) {
+        return Component.translatable(this.getDescriptionId(stack));
+    }
+
+    @Override
+    public ResourceLocation getGuiTexture(Spell spell) {
+        return super.getGuiTexture(spell);
     }
 
     // Display stored text in tooltip
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, net.minecraft.world.item.TooltipFlag flag) {
+        if (level == null) return;
+
         if (stack.hasTag() && stack.getTag() != null && stack.getTag().contains("written_text")) {
             if (Screen.hasShiftDown()) {
                 String text = stack.getTag().getString("written_text");
@@ -42,16 +68,48 @@ public class FinishedSpellbookItem extends Item implements IManaItem, IWorkbench
                 tooltip.add(Component.translatable("spellbook.byAuthor", stack.getTag().getString("author")).withStyle(ChatFormatting.GRAY));
             }
         }
+
+        Spell spell = RegistryUtils.getSpell(stack);
+        if (spell == Spells.NONE) return;
+        boolean discovered = ClientUtils.shouldDisplayDiscovered(spell, stack);
+        tooltip.add(spell.getTier().getDescriptionFormatted());
+
+        if (discovered && flag.isAdvanced()) {
+            tooltip.add(Component.translatable(spell.getElement().getDescriptionId()).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable(spell.getType().getDisplayName()).withStyle(ChatFormatting.GRAY));
+        }
         super.appendHoverText(stack, level, tooltip, flag);
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        
+        ItemStack opposite = player.getItemInHand(hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+
         if (stack.hasTag() && stack.getTag() != null && stack.getTag().contains("written_text")) {
             stack.getTag().putString("author", player.getName().getString());
             String text = stack.getTag().getString("written_text");
+            if (!opposite.isEmpty()){
+                if (opposite.getItem() == Items.FEATHER) {
+                    if (level.isClientSide()) {
+                        Minecraft.getInstance().keyboardHandler.setClipboard(text);
+                    }
+                    if (!level.isClientSide) {
+                        player.displayClientMessage(Component.translatable("item.zetta_spells.finished_spellbook_copy"), true);
+                    }
+                    return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+                }
+                /*
+                if (opposite.getItem() instanceof ICastItem){
+                    if (CastItemDataHelper.getCurrentSpell(opposite) == ZettaSpells.CUSTOM_PLAYER_SPELL.get()){
+                        CustomPlayerSpell.setCustomSpell(opposite, CastItemDataHelper.getCurrentSpellIndex(opposite), text);
+                        if (!level.isClientSide) {
+                            player.displayClientMessage(Component.translatable("item.zetta_spells.finished_spellbook_added"), true);
+                        }
+                        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+                    }
+                }*/
+            }
             int cost = TextProcessingUtil.extractWords(text).size();
             if (cost == 0) cost = 10;
             cost = Math.max(10, (cost * cost)/5);
@@ -77,7 +135,7 @@ public class FinishedSpellbookItem extends Item implements IManaItem, IWorkbench
             return InteractionResultHolder.sidedSuccess(stack,level.isClientSide);
         }
         
-        return super.use(level, player, hand);
+        return InteractionResultHolder.fail(stack);
     }
 
     @Override

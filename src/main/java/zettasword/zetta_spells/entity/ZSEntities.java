@@ -2,18 +2,16 @@ package zettasword.zetta_spells.entity;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import zettasword.zetta_spells.ZettaSpellsMod;
-import zettasword.zetta_spells.blocks.ZSBlocks;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.*;
 
 public class ZSEntities {
     // 1. Create the DeferredRegister for EntityTypes
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ZettaSpellsMod.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ZettaSpells.MODID);
 
     public static final RegistryObject<EntityType<TenebriaWillSigil>> TENEBRIA_WILL_SIGIL = ENTITY_TYPES.register("tenebria_will_sigil",
             () -> EntityType.Builder.<TenebriaWillSigil>of(TenebriaWillSigil::new, MobCategory.MISC)
@@ -79,5 +77,5 @@ public class ZSEntities {
                     .build("magical_turret")
     );
 
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpellsMod.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);
 }

@@ -433,7 +433,7 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [04апр.2026 01:30:43.502] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider/LOADING]: Loading FMLModContainer from classloader cpw.mods.modlauncher.TransformingClassLoader@15f35bc3 - got cpw.mods.cl.ModuleClassLoader@7a799159
 [04апр.2026 01:30:43.503] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for com.binaris.wizardry.WizardryForgeMod
 [04апр.2026 01:30:43.503] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider/LOADING]: Loading FMLModContainer from classloader cpw.mods.modlauncher.TransformingClassLoader@15f35bc3 - got cpw.mods.cl.ModuleClassLoader@7a799159
-[04апр.2026 01:30:43.503] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for zettasword.zetta_spells.ZettaSpellsMod
+[04апр.2026 01:30:43.503] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for zettasword.zetta_spells.ZettaSpells
 [04апр.2026 01:30:43.515] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for mixinextras
 [04апр.2026 01:30:43.530] [modloading-worker-0/DEBUG] [com.binaris.wizardry.core.EBLogger/]: Loaded com.binaris.wizardry.platform.ForgePlatformHelper@44df68db for service interface com.binaris.wizardry.core.platform.services.IPlatformHelper
 [04апр.2026 01:30:43.532] [modloading-worker-0/DEBUG] [com.binaris.wizardry.core.EBLogger/]: Loaded com.binaris.wizardry.platform.ForgeObjectData@fd53a8f for service interface com.binaris.wizardry.core.platform.services.IObjectData
@@ -463,7 +463,7 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [04апр.2026 01:30:43.639] [modloading-worker-0/DEBUG] [mixin/]: Mixing accessor.CriteriaAccessor from ebwizardry.mixins.json into net.minecraft.advancements.CriteriaTriggers
 [04апр.2026 01:30:43.645] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.system.spellcreation.MagicWordsCreator to FORGE
 [04апр.2026 01:30:43.647] [modloading-worker-0/DEBUG] [mixin/]: Mixing ClientLevelMixin from ebwizardry.mixins.json into net.minecraft.client.multiplayer.ClientLevel
-[04апр.2026 01:30:43.656] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.ZettaSpellsMod$ClientModEvents to MOD
+[04апр.2026 01:30:43.656] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.ZettaSpells$ClientModEvents to MOD
 [04апр.2026 01:30:43.657] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.ZSEvents to FORGE
 [04апр.2026 01:30:43.659] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for forge
 [04апр.2026 01:30:43.660] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.minecraftforge.common.ForgeSpawnEggItem$CommonHandler to MOD

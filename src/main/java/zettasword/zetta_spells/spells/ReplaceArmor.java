@@ -6,32 +6,21 @@ import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
-import com.binaris.wizardry.api.content.util.MagicDamageSource;
 import com.binaris.wizardry.content.spell.DefaultProperties;
 import com.binaris.wizardry.content.spell.abstr.RaySpell;
-import com.binaris.wizardry.setup.registries.EBDamageSources;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.ZettaSpellsMod;
-import zettasword.zetta_spells.system.Alchemy;
-import zettasword.zetta_spells.system.ArcaneColor;
-
-import javax.annotation.Nullable;
 
 public class ReplaceArmor extends RaySpell {
     public ReplaceArmor(){

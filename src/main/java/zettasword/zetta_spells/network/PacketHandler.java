@@ -1,19 +1,13 @@
 package zettasword.zetta_spells.network;
 // PacketHandler.java
 
-import com.binaris.wizardry.client.ClientPacketHandler;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.items.spellbook.OpenWriterScreenPacket;
 import zettasword.zetta_spells.items.spellbook.SubmitWriterTextPacket;
-
-import java.util.Objects;
 
 public class PacketHandler {
     private static final String PROTOCOL_VERSION = "1.0";
@@ -21,7 +15,7 @@ public class PacketHandler {
 
     public static void register() {
         INSTANCE = NetworkRegistry.newSimpleChannel(
-                ResourceLocation.fromNamespaceAndPath(ZettaSpellsMod.MODID, "main"),
+                ResourceLocation.fromNamespaceAndPath(ZettaSpells.MODID, "main"),
                 () -> PROTOCOL_VERSION,
                 PROTOCOL_VERSION::equals,
                 PROTOCOL_VERSION::equals

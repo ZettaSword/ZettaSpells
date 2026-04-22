@@ -11,13 +11,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import org.joml.Matrix3f;
-import org.joml.Vector3f;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 public class HelixChainRenderer<T extends Entity> extends EntityRenderer<T> {
 
     // The texture for the chains
-    private static final ResourceLocation CHAIN_TEXTURE = ZettaSpellsMod.location("textures/sigils/system_call.png");
+    private static final ResourceLocation CHAIN_TEXTURE = ZettaSpells.location("textures/sigils/system_call.png");
     
     // Configuration for the helix
     private static final float RADIUS = 2f;      // Distance from player

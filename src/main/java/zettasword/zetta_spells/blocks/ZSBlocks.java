@@ -3,14 +3,13 @@ package zettasword.zetta_spells.blocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 public class ZSBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ZettaSpellsMod.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ZettaSpells.MODID);
 
     public static final RegistryObject<Block> PASSABLE_BLOCK = BLOCKS.register("passable_block",
             () -> new PassableBlock(Block.Properties.copy(Blocks.DARK_OAK_FENCE)

@@ -3,12 +3,17 @@ package zettasword.zetta_spells;
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.data.SpellManagerData;
 import com.binaris.wizardry.api.content.data.WizardData;
+import com.binaris.wizardry.api.content.event.SpellBindEvent;
 import com.binaris.wizardry.api.content.event.SpellCastEvent;
+import com.binaris.wizardry.api.content.item.ICastItem;
+import com.binaris.wizardry.api.content.item.IWorkbenchItem;
 import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.util.EntityUtil;
+import com.binaris.wizardry.api.content.util.RegistryUtils;
 import com.binaris.wizardry.content.Forfeit;
 import com.binaris.wizardry.content.ForfeitRegistry;
+import com.binaris.wizardry.content.menu.ArcaneWorkbenchMenu;
 import com.binaris.wizardry.core.config.EBConfig;
 import com.binaris.wizardry.core.event.WizardryEventBus;
 import com.binaris.wizardry.core.integrations.ArtifactChannel;
@@ -25,6 +30,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -50,7 +56,11 @@ import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
+import zettasword.zetta_spells.items.ZSItems;
+import zettasword.zetta_spells.items.spellbook.FinishedSpellbookItem;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
+import zettasword.zetta_spells.spells.CustomPlayerSpell;
+import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.loot.ZSLootTables;
 import zettasword.zetta_spells.system.particles.Alteria;
@@ -59,7 +69,7 @@ import java.util.Random;
 
 import static zettasword.zetta_spells.mob_effects.MagicRestorationMobEffect.rechargeMana;
 
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ZettaSpells.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ZSEvents {
 
     @SubscribeEvent
@@ -260,7 +270,7 @@ public class ZSEvents {
 
         // 3. Check if drops should be suppressed
         if (persistentData.contains(TAG_RESURRECTED) && persistentData.getBoolean(TAG_RESURRECTED)) {
-            ZettaSpellsMod.LOGGER.warn("Resurrected entity: {}", entity.getName().getString());
+            ZettaSpells.LOGGER.warn("Resurrected entity: {}", entity.getName().getString());
             event.setCanceled(true); // Prevent all drops
             persistentData.remove(TAG_RESURRECTED); // Cleanup tag
         }
@@ -273,6 +283,34 @@ public class ZSEvents {
         bus.register(SpellCastEvent.Pre.class, ZSEvents::onPreCast);
         bus.register(SpellCastEvent.Tick.class, ZSEvents::onTickCast);
         bus.register(SpellCastEvent.Post.class, ZSEvents::onAfterCast);
+        bus.register(SpellBindEvent.class, ZSEvents::onSpellBind);
+    }
+
+
+    public static void onSpellBind(SpellBindEvent event){
+        Player player = event.getPlayer();
+        ArcaneWorkbenchMenu menu = event.getMenu();
+        if (player.level().isClientSide) return;
+        Slot centre = menu.getSlot(9);
+        ItemStack stack = centre.getItem();
+
+        if (stack.getItem() instanceof IWorkbenchItem && stack.getItem() instanceof ICastItem) {
+            Slot[] spellBooks = menu.slots.subList(0, 8).toArray(new Slot[8]);
+            for (Slot slot : spellBooks){
+                if (slot.hasItem() && slot.getItem().getItem() instanceof FinishedSpellbookItem){
+                    ItemStack spellbook = slot.getItem().copy();
+                    String spell = null;
+                    if (spellbook.hasTag()){
+                        CompoundTag tag = spellbook.getTag();
+                        if (tag != null && tag.contains("written_text"))
+                            spell = tag.getString("written_text");
+                    }
+                    RegistryUtils.setSpell(spellbook, ZSSpells.CUSTOM_PLAYER_SPELL.get());
+                    if (spell == null) continue;
+                    CustomPlayerSpell.setCustomSpell(stack, slot.index, spell);
+                }
+            }
+        }
     }
 
     public static void onPreCast(SpellCastEvent.Pre event){
@@ -358,7 +396,7 @@ public class ZSEvents {
 
                     // Visual effects to show Tenebria's Attention
                     CosmeticSigil sigil = new CosmeticSigil(level);
-                    sigil.setLocation(ZettaSpellsMod.location("textures/sigils/old/circle_vampires.png"));
+                    sigil.setLocation(ZettaSpells.location("textures/sigils/old/circle_vampires.png"));
                     sigil.lifetime = 40;
                     sigil.setCaster(player);
                     sigil.setPos(player.getPosition(1.0F));

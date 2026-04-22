@@ -2,7 +2,6 @@ package zettasword.zetta_spells.entity.construct;
 
 import com.binaris.wizardry.api.content.entity.construct.MagicConstructEntity;
 import com.binaris.wizardry.content.entity.projectile.MagicMissileEntity;
-import com.binaris.wizardry.content.spell.DefaultProperties;
 import com.binaris.wizardry.core.AllyDesignation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import zettasword.zetta_spells.entity.ZSEntities;
-import zettasword.zetta_spells.spells.ZettaSpells;
 
 import java.util.List;
 

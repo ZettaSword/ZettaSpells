@@ -13,13 +13,13 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 import java.util.HashSet;
 import java.util.Set;
 
 // Client-side only dynamic lighting (actual game light)
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID,value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ZettaSpells.MODID,value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class LuxClientLightBlocks {
     // Tracks light blocks we placed for the local player
     private static final Set<BlockPos> clientLights = new HashSet<>();

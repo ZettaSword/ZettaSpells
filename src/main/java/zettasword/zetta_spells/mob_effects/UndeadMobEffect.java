@@ -16,9 +16,9 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
+@Mod.EventBusSubscriber(modid = ZettaSpells.MODID)
 public class UndeadMobEffect extends MagicMobEffect {
     public UndeadMobEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x791ABB);

@@ -20,13 +20,13 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpellcasterData implements INBTSerializable<CompoundTag>, ISpellcasterData {
-    public static final ResourceLocation LOCATION = ZettaSpellsMod.location("spellcaster_data");
+    public static final ResourceLocation LOCATION = ZettaSpells.location("spellcaster_data");
     public static final Capability<SpellcasterData> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
     private List<Spell> spells = new ArrayList<>(List.of(Spells.MAGIC_MISSILE));

@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.items.SpellWordItem;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWords;
@@ -76,7 +76,7 @@ public class SetSpellWordFunction extends LootItemConditionalFunction {
         if (candidates.isEmpty()) {
             if (allowUnknown) {
                 // Fallback: set a dummy/unknown tag so item still displays something
-                SpellWordItem.setSpellWord(stack, ResourceLocation.fromNamespaceAndPath(ZettaSpellsMod.MODID, "unknown"));
+                SpellWordItem.setSpellWord(stack, ResourceLocation.fromNamespaceAndPath(ZettaSpells.MODID, "unknown"));
             }
             return stack;
         }

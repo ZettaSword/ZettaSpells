@@ -1,14 +1,11 @@
 package zettasword.zetta_spells;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -19,7 +16,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.*;
 import org.slf4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import zettasword.zetta_spells.blocks.ZSBlocks;
@@ -28,21 +24,21 @@ import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
-import zettasword.zetta_spells.spells.ZettaSpells;
+import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.commands.SpellKnowledgeCommand;
 import zettasword.zetta_spells.system.loot.ZSLootFunctions;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWords;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(ZettaSpellsMod.MODID)
-public class ZettaSpellsMod
+@Mod(ZettaSpells.MODID)
+public class ZettaSpells
 {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "zetta_spells";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public ZettaSpellsMod(FMLJavaModLoadingContext context)
+    public ZettaSpells(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
 
@@ -61,7 +57,7 @@ public class ZettaSpellsMod
         ZSEntities.BLOCK_E_TYPES.register(modEventBus);
         // Register items
         ZSItems.ITEMS.register(modEventBus);
-        ZettaSpells.SPELLS.register(modEventBus);
+        ZSSpells.SPELLS.register(modEventBus);
         //ZSLootFunctions.register(modEventBus);
         MixinBootstrap.init();
 
@@ -96,8 +92,8 @@ public class ZettaSpellsMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.accept(ZSItems.WRITER_ITEM);
-            event.accept(ZSItems.WRITTEN_ITEM);
+            event.accept(ZSItems.UNFINISHED_SPELLBOOK);
+            event.accept(ZSItems.FINISHED_SPELLBOOK);
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ZSItems.NECROMANCER_STAFF);

@@ -5,9 +5,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
-@Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
+@Mod.EventBusSubscriber(modid = ZettaSpells.MODID)
 public class MinionSitManager {
     // Track sitting state (Server side)
     @SubscribeEvent

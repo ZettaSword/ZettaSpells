@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.MagicalTurretEntity;
 
 public class MagicalTurretEntityRenderer extends EntityRenderer<MagicalTurretEntity> {
@@ -52,7 +52,7 @@ public class MagicalTurretEntityRenderer extends EntityRenderer<MagicalTurretEnt
 
         // Position at entity center
         poseStack.translate(0.0F, 0.0F, 0.0F);
-        RenderSystem.setShaderTexture(0, ResourceLocation.fromNamespaceAndPath(ZettaSpellsMod.MODID, "textures/block/passable_block.png"));
+        RenderSystem.setShaderTexture(0, ResourceLocation.fromNamespaceAndPath(ZettaSpells.MODID, "textures/block/passable_block.png"));
 
         // Common rendering params
         float f6 = 1.0F;  // width
@@ -128,6 +128,6 @@ public class MagicalTurretEntityRenderer extends EntityRenderer<MagicalTurretEnt
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull MagicalTurretEntity entity) {
-        return ResourceLocation.fromNamespaceAndPath(ZettaSpellsMod.MODID, "textures/block/passable_block.png");
+        return ResourceLocation.fromNamespaceAndPath(ZettaSpells.MODID, "textures/block/passable_block.png");
     }
 }

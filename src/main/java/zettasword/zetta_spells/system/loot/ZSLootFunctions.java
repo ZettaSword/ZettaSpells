@@ -5,13 +5,13 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import zettasword.zetta_spells.ZettaSpellsMod;
+import zettasword.zetta_spells.ZettaSpells;
 
 public class ZSLootFunctions {
 
     // ✅ Use Registries.LOOT_FUNCTION_TYPE (not ForgeRegistries)
     public static final DeferredRegister<LootItemFunctionType> LOOT_FUNCTION_TYPES =
-            DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, ZettaSpellsMod.MODID);
+            DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, ZettaSpells.MODID);
 
     // ✅ Register with Serializer instance
     public static final RegistryObject<LootItemFunctionType> SET_SPELLWORD =

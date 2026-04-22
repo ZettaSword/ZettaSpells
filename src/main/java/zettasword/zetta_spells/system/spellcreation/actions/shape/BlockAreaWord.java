@@ -1,21 +1,13 @@
 package zettasword.zetta_spells.system.spellcreation.actions.shape;
 
-import com.binaris.wizardry.api.content.util.BlockUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import zettasword.zetta_spells.ZettaSpellsMod;
-import zettasword.zetta_spells.system.SpellTarget;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
-import zettasword.zetta_spells.system.spellcreation.actions.bases.TargetSpellWord;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class BlockAreaWord extends SpellWord {
 
@@ -52,7 +44,7 @@ public class BlockAreaWord extends SpellWord {
         for (BlockPos position : blockPosList){
             ctx.addTarget(position);
         }
-        ZettaSpellsMod.LOGGER.warn("AFFECTING: {}", ctx.getTargets().size());
+        ZettaSpells.LOGGER.warn("AFFECTING: {}", ctx.getTargets().size());
         success();
         return isSuccess();
     }
