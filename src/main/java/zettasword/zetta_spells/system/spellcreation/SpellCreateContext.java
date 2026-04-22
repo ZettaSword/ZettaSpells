@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.apache.commons.compress.utils.Lists;
 import zettasword.zetta_spells.system.SpellTarget;
 
@@ -41,7 +42,7 @@ public class SpellCreateContext {
         this.mods.put("amplification", SVar.init(1));
         this.mods.put("duration", SVar.init(10));
         this.mods.put("power", SVar.init(1));
-        this.mods.put("ignorelivingentities", SVar.init(false));
+        this.mods.put("ignoreliving", SVar.init(false));
     }
 
     public SpellCreateContext(){}
@@ -159,6 +160,15 @@ public class SpellCreateContext {
      * @return Returns SVar, modification of the spellword spell.
      */
     public SVar getMod(String mod, String fallback){
+        return getMods().getOrDefault(mod, SVar.init(fallback));
+    }
+
+    /** Quick method to get SVar without making code look too messy!
+     * @param mod Name of SVar player defined before.
+     * @param fallback Fallback in case something goes wrong, like there is no defined value in the spell.
+     * @return Returns SVar, modification of the spellword spell.
+     */
+    public SVar getMod(String mod, Vec3 fallback){
         return getMods().getOrDefault(mod, SVar.init(fallback));
     }
 

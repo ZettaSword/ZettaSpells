@@ -25,7 +25,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = ZettaSpellsMod.MODID)
 public class MagicWordsCreator {
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
+   // @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent()
     public static void chatEventServer(ServerChatEvent event){
         ServerPlayer player = event.getPlayer();
@@ -33,7 +33,7 @@ public class MagicWordsCreator {
         spellCast(ctx, event.getRawText());
     }
 
-    @OnlyIn(Dist.CLIENT)
+    //@OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void chatEventClient(ClientChatEvent event){
         Minecraft mc = Minecraft.getInstance();
@@ -44,6 +44,7 @@ public class MagicWordsCreator {
     public static void spellCast(SpellCreateContext context, String spell) {
         Level level = context.getWorld();
         LivingEntity caster = context.getCaster();
+        if (caster == null) return;
         SpellTarget target = new SpellTarget(caster);
         ItemStack stack = caster.getMainHandItem();
         String previous = "";

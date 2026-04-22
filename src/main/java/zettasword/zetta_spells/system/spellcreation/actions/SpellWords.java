@@ -7,10 +7,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpellsMod;
-import zettasword.zetta_spells.system.spellcreation.actions.action.ApplyEffectWord;
-import zettasword.zetta_spells.system.spellcreation.actions.action.BreakBlockWord;
-import zettasword.zetta_spells.system.spellcreation.actions.action.CastSpellWord;
-import zettasword.zetta_spells.system.spellcreation.actions.action.SummonWord;
+import zettasword.zetta_spells.system.spellcreation.actions.action.*;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.FilterWord;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.IfWord;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.ShiftPosWord;
@@ -32,20 +29,21 @@ public class SpellWords {
     public static final Supplier<IForgeRegistry<SpellWord>> SPELL_WORD = SPELL_WORDS.makeRegistry(() -> new RegistryBuilder<SpellWord>().disableSaving().disableOverrides());
 
     // Shapes
-    public static final RegistryObject<SpellWord> RAY = SPELL_WORDS.register("ray", RayWord::new);
-    public static final RegistryObject<SpellWord> SELF = SPELL_WORDS.register("self", SelfWord::new);
-    public static final RegistryObject<SpellWord> BLOCK_AREA = SPELL_WORDS.register("block_area", BlockAreaWord::new);
-    public static final RegistryObject<SpellWord> ENTITY_AREA = SPELL_WORDS.register("entity_area", EntityAreaWord::new);
+    public static final RegistryObject<SpellWord> RAY = regSpellWord(RayWord::new);
+    public static final RegistryObject<SpellWord> SELF = regSpellWord(SelfWord::new);
+    public static final RegistryObject<SpellWord> BLOCK_AREA = regSpellWord(BlockAreaWord::new);
+    public static final RegistryObject<SpellWord> ENTITY_AREA = regSpellWord(EntityAreaWord::new);
 
     // Actions
-    public static final RegistryObject<SpellWord> APPLY_EFFECT = SPELL_WORDS.register("apply_effect", ApplyEffectWord::new);
-    public static final RegistryObject<SpellWord> CAST = SPELL_WORDS.register("cast", CastSpellWord::new);
-    public static final RegistryObject<SpellWord> BREAK_BLOCK = SPELL_WORDS.register("break_block", BreakBlockWord::new);
-    public static final RegistryObject<SpellWord> SUMMON = SPELL_WORDS.register("summon", SummonWord::new);
+    public static final RegistryObject<SpellWord> APPLY_EFFECT = regSpellWord(ApplyEffectWord::new);
+    public static final RegistryObject<SpellWord> CAST = regSpellWord(CastSpellWord::new);
+    public static final RegistryObject<SpellWord> BREAK_BLOCK = regSpellWord(BreakBlockWord::new);
+    public static final RegistryObject<SpellWord> PLACE_BLOCK = regSpellWord(PlaceBlockWord::new);
+    public static final RegistryObject<SpellWord> SUMMON = regSpellWord(SummonWord::new);
 
     // Operations
-    public static final RegistryObject<SpellWord> FILTER = SPELL_WORDS.register("filter", FilterWord::new);
-    public static final RegistryObject<SpellWord> IF = SPELL_WORDS.register("if", IfWord::new);
+    public static final RegistryObject<SpellWord> FILTER = regSpellWord(FilterWord::new);
+    public static final RegistryObject<SpellWord> IF = regSpellWord(IfWord::new);
     public static final RegistryObject<SpellWord> SHIFT_POSITION = regSpellWord(ShiftPosWord::new);
 
 

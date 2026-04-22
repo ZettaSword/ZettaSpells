@@ -25,11 +25,29 @@ public class IfWord extends SpellWord {
             ctx.setIf(context->context.getCaster().isShiftKeyDown());
         }
 
+        if (words.get(i).equals("sprinting")){
+            ctx.setIf(context -> context.getCaster().isSprinting());
+        }
+
+        if (words.get(i).equals("light")){
+            ctx.setIf(context ->
+                    context.getWorld().getLightEmission(context.getCaster().blockPosition()) >= context.getMod("light", 0).getInt());
+        }
+
         // Inverse
         if (words.get(i).equals("not")){
             String next = SpellCreator.next(words, i+1);
             if (next.equals("sneaking")){
                 ctx.setIf(context -> !context.getCaster().isShiftKeyDown());
+            }
+
+            if (next.equals("sprinting")){
+                ctx.setIf(context -> context.getCaster().isSprinting());
+            }
+
+            if (next.equals("light")){
+                ctx.setIf(context ->
+                        context.getWorld().getLightEmission(context.getCaster().blockPosition()) <= context.getMod("light", 0).getInt());
             }
         }
         return false;

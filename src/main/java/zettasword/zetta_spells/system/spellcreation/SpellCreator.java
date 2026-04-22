@@ -18,6 +18,7 @@ public class SpellCreator {
         if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return;
         Level world = context.getWorld();
         LivingEntity caster = context.getCaster();
+        if (caster == null) return;
         List<SpellTarget> targets = context.getTargets();
         boolean creative = context.isCreative();
 
@@ -34,6 +35,18 @@ public class SpellCreator {
                 // to set Duration to 30, Destroy to False, and Element to Magic.
                 // Caster can define own parameters, it's spellwords job to check if those exist.
                 processVariable(mods, current, next, next(words, i+2));
+
+                // Example; Previous is 'Vec', Key is current ('target' as example), Value is three after. getCoordinates() gets three int after.
+                // Vec target 0 10 0
+                if (previous.equals("vec") || previous.equals("vector") || previous.equals("coordinates")){
+                    Vec3 vec = getCoordinates(words, i);
+                    if (vec != null) {
+                        SVar mod = SVar.init(vec);
+                        mods.put(current, mod);
+                    }
+                }
+
+                context.setMods(mods);
             }
 
             for (SpellWord action : SpellWords.getWords()){
@@ -85,7 +98,7 @@ public class SpellCreator {
     /** Gets coordinates (x,y,z) to do something with them, if it is not possible - returns Null.
      * **/
     @Nullable
-    public static Vec3 getCords(List<String> words, int i){
+    public static Vec3 getCoordinates(List<String> words, int i){
         if (nextExist(words, i+1) && nextExist(words, i+2) && nextExist(words, i+3)) {
             int x,y,z;
             try {

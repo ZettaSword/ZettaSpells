@@ -37,7 +37,7 @@ public class ShiftPosWord extends SpellWord {
      **/
     @Override
     public boolean cast(SpellCreateContext ctx, List<String> words, int i) {
-        int number = ctx.getMod("shift", 0).getInt();
+        int number = ctx.getMod("shift", 1).getInt();
         String current = SpellCreator.next(words, i+1);
         if (number <= 0) return false;
         SpellTarget target = new SpellTarget();
@@ -65,6 +65,9 @@ public class ShiftPosWord extends SpellWord {
         if (current.equals("look")){ // Following caster look
             Vec3 lookVec = caster.getLookAngle().scale(number);
             target.setTargetPos(pos.offset((int) Math.round(lookVec.x), (int) Math.round(lookVec.y), (int) Math.round(lookVec.z)));
+        }
+        if (current.equals("direction")){
+            target.setTargetPos(pos.relative(ctx.getHitDirection(), number));
         }
         ctx.getTargets().set(0, target);
         return true;

@@ -132,9 +132,11 @@
   "spellword.zetta_spells.filter.description": "Allows you to filter targets of the spell to be different. Should be BEFORE using shape word. Supports: living, undead, none. \n Example spell: 'Filter undead, num area 15 affect entity area, apply decay.'",
 
   "spellword.zetta_spells.if": "If",
-  "spellword.zetta_spells.if.description": "Define something that will stop the spell 'if' something is not aligning! You can use ';' to split the spell on fragments. In example spell - there are two fragments. 1 Fragment = 1 Spell. \n Example spell: 'If sneaking ray apply levitation; If not sneaking apply levitation'",
+  "spellword.zetta_spells.if.description": "Define something that will stop the spell 'if' something is not aligning! You can use ';' to split the spell on fragments. In example spell - there are two fragments. 1 Fragment = 1 Spell. Supports: sneaking, sprinting, light. \n Example spell: 'If sneaking ray apply levitation; If not sneaking apply levitation'",
 
   "spellword.zetta_spells.shift_pos": "Shift Position",
-  "spellword.zetta_spells.shift_pos.description": "Allows you to shift current first position (usually a caster position, or raycasted target position) relative to the caster. You can shift it to: back, forth, left, right, down, up, and look (look takes what you're looking on basically). \n Example spell: 'Ray break! Num shift 1 shift position forth break, shift position forth break.' \n Tunnel Mine:'Ray break! Num shift 1 shift position up break, shift position right break, shift pos down break shift pos down break, shift pos left break, shift position left break, shift position up break shift position up break.'"
+  "spellword.zetta_spells.shift_pos.description": "Allows you to shift current first position (usually a caster position, or raycasted target position) relative to the caster. You can shift it to: back, forth, left, right, down, up, and look (look takes what you're looking on basically). \n Example spell: 'Ray break! Num shift 1 shift position forth break, shift position forth break.' \n Tunnel Mine:'Ray break! Num shift 1 shift position up break, shift position right break, shift pos down break shift pos down break, shift pos left break, shift position left break, shift position up break shift position up break.'",
 
+  "spellword.zetta_spells.place_block": "Place",
+  "spellword.zetta_spells.place_block.description": "Places the block to target position, you must hold it in opposite hand. \n Example spell: 'Ray place!' \n Mage Hand spell: 'If not sneaking Num range 100, truth ignoreliving true ray! Shift position direction, place; If sneaking Num range 100, truth ignoreliving true, ray, break!'"
 }

@@ -1,11 +1,14 @@
 package zettasword.zetta_spells.system.spellcreation;
 
+import net.minecraft.world.phys.Vec3;
+
 public class SVar {
 
     int type = 0;
     private int valueInt = 0;
     private boolean valueBoolean = false;
     private String valueString = "";
+    private Vec3 valueVec = new Vec3(0,0,0);
 
     public static SVar init(int valueInt){
         return new SVar(valueInt);
@@ -17,6 +20,10 @@ public class SVar {
 
     public static SVar init(String valueString){
         return new SVar(valueString);
+    }
+
+    public static SVar init(Vec3 vec3){
+        return new SVar(vec3);
     }
 
     public SVar(int valueInt){
@@ -32,6 +39,11 @@ public class SVar {
     public SVar(String valueString){
         this.type= SpellTypes.STRING.ordinal();
         this.setString(valueString);
+    }
+
+    public SVar(Vec3 vec3){
+        this.type = SpellTypes.VECTOR.ordinal();
+        this.setVec(vec3);
     }
 
     public int getType() {
@@ -74,5 +86,13 @@ public class SVar {
 
     public void setString(String valueString) {
         this.valueString = valueString;
+    }
+
+    public Vec3 getVec() {
+        return valueVec;
+    }
+
+    public void setVec(Vec3 valueVec) {
+        this.valueVec = valueVec;
     }
 }
