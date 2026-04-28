@@ -29,6 +29,10 @@ public class SpellCreateContext {
     private Predicate<SpellCreateContext> ifs = context -> true;
     // Switch it with stopSpell() only if there is real need. It stops the spell completely.
     private boolean stopSpell = false;
+    // To ensure we calculate cooldown and stuff ONLY if spell is finished for CustomPlayerSpell class and FinishedSpellbookItem class.
+    private boolean spellFinished = false;
+    /** Add ticks to this cooldown to make spell cooldown be bigger. 20 ticks = 1 second. **/
+    private int cooldown = 0;
 
 
     public SpellCreateContext(Level world, LivingEntity caster, InteractionHand hand){
@@ -204,5 +208,25 @@ public class SpellCreateContext {
 
     public boolean shouldStopSpell() {
         return stopSpell;
+    }
+
+    public boolean isSpellFinished() {
+        return spellFinished;
+    }
+
+    public void spellFinished() {
+        this.spellFinished = true;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    public void addCooldown(int cooldown) {
+        this.cooldown += cooldown;
     }
 }

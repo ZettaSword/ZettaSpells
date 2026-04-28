@@ -146,5 +146,9 @@
   "spellword.zetta_spells.place_block.description": "Places the block to target position, you must hold it in opposite hand. \n Example spell: 'Ray place!' \n Mage Hand spell: 'If not sneaking Num range 100, truth ignoreliving true ray! Shift position direction, place; If sneaking Num range 100, truth ignoreliving true, ray, break!'",
 
   "spellword.zetta_spells.information": "Information",
-  "spellword.zetta_spells.information.description": "Shows you information about the world! There are two kinds in this world - Blocks and Entities. \n Example spell: 'Ray info!'"
+  "spellword.zetta_spells.information.description": "Shows you information about the world! There are two kinds in this world - Blocks and Entities. \n Example spell: 'Ray info!'",
+
+  "spellword.zetta_spells.ignite": "Ignite",
+  "spellword.zetta_spells.ignite.description": "Ignite target block or entity. \n Example spell: 'Ray ignite!' \n Fire Box: 'Apply fire_resistance, num area 5 affect block area, ignite!'"
+
 }

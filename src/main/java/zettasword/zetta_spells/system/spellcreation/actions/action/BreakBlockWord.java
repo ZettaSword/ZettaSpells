@@ -42,6 +42,7 @@ public class BreakBlockWord extends TargetSpellWord {
             if (world.isClientSide) {
                 Alteria.spawnBlockOutlineParticles(world, pos, ParticleTypes.HAPPY_VILLAGER, 5);
             }
+            ctx.addCooldown(1);
             success();
         }
         return isSuccess();

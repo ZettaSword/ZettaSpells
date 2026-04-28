@@ -8,6 +8,7 @@ import com.binaris.wizardry.client.gui.elements.TooltipElementSpellEntry;
 import com.binaris.wizardry.content.item.ScrollItem;
 import com.binaris.wizardry.content.item.SpellBookItem;
 import com.binaris.wizardry.setup.registries.Spells;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -47,7 +48,7 @@ public abstract class TooltipElementSpellEntryMixin {
         Spell spell = getSpell(stack);
         if (spell == ZSSpells.CUSTOM_PLAYER_SPELL.get()) {
             String name = CustomPlayerSpell.getCustomSpellName(stack, index);
-            if (name != null) cir.setReturnValue(Component.literal(name));
+            if (name != null) cir.setReturnValue(Component.literal(name).withStyle(ChatFormatting.LIGHT_PURPLE));
         }
     }
 }

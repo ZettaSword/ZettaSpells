@@ -127,6 +127,7 @@ public class SummonWord extends SpellWord {
                 // entity.setPersistenceRequired();
                 if (summon) level.addFreshEntity(entity);
             }
+            ctx.addCooldown(Math.max(duration/20, 1));
         }
 
         // ── Client-side: visual feedback only ─────────────────────────────

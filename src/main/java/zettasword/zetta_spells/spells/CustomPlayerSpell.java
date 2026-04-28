@@ -7,6 +7,7 @@ import com.binaris.wizardry.api.content.spell.internal.PlayerCastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.api.content.util.CastItemDataHelper;
 import com.binaris.wizardry.content.spell.DefaultProperties;
+import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.Spells;
@@ -31,8 +32,6 @@ public class CustomPlayerSpell extends Spell {
         requiresPacket();
     }
 
-
-
     /**
      * This cast method is meant to be used for spells that are cast by a player source. This is useful for spells that
      * are meant to be cast by players, as it provides more information about the caster and the context of the cast.
@@ -50,12 +49,15 @@ public class CustomPlayerSpell extends Spell {
         ItemStack stack = caster.getItemInHand(hand);
         int index = CastItemDataHelper.getCurrentSpellIndex(stack);
         String spell = getCustomSpell(stack, index);
+        int cooldown = 0;
         if (spell != null){
             String[] texts = spell.split(";");
             for (String fragment : texts) {
                 if (fragment.isEmpty()) continue;
-                SpellCreator.spellCast(new SpellCreateContext(ctx.world(), caster, hand), fragment);
+                SpellCreateContext spellCtx = SpellCreator.spellCast(new SpellCreateContext(ctx.world(), caster, hand), fragment);
+                if (spellCtx.isSpellFinished()) cooldown+=spellCtx.getCooldown();
             }
+            if (!caster.isCreative()){ CastItemDataHelper.setCurrentCooldown(stack, Math.max(cooldown, 5), ctx.world().getGameTime());}
             return true;
         }
         return false;

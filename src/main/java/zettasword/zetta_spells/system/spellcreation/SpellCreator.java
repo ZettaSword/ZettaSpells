@@ -14,11 +14,11 @@ import java.util.List;
 
 public class SpellCreator {
 
-    public static void spellCast(SpellCreateContext context, String spell) {
-        if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return;
+    public static SpellCreateContext spellCast(SpellCreateContext context, String spell) {
+        if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return context;
         Level world = context.getWorld();
         LivingEntity caster = context.getCaster();
-        if (caster == null) return;
+        if (caster == null) return context;
         List<SpellTarget> targets = context.getTargets();
         boolean creative = context.isCreative();
 
@@ -64,6 +64,9 @@ public class SpellCreator {
             previous = current;
             context.setPrevious(current);
         }
+        context.addCooldown(words.size());
+        context.spellFinished();
+        return context;
     }
 
     public static void processVariable(HashMap<String, SVar> mods, String type, String key, String value){

@@ -116,11 +116,14 @@ public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, I
             if (this.getMana(stack) >= cost || player.isCreative()){
                 //Spellcasting.spellCast(level, player, hand, text);
                 // Caster can split spell onto pieces.
+                int cooldown = 0;
                 String[] texts = text.split(";");
                 for (String fragment : texts) {
                     if (fragment.isEmpty()) continue;
-                    SpellCreator.spellCast(new SpellCreateContext(level, player, hand), fragment);
+                    SpellCreateContext spellCtx = SpellCreator.spellCast(new SpellCreateContext(level, player, hand), fragment);
+                    if (spellCtx.isSpellFinished()) cooldown += spellCtx.getCooldown();
                 }
+                if(!player.isCreative()) player.getCooldowns().addCooldown(this,  Math.max(cooldown, 5));
                 if (!level.isClientSide) {
                     player.displayClientMessage(Component.literal(stack.getHoverName().getString()), true);
                 }

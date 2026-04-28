@@ -10,6 +10,7 @@ import com.binaris.wizardry.core.config.EBConfig;
 import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.EBMobEffects;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -93,19 +94,19 @@ public abstract class SpellGUIDisplayMixin {
             if (previousIndex != -999) {
                 if (previous == ZSSpells.CUSTOM_PLAYER_SPELL.get()) {
                     String name = CustomPlayerSpell.getCustomSpellName(wand, previousIndex);
-                    if (name != null) prevSpellName = Component.literal(name);
+                    if (name != null) prevSpellName = Component.literal(name).withStyle(ChatFormatting.LIGHT_PURPLE);
                 }
             }
 
             if (current == ZSSpells.CUSTOM_PLAYER_SPELL.get()){
                 String name = CustomPlayerSpell.getCustomSpellName(wand, currentIndex);
-                if (name != null) spellName = Component.literal(name);
+                if (name != null) spellName = Component.literal(name).withStyle(ChatFormatting.LIGHT_PURPLE);
             }
 
             if (nextIndex != -999){
                 if (next == ZSSpells.CUSTOM_PLAYER_SPELL.get()){
                     String name = CustomPlayerSpell.getCustomSpellName(wand, nextIndex);
-                    if (name != null) nextSpellName = Component.literal(name);
+                    if (name != null) nextSpellName = Component.literal(name).withStyle(ChatFormatting.LIGHT_PURPLE);
                 }
             }
 

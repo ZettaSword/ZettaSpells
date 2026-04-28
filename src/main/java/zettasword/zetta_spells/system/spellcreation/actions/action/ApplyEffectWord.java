@@ -48,6 +48,7 @@ public class ApplyEffectWord extends TargetSpellWord {
             int amplification = ctx.getMods().getOrDefault("amplification", SVar.init(1)).getInt();
 
             if (consumeMana(ctx, amplification * (duration * 2))) {
+                ctx.addCooldown(Math.max(duration/5, 5));
                 // Server side: apply effect
                 if (!ctx.getWorld().isClientSide) {
                     living.addEffect(new MobEffectInstance(

@@ -55,6 +55,7 @@ public class CastSpellWord extends SpellWord {
                 if (spell.isInstantCast()) spell.cast(new PlayerCastContext(ctx.getWorld(), player, ctx.getHand(), 0, data.getSpellModifiers()));
                 else handleContinuousSpell(spell, player, data.getSpellModifiers(), ctx.getMod("duration", 5).getIntSafe(1));
             }
+            ctx.addCooldown(spell.getCooldown());
         }catch (Exception ignore){}
         return false;
     }

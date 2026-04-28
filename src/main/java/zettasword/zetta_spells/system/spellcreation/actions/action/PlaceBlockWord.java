@@ -53,6 +53,7 @@ public class PlaceBlockWord extends TargetSpellWord {
                     Alteria.spawnBlockOutlineParticles(world, pos, EBParticles.SPARKLE, 0xFF9800, 5);
                 }
             }
+            ctx.addCooldown(1);
         }
         return isSuccess();
     }
