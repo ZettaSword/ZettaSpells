@@ -44,7 +44,7 @@ public class PlaceBlockWord extends TargetSpellWord {
         InteractionHand opposite_hand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         ItemStack opposite = caster.getItemInHand(opposite_hand);
         if (!opposite.isEmpty() && opposite.getItem() instanceof BlockItem blockItem) {
-            if (BlockUtil.canBlockBeReplaced(world, pos)) {
+            if (BlockUtil.canBlockBeReplaced(world, pos) && consumeMana(ctx, 10)) {
                 if (!world.isClientSide && BlockUtil.canPlaceBlock(caster, world, pos)) {
                     world.setBlock(pos, blockItem.getBlock().defaultBlockState(), 3);
                     opposite.shrink(1);

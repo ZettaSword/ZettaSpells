@@ -16,7 +16,7 @@ license="${mod_license}"
 modId="zetta_spells" #mandatory
 # The version number of the mod
 version="${mod_version}" #mandatory
-credits = "Roombie (for Necromancer Staff texture)"
+credits = "Roombie (for Necromancer Staff and Spellword tablet textures)"
 # A display name for the mod
 displayName="Zetta's Spells" #mandatory
 logoFile = "zettas_spells.png"

@@ -152,6 +152,14 @@ public class SummonWord extends SpellWord {
     private EntityType<?> findEntityType(String name) {
         if (name == null || name.isBlank()) return null;
 
+        // ── 3. Optional: Fuzzy match by path only
+        for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
+            ResourceLocation loc = ForgeRegistries.ENTITY_TYPES.getKey(type);
+            if (loc != null && loc.getPath().equalsIgnoreCase(name)) {
+                return type; // First match wins
+            }
+        }
+
         // ── 1. Try exact ResourceLocation match ───────────────────────────
         try {
             ResourceLocation exactLoc = ResourceLocation.parse(name);
@@ -165,16 +173,7 @@ public class SummonWord extends SpellWord {
         if (!name.contains(":")) {
             ResourceLocation vanillaLoc = ResourceLocation.tryBuild("minecraft", name);
             if (vanillaLoc != null) {
-                EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(vanillaLoc);
-                if (type != null) return type;
-            }
-        }
-
-        // ── 3. Optional: Fuzzy match by path only
-        for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
-            ResourceLocation loc = ForgeRegistries.ENTITY_TYPES.getKey(type);
-            if (loc != null && loc.getPath().equalsIgnoreCase(name)) {
-                return type; // First match wins
+                return ForgeRegistries.ENTITY_TYPES.getValue(vanillaLoc);
             }
         }
 

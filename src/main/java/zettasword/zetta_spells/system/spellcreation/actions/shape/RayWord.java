@@ -55,6 +55,8 @@ public class RayWord extends SpellWord {
             origin = origin.add(look.scale(1.2));
         }
 
+        Vec3 targetPosClient = null;
+
         Vec3 endpoint = origin.add(look.scale(range));
         HitResult rayTrace = RayTracer.rayTrace(world, caster, origin, endpoint, 0.0F, false, Entity.class,
                 ctx.getMod("ignoreliving",false).getBoolean() ? EntityUtil::isLiving : RayTracer.ignoreEntityFilter(caster));
@@ -69,31 +71,25 @@ public class RayWord extends SpellWord {
             if (ctx.filter().test(entityHit.getEntity())) {
                 ctx.clearTargets();
                 ctx.addTarget(entityHit.getEntity());
+                targetPosClient = entityHit.getEntity().getEyePosition();
             }else{
                 ctx.clearTargets();
                 ctx.stopSpell();
+                targetPosClient = entityHit.getEntity().getEyePosition();
             }
             range = origin.distanceTo(rayTrace.getLocation());
         } else if (rayTrace instanceof BlockHitResult blockHit && rayTrace.getType() == HitResult.Type.BLOCK) {
             ctx.clearTargets();
             ctx.addTarget(blockHit.getBlockPos());
+            targetPosClient = blockHit.getBlockPos().getCenter();
             ctx.setHitDirection(blockHit.getDirection());
             range = origin.distanceTo(rayTrace.getLocation());
         }
 
 
-        if (world.isClientSide && !ctx.getTargets().isEmpty() && ctx.getTarget().getTargetPos() != null){
-            BlockPos targetPos = ctx.getTarget().getTargetPos();
-
-            double x = targetPos.getX();
-            double y = targetPos.getY();
-            double z = targetPos.getZ();
-
-            ParticleBuilder.create(EBParticles.BEAM).entity(caster).pos(origin.subtract(caster.position())).length(range).color(0xFF9800)
-                    .scale(2).time(20).spawn(world);
-
-            ParticleBuilder.create(EBParticles.SPHERE).pos(x + 0.5, y + 0.5, z + 0.5).color(0xFF9800).time(20).scale(1.0F)
-                    .spawn(world);
+        if (world.isClientSide && targetPosClient != null){
+            ParticleBuilder.create(EBParticles.BEAM).pos(origin).target(targetPosClient).length(range).color(0xFF9800)
+                    .scale(1).time(20).spawn(world);
         }
         return true;
     }

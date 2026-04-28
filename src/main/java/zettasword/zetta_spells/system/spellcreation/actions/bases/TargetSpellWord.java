@@ -5,7 +5,6 @@ import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

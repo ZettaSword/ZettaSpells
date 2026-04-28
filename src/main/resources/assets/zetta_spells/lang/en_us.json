@@ -3,6 +3,7 @@
   "item.zetta_spells.finished_spellbook": "Spellbook",
   "item.zetta_spells.finished_spellbook_fail": "Not enough mana to cast the spell!",
   "item.zetta_spells.finished_spellbook_copy": "Spell is copied to Clipboard!",
+  "item.zetta_spells.finished_spellbook_added": "Bound Spell to Chant.",
   "item.zetta_spells.golden_astral_diamond": "Golden Astral Diamond",
   "item.zetta_spells.golden_astral_diamond.desc": "Use on any minion to extend its lifetime to eternity.",
   "item.zetta_spells.necromancer_staff": "Necromancer Staff",
@@ -92,6 +93,9 @@
   "spell.zetta_spells.turn_spellcaster": "Turn Spellcaster",
   "spell.zetta_spells.turn_spellcaster.desc": "Turns monster into spellcaster!... It is bad idea to use it on others, I guess.",
 
+  "spell.zetta_spells.custom_player_spell": "Incantation",
+  "spell.zetta_spells.custom_player_spell.desc": "Spell made by someone. To create it - You must use Unfinished Spellbook, then prepare your spell using it, and once complete, you can bind your spell on workbench.",
+
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
 
@@ -114,8 +118,8 @@
   "spellword.zetta_spells.apply_effect": "Apply",
   "spellword.zetta_spells.apply_effect.description": "Inflicts a status effect of your choice, in your spell simply write 'apply speed' to get speed. \n Example spell: 'Apply speed. Num range 30, Ray. Num duration 30, num amplification 2. Apply decay!'",
 
-  "spellword.zetta_spells.cast": "Cast",
-  "spellword.zetta_spells.cast.description": "Cast spell you discovered at ease!\n Example spell: 'Cast magic_missile!'",
+  "spellword.zetta_spells.cast_spell": "Cast",
+  "spellword.zetta_spells.cast_spell.description": "Cast spell you discovered at ease!\n Example spell: 'Cast magic_missile!'",
 
   "spellword.zetta_spells.break_block": "Break",
   "spellword.zetta_spells.break_block.description": "Breaks the targeted block. \n Example spell: 'Break!'",
@@ -140,5 +144,7 @@
 
   "spellword.zetta_spells.place_block": "Place",
   "spellword.zetta_spells.place_block.description": "Places the block to target position, you must hold it in opposite hand. \n Example spell: 'Ray place!' \n Mage Hand spell: 'If not sneaking Num range 100, truth ignoreliving true ray! Shift position direction, place; If sneaking Num range 100, truth ignoreliving true, ray, break!'",
-  "item.zetta_spells.finished_spellbook_added": "Bound Spell to Chant."
+
+  "spellword.zetta_spells.information": "Information",
+  "spellword.zetta_spells.information.description": "Shows you information about the world! There are two kinds in this world - Blocks and Entities. \n Example spell: 'Ray info!'"
 }

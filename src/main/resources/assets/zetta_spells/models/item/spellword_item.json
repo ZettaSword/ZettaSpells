@@ -1,3 +1,6 @@
 {
-  "parent": "minecraft:item/written_book"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "zetta_spells:item/spellword_item"
+  }
 }

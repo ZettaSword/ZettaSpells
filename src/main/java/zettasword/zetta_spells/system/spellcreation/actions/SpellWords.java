@@ -40,6 +40,7 @@ public class SpellWords {
     public static final RegistryObject<SpellWord> BREAK_BLOCK = regSpellWord(BreakBlockWord::new);
     public static final RegistryObject<SpellWord> PLACE_BLOCK = regSpellWord(PlaceBlockWord::new);
     public static final RegistryObject<SpellWord> SUMMON = regSpellWord(SummonWord::new);
+    public static final RegistryObject<SpellWord> INFORMATION = regSpellWord(InformationWord::new);
 
     // Operations
     public static final RegistryObject<SpellWord> FILTER = regSpellWord(FilterWord::new);
