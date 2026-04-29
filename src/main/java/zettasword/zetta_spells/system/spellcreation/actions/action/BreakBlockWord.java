@@ -39,7 +39,7 @@ public class BreakBlockWord extends TargetSpellWord {
             if (!world.isClientSide && BlockUtil.canBreak((Player) caster, world, pos, false)) {
                 world.destroyBlock(pos, true, caster);
             }
-            if (world.isClientSide) {
+            if (world.isClientSide && ctx.canCreateFx()) {
                 Alteria.spawnBlockOutlineParticles(world, pos, ParticleTypes.HAPPY_VILLAGER, 5);
             }
             ctx.addCooldown(1);

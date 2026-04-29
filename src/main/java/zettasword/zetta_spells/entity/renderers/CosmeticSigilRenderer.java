@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 
 public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
@@ -41,10 +42,23 @@ public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
             }
         }
 
+        // === FADE CALCULATION ===
+        int fadeDuration = 20; // Adjust for slower/faster fade
+        int fadeStartTick = Math.max(0, entity.getLifetime() - fadeDuration);
+        float progress = Math.max(0.0F, (entity.tickCount + partialTicks - fadeStartTick) / (float) fadeDuration);
+        float alpha = 1.0F - progress;
+        //ZettaSpells.LOGGER.warn("Sigil fade: tick={}, alpha={}, progress={}, lifetime={}", entity.tickCount, alpha, progress, entity.lifetime);
+
+        if (alpha <= 0.01F) return; // Skip if fully transparent
+        // === END FADE ===
+
         poseStack.pushPose();
         RenderSystem.enableDepthTest();
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+
+        // Apply alpha via shader color (Minecraft 1.20.1 compatible)
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
 
         float yOffset = 0.0F;
         poseStack.translate(0.0F, yOffset, 0.0F);
@@ -54,7 +68,6 @@ public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
         float f7 = 0.5F;
         float f8 = 0.5F;
 
-        // Rotate to face upward
         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
         if (this.rotationSpeed != 0.0F) {
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) entity.tickCount * this.rotationSpeed));
@@ -62,8 +75,6 @@ public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
 
         float s = entity.getBbWidth() * DrawingUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
         poseStack.scale(s, s, s);
-
-
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         Tesselator tessellator = Tesselator.getInstance();
@@ -77,7 +88,7 @@ public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
         buffer.vertex(poseStack.last().pose(), 0.0F - f7, 1.0F - f8, 0.01F).uv(0.0F, 0.0F).endVertex();
         BufferUploader.drawWithShader(buffer.end());
 
-        // Render BOTTOM face (rotate 180° around X axis)
+        // Render BOTTOM face
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
         buffer.begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
@@ -87,6 +98,9 @@ public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
         buffer.vertex(poseStack.last().pose(), 0.0F - f7, 1.0F - f8, 0.01F).uv(0.0F, 0.0F).endVertex();
         BufferUploader.drawWithShader(buffer.end());
         poseStack.popPose();
+
+        // Reset shader color to avoid affecting other renders
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         RenderSystem.disableBlend();
         poseStack.popPose();

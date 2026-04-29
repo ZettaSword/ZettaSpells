@@ -79,9 +79,6 @@ public class ZettaSpells
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         event.enqueueWork(PacketHandler::register);
 

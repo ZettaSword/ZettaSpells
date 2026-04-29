@@ -51,7 +51,7 @@ public class LevitationSigilBlock extends Block {
                             .spawn(world);
                 }
 
-                living.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.7F, 1.0F);
+                living.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.5F, 1.0F);
             }
         }
         if (entity instanceof ItemEntity item && this.getAmplify() > 0){

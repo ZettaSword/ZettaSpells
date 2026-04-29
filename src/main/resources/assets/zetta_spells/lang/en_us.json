@@ -131,7 +131,7 @@
   "spellword.zetta_spells.entity_area.description": "Marks entities in an area to be target of the spell. Supports Filter. \n Example spell: 'Num area 15, affect entity area! Num duration 30 Apply decay!' \n 'Num area 10 affect entity area, apply speed.'",
 
   "spellword.zetta_spells.summon": "Summon",
-  "spellword.zetta_spells.summon.description": "You can summon almost anyone with this word, though you should define health, count, duration. (you can also define name) \n Example spell: 'Ray, number duration 15, num health 10, num count 1, summon zombie'",
+  "spellword.zetta_spells.summon.description": "You can summon almost anyone with this word, though you should define health, attack, count, duration. (you can also define name) \n Example spell: 'Ray, number duration 15, num health 10, num attack 4, num count 1, summon zombie' \n Remnant Summon: 'Number duration 15, num health 5, num attack 5, num count 5. Num shift 2, shift position up. Summon remnant!' ",
 
   "spellword.zetta_spells.filter": "Filter",
   "spellword.zetta_spells.filter.description": "Allows you to filter targets of the spell to be different. Should be BEFORE using shape word. Supports: living, undead, none. \n Example spell: 'Filter undead, num area 15 affect entity area, apply decay.'",
@@ -149,6 +149,12 @@
   "spellword.zetta_spells.information.description": "Shows you information about the world! There are two kinds in this world - Blocks and Entities. \n Example spell: 'Ray info!'",
 
   "spellword.zetta_spells.ignite": "Ignite",
-  "spellword.zetta_spells.ignite.description": "Ignite target block or entity. \n Example spell: 'Ray ignite!' \n Fire Box: 'Apply fire_resistance, num area 5 affect block area, ignite!'"
+  "spellword.zetta_spells.ignite.description": "Ignite target block or entity. \n Example spell: 'Ray ignite!' \n Fire Box: 'Apply fire_resistance, num area 5 affect block area, ignite!'",
+
+  "spellword.zetta_spells.modify_block": "Modify Block",
+  "spellword.zetta_spells.modify_block.description": "Allows you to modify some block states of blocks around you, you can learn those with the word 'info'. If it is numerical you can define  \n Example spell: 'Ray modify block lit' (example use for redstone lamp)",
+
+  "spellword.zetta_spells.turn_fx": "Turn Fx",
+  "spellword.zetta_spells.turn_fx.description": "Generally removes the visual and audio output of the spell making it more silent. Can be: On/Off, True/False, Yes/No. \n Example spell: 'Turn fx off, Ray ignite!'"
 
 }

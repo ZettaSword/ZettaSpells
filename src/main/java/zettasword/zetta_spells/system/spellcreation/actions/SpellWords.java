@@ -42,11 +42,13 @@ public class SpellWords {
     public static final RegistryObject<SpellWord> SUMMON = regSpellWord(SummonWord::new);
     public static final RegistryObject<SpellWord> INFORMATION = regSpellWord(InformationWord::new);
     public static final RegistryObject<SpellWord> IGNITE = regSpellWord(IgniteWord::new);
+    public static final RegistryObject<SpellWord> MODIFY_BLOCK = regSpellWord(ModifyBlockWord::new);
 
     // Operations
     public static final RegistryObject<SpellWord> FILTER = regSpellWord(FilterWord::new);
     public static final RegistryObject<SpellWord> IF = regSpellWord(IfWord::new);
     public static final RegistryObject<SpellWord> SHIFT_POSITION = regSpellWord(ShiftPosWord::new);
+    public static final RegistryObject<SpellWord> TURN_FX = regSpellWord(TurnFxWord::new);
 
 
     /** Yay

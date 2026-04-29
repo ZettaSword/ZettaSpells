@@ -87,7 +87,7 @@ public class RayWord extends SpellWord {
         }
 
 
-        if (world.isClientSide && targetPosClient != null){
+        if (world.isClientSide && targetPosClient != null && ctx.canCreateFx()){
             ParticleBuilder.create(EBParticles.BEAM).pos(origin).target(targetPosClient).length(range).color(0xFF9800)
                     .scale(1).time(20).spawn(world);
         }

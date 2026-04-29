@@ -20,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.Config;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 
@@ -148,7 +149,7 @@ public class CustomPlayerSpell extends Spell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.ADVANCED, Elements.MAGIC, SpellType.UTILITY, SpellAction.POINT_DOWN, 20, 0, 5)
+                .assignBaseProperties(SpellTiers.MASTER, Elements.MAGIC, SpellType.UTILITY, SpellAction.POINT_DOWN, 20, 0, 5)
                 .add(DefaultProperties.RANGE, 14F)
                 .build();
     }

@@ -69,7 +69,7 @@ public class NecromancerStaffItem extends Item {
                         ? Component.translatable("item.zetta_spells.necromancer_staff.mode.command.active")
                         : Component.translatable("item.zetta_spells.necromancer_staff.mode.equip.active");
                 player.displayClientMessage(message, true);
-                player.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.7F, 1.2F);
+                player.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.5F, 1.2F);
             }
             return InteractionResultHolder.success(stack);
         }
@@ -132,7 +132,7 @@ public class NecromancerStaffItem extends Item {
                                 .entity(mob)
                                 .color(ArcaneColor.ARCANE)
                                 .spawn(level);
-                        player.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.7F, 1.0F);
+                        player.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.5F, 1.0F);
                     }
                     return InteractionResultHolder.success(stack);
                 }

@@ -329,7 +329,7 @@ public class Spellcasting {
                             // Visual effects to show Tenebria's Attention
                             CosmeticSigil sigil = new CosmeticSigil(world);
                             sigil.setLocation(ZettaSpells.location("textures/sigils/old/circle_vampires.png"));
-                            sigil.lifetime = 40;
+                            sigil.setLifetime(40);
                             sigil.setCaster(caster);
                             sigil.setPos(caster.getPosition(1.0F));
                             world.addFreshEntity(sigil);
@@ -503,7 +503,7 @@ public class Spellcasting {
             // Visual effects, but they're actually entities so we spawn them.
             CosmeticSigil sigil = new CosmeticSigil(world);
             sigil.setLocation(WizardryMainMod.location("textures/entity/healing_aura.png"));
-            sigil.lifetime = 40;
+            sigil.setLifetime(40);
             sigil.setCaster(caster);
             sigil.setPos(caster.getPosition(1.0F));
             world.addFreshEntity(sigil);

@@ -1,5 +1,6 @@
 package zettasword.zetta_spells.system.spellcreation.actions.action;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -46,7 +47,7 @@ public class InformationWord extends TargetSpellWord {
                 result.append("\n [").append(ctx.getWorld().getBlockState(pos).getValues()).append("] ");
                 boolean flag = consumeMana(ctx, result.length());
                 if (flag && !ctx.getWorld().isClientSide) {
-                    ctx.getCaster().sendSystemMessage(Component.literal(result.toString()));
+                    ctx.getCaster().sendSystemMessage(Component.literal(result.toString()).withStyle(ChatFormatting.GOLD));
                 }
                 return flag;
             }
@@ -67,7 +68,7 @@ public class InformationWord extends TargetSpellWord {
             result.append("\n [entity_type: ").append(entity.getType()).append("] ");
             boolean flag = consumeMana(ctx, result.length());
             if (flag && !ctx.getWorld().isClientSide) {
-                ctx.getCaster().sendSystemMessage(Component.literal(result.toString()));
+                ctx.getCaster().sendSystemMessage(Component.literal(result.toString()).withStyle(ChatFormatting.GOLD));
             }
             return flag;
         }

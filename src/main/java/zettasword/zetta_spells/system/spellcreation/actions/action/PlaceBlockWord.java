@@ -49,7 +49,7 @@ public class PlaceBlockWord extends TargetSpellWord {
                     world.setBlock(pos, blockItem.getBlock().defaultBlockState(), 3);
                     opposite.shrink(1);
                 }
-                if (world.isClientSide){
+                if (world.isClientSide && ctx.canCreateFx()){
                     Alteria.spawnBlockOutlineParticles(world, pos, EBParticles.SPARKLE, 0xFF9800, 5);
                 }
             }

@@ -400,7 +400,7 @@ public class ZSEvents {
                     // Visual effects to show Tenebria's Attention
                     CosmeticSigil sigil = new CosmeticSigil(level);
                     sigil.setLocation(ZettaSpells.location("textures/sigils/old/circle_vampires.png"));
-                    sigil.lifetime = 40;
+                    sigil.setLifetime(40);
                     sigil.setCaster(player);
                     sigil.setPos(player.getPosition(1.0F));
                     level.addFreshEntity(sigil);

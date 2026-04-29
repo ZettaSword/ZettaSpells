@@ -1,7 +1,7 @@
 package zettasword.zetta_spells;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -9,7 +9,6 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
-import java.util.Set;
 
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Forge's config APIs
@@ -22,37 +21,38 @@ public class Config
             .comment("Is learning system is active? (It allows you cast spell, and slowly getting better at this spell, increasing potency and decreasing cost)")
             .define("learningSystem", true);
 
-    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.BooleanValue SPELLCREATION_ENABLED = BUILDER
+            .comment("SpellCreation enabled? (Players can create own spells with Unfinished Spellbook and put it on the wand.)")
+            .define("spellCreationEnabled", true);
 
-    public static final ForgeConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
+    private static final ForgeConfigSpec.BooleanValue SPELLCREATION_CAST_FROM_SPELLBOOKS = BUILDER
+            .comment("SpellCreation: You can cast your custom spell from your Spellbook you've made.")
+            .define("spellCreationCastFromSpellbooks", true);
 
     // a list of strings that are treated as resource locations for items
-    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOB_EFFECTS = BUILDER
+            .comment("Banned Mob Effects (bans effects from applying using Apply spellword in custom spells.)")
+            .defineListAllowEmpty("banned_mob_effects", List.of("minecraft:saturation", "minecraft:harm", "minecraft:wither"), Config::validateMobEffectName);
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static boolean learningSystem;
-    public static int magicNumber;
-    public static String magicNumberIntroduction;
-    public static Set<Item> items;
+    public static boolean spellCreationEnabled;
+    public static boolean spellCreationCastFromSpellbooks;
+    public static List<? extends String> banned_mob_effects;
 
-    private static boolean validateItemName(final Object obj)
+    private static boolean validateMobEffectName(final Object obj)
     {
-        return obj instanceof final String itemName && ForgeRegistries.ITEMS.containsKey(ResourceLocation.tryParse(itemName));
+        return obj instanceof final String itemName && ForgeRegistries.MOB_EFFECTS.containsKey(ResourceLocation.tryParse(itemName));
     }
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
         learningSystem = LEARNING_SYSTEM.get();
-        magicNumber = MAGIC_NUMBER.get();
-        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+        spellCreationEnabled = SPELLCREATION_ENABLED.get();
+        spellCreationCastFromSpellbooks = SPELLCREATION_CAST_FROM_SPELLBOOKS.get();
+        banned_mob_effects = BANNED_MOB_EFFECTS.get();
 
         // convert the list of strings into a set of items
         //items = ITEM_STRINGS.get().stream()

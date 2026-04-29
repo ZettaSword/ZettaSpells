@@ -53,6 +53,7 @@ public class MagicWordsCreator {
         for (int i = 0; i < words.size(); ++i) {
             String current = words.get(i);
             String next = getNext(words, i, 1);
+            //TODO: Make it registry based system instead
 
             // Because of WordsDynamicLightning class we just need to put one simple tag and everything is ready!
             if (current.equals("lux")) {

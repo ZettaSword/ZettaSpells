@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "zetta_spells:finished_spellbook"
+    },
+    {
+      "item": "ebwizardry:mana_flask_small"
+    }
+  ],
+  "result": {
+    "item": "zetta_spells:unfinished_spellbook",
+    "count": 1
+  }
+}

@@ -1,8 +1,13 @@
 package zettasword.zetta_spells.system.spellcreation;
 
+import com.binaris.wizardry.WizardryMainMod;
+import com.binaris.wizardry.setup.registries.EBSounds;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import zettasword.zetta_spells.Config;
+import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.TextProcessingUtil;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
@@ -15,6 +20,7 @@ import java.util.List;
 public class SpellCreator {
 
     public static SpellCreateContext spellCast(SpellCreateContext context, String spell) {
+        if (!Config.spellCreationEnabled) return context;
         if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return context;
         Level world = context.getWorld();
         LivingEntity caster = context.getCaster();
@@ -66,6 +72,21 @@ public class SpellCreator {
         }
         context.addCooldown(words.size());
         context.spellFinished();
+
+        if (context.canCreateFx() && !world.isClientSide){
+            // Visual effects, but they're actually entities lol :D
+            CosmeticSigil sigil = new CosmeticSigil(world);
+            sigil.setLocation(WizardryMainMod.location("textures/entity/arcane_workbench_rune.png"));
+            sigil.setLifetime(40);
+            sigil.setCaster(caster);
+            sigil.setPos(caster.getPosition(1.0F));
+            world.addFreshEntity(sigil);
+        }
+
+        if (context.canCreateFx() && world.isClientSide){
+            // Playing cast sound to player
+            caster.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.5F, 1.0F);
+        }
         return context;
     }
 

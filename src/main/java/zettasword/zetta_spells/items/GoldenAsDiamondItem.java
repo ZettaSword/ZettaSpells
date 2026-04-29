@@ -68,7 +68,7 @@ public class GoldenAsDiamondItem extends Item {
                                     .color(0xFF9800)
                                     .spawn(level);
                         }
-                        player.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.7F, 1.0F);
+                        player.playSound(EBSounds.BLOCK_ARCANE_WORKBENCH_SPELLBIND.get(), 0.5F, 1.0F);
                     }
                     stack.shrink(1);
                     return InteractionResultHolder.success(stack);

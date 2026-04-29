@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.Config;
 import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.TextProcessingUtil;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
@@ -68,16 +69,6 @@ public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, I
                 tooltip.add(Component.translatable("spellbook.byAuthor", stack.getTag().getString("author")).withStyle(ChatFormatting.GRAY));
             }
         }
-
-        Spell spell = RegistryUtils.getSpell(stack);
-        if (spell == Spells.NONE) return;
-        boolean discovered = ClientUtils.shouldDisplayDiscovered(spell, stack);
-        tooltip.add(spell.getTier().getDescriptionFormatted());
-
-        if (discovered && flag.isAdvanced()) {
-            tooltip.add(Component.translatable(spell.getElement().getDescriptionId()).withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable(spell.getType().getDisplayName()).withStyle(ChatFormatting.GRAY));
-        }
         super.appendHoverText(stack, level, tooltip, flag);
     }
 
@@ -113,25 +104,27 @@ public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, I
             int cost = TextProcessingUtil.extractWords(text).size();
             if (cost == 0) cost = 10;
             cost = Math.max(10, (cost * cost)/5);
-            if (this.getMana(stack) >= cost || player.isCreative()){
-                //Spellcasting.spellCast(level, player, hand, text);
-                // Caster can split spell onto pieces.
-                int cooldown = 0;
-                String[] texts = text.split(";");
-                for (String fragment : texts) {
-                    if (fragment.isEmpty()) continue;
-                    SpellCreateContext spellCtx = SpellCreator.spellCast(new SpellCreateContext(level, player, hand), fragment);
-                    if (spellCtx.isSpellFinished()) cooldown += spellCtx.getCooldown();
+            if (Config.spellCreationCastFromSpellbooks){
+                if (this.getMana(stack) >= cost || player.isCreative()){
+                    //Spellcasting.spellCast(level, player, hand, text);
+                    // Caster can split spell onto pieces.
+                    int cooldown = 0;
+                    String[] texts = text.split(";");
+                    for (String fragment : texts) {
+                        if (fragment.isEmpty()) continue;
+                        SpellCreateContext spellCtx = SpellCreator.spellCast(new SpellCreateContext(level, player, hand), fragment);
+                        if (spellCtx.isSpellFinished()) cooldown += spellCtx.getCooldown();
+                    }
+                    if(!player.isCreative()) player.getCooldowns().addCooldown(this,  Math.max(cooldown, 5));
+                    if (!level.isClientSide) {
+                        player.displayClientMessage(Component.literal(stack.getHoverName().getString()), true);
+                    }
+                }else{
+                    if (!level.isClientSide) {
+                        player.displayClientMessage(Component.translatable("item.zetta_spells.finished_spellbook_fail"), true);
+                    }
+                    return InteractionResultHolder.fail(stack);
                 }
-                if(!player.isCreative()) player.getCooldowns().addCooldown(this,  Math.max(cooldown, 5));
-                if (!level.isClientSide) {
-                    player.displayClientMessage(Component.literal(stack.getHoverName().getString()), true);
-                }
-            }else{
-                if (!level.isClientSide) {
-                    player.displayClientMessage(Component.translatable("item.zetta_spells.finished_spellbook_fail"), true);
-                }
-                return InteractionResultHolder.fail(stack);
             }
 
             //this.consumeMana(stack, cost, player);

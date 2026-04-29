@@ -33,6 +33,8 @@ public class SpellCreateContext {
     private boolean spellFinished = false;
     /** Add ticks to this cooldown to make spell cooldown be bigger. 20 ticks = 1 second. **/
     private int cooldown = 0;
+    /** Switch this false to disable casting visual effects and sounds, it is recommended to check it if you're doing something visual with the spell!**/
+    private boolean createFx = true;
 
 
     public SpellCreateContext(Level world, LivingEntity caster, InteractionHand hand){
@@ -228,5 +230,13 @@ public class SpellCreateContext {
 
     public void addCooldown(int cooldown) {
         this.cooldown += cooldown;
+    }
+
+    public boolean canCreateFx() {
+        return createFx;
+    }
+
+    public void setCreateFx(boolean createFx) {
+        this.createFx = createFx;
     }
 }

@@ -1,7 +1,9 @@
 package zettasword.zetta_spells.system.spellcreation.actions.action;
 
+import com.binaris.wizardry.WizardryMainMod;
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.entity.construct.MagicConstructEntity;
+import com.binaris.wizardry.api.content.entity.construct.ScaledConstructEntity;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.ResourceLocationException;
@@ -10,13 +12,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
+import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.spells.TurnMinion;
 import zettasword.zetta_spells.system.ArcaneColor;
 import zettasword.zetta_spells.system.SpellTarget;
@@ -25,6 +29,7 @@ import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 
 import java.util.List;
+import java.util.UUID;
 
 public class SummonWord extends SpellWord {
     public SummonWord() {
@@ -84,12 +89,13 @@ public class SummonWord extends SpellWord {
 
         int duration = ctx.getMods().getOrDefault("duration", SVar.init(10)).getIntSafe();
         int health = ctx.getMods().getOrDefault("health", SVar.init(1)).getIntSafe();
+        int attack_value = ctx.getMod("attack", 1).getInt();
 
         SVar name = ctx.getMod("name");
 
         // ── Mana cost: base + scaling ────────────────────────────
         int baseCost = 10;
-        int totalCost = (baseCost + (count * 5)) + duration + (health / 5);
+        int totalCost = (baseCost + (count * 5)) + duration + (health / 5) + (attack_value * 5);
         if (!consumeMana(ctx, totalCost)) return false;
 
         // ── Server-side: spawn entities ───────────────────────────────────
@@ -112,8 +118,17 @@ public class SummonWord extends SpellWord {
                 );
 
                 if (entity instanceof Mob mob) {
+                    if (mob instanceof TamableAnimal tamable){
+                        tamable.setTame(true);
+                        tamable.setOwnerUUID(ctx.getCaster().getUUID());
+                    }
                     TurnMinion.turnMinion(ctx.getCaster(), new SpellModifiers(), mob);
                     TurnMinion.setLifetime(mob, duration * 20);
+                    AttributeInstance attack = mob.getAttribute(Attributes.ATTACK_DAMAGE);
+                    if (attack != null){
+                        attack.addPermanentModifier(new AttributeModifier("summon_attack", attack_value,
+                                AttributeModifier.Operation.ADDITION));
+                    }
                     if (name != null) mob.setCustomName(Component.literal(name.getString()));
                     summon = true;
                 }
@@ -121,18 +136,39 @@ public class SummonWord extends SpellWord {
                 if (entity instanceof MagicConstructEntity construct) {
                     construct.setCaster(ctx.getCaster());
                     construct.lifetime = duration * 20;
+                    if (construct instanceof ScaledConstructEntity scaled){
+                        SVar width = ctx.getMod("width");
+                        SVar height = ctx.getMod("height");
+                        if (width != null && height != null && consumeMana(ctx, (width.getInt() * 10)+(height.getInt() * 10)))
+                            scaled.setSize(width.getInt(), height.getInt());
+                    }
                     summon = true;
                 }
                 // Optional: set persistent if needed (prevents despawn)
                 // entity.setPersistenceRequired();
-                if (summon) level.addFreshEntity(entity);
+                if (summon) {
+                    // We spawn entity
+                    level.addFreshEntity(entity);
+                }
             }
             ctx.addCooldown(Math.max(duration/20, 1));
         }
 
         // ── Client-side: visual feedback only ─────────────────────────────
-        if (level.isClientSide) {
-            ParticleBuilder.create(EBParticles.SPHERE)
+        // We create sigil at the place where entity will be!
+        if (!level.isClientSide && ctx.canCreateFx()) {
+            CosmeticSigil sigil = new CosmeticSigil(ctx.getWorld());
+            sigil.setLocation(WizardryMainMod.location("textures/entity/arcane_workbench_rune.png"));
+            sigil.setLifetime(40);
+            sigil.setCaster(ctx.getCaster());
+            sigil.setPos(targetPos);
+            sigil.addDeltaMovement(new Vec3(0, 0.5,0));
+            ctx.getWorld().addFreshEntity(sigil);
+        }
+
+        // Particle effect
+        if (level.isClientSide && ctx.canCreateFx()) {
+            ParticleBuilder.create(EBParticles.BUFF)
                     .pos(targetPos)
                     .color(ArcaneColor.ARCANE)
                     .time(40)

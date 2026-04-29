@@ -2,6 +2,9 @@ package zettasword.zetta_spells.entity.construct;
 
 import com.binaris.wizardry.api.content.entity.construct.ScaledConstructEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -10,6 +13,8 @@ import zettasword.zetta_spells.entity.ZSEntities;
 
 public class CosmeticSigil extends ScaledConstructEntity {
     public ResourceLocation location = ZettaSpells.location("textures/sigils/old/circle_arcane.png");
+    private static final EntityDataAccessor<Integer> DATA_LIFETIME =
+            SynchedEntityData.defineId(CosmeticSigil.class, EntityDataSerializers.INT);
 
     public CosmeticSigil(EntityType<?> type, Level world) {
         super(type, world);
@@ -29,6 +34,22 @@ public class CosmeticSigil extends ScaledConstructEntity {
         tag.putString("loc_path", this.location.getPath());
         return tag;
     }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_LIFETIME, 600); // Default value
+    }
+
+    public void setLifetime(int lifetime) {
+        this.entityData.set(DATA_LIFETIME, lifetime);
+        this.lifetime=lifetime;
+    }
+
+    public int getLifetime() {
+        return this.entityData.get(DATA_LIFETIME);
+    }
+
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
