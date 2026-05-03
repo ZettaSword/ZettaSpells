@@ -5,7 +5,6 @@ import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.util.EntityUtil;
 import com.binaris.wizardry.api.content.util.RayTracer;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -14,7 +13,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
-import zettasword.zetta_spells.system.spellcreation.SVar;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 
 import java.util.List;
@@ -48,7 +46,7 @@ public class RayWord extends SpellWord {
     public boolean cast(SpellCreateContext ctx, List<String> words, int i) {
         double range = ctx.getMod("range", 14).getInt();
         LivingEntity caster = ctx.getCaster();
-        Level world = ctx.getWorld();
+        Level world = ctx.world();
         Vec3 look = caster.getLookAngle();
         Vec3 origin = new Vec3(caster.getX(), caster.getY() + (double)caster.getEyeHeight() - (double)0.25F, caster.getZ());
         if (world.isClientSide && ClientUtils.isFirstPerson(caster)) {

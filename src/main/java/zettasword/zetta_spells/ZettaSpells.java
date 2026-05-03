@@ -45,6 +45,7 @@ public class ZettaSpells
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+
         // Register the Deferred Register to the mod event bus so blocks get registered
         //BLOCKS.register(modEventBus);
 
@@ -58,6 +59,7 @@ public class ZettaSpells
         // Register items
         ZSItems.ITEMS.register(modEventBus);
         ZSSpells.SPELLS.register(modEventBus);
+        //ZSBiomes.BIOMES.register(modEventBus);
         //ZSLootFunctions.register(modEventBus);
         MixinBootstrap.init();
 
@@ -73,7 +75,7 @@ public class ZettaSpells
         ZSEvents.register();
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
-        context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        context.registerConfig(ModConfig.Type.COMMON, ZSConfig.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

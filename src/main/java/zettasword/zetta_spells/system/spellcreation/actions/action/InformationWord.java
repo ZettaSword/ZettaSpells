@@ -43,10 +43,10 @@ public class InformationWord extends TargetSpellWord {
         if (target.getTargetEntity() == null){
             BlockPos pos = target.getTargetPos();
             if (pos != null){
-                StringBuilder result = new StringBuilder("[" + ctx.getWorld().getBlockState(pos) + "] ");
-                result.append("\n [").append(ctx.getWorld().getBlockState(pos).getValues()).append("] ");
+                StringBuilder result = new StringBuilder("[" + ctx.world().getBlockState(pos) + "] ");
+                result.append("\n [").append(ctx.world().getBlockState(pos).getValues()).append("] ");
                 boolean flag = consumeMana(ctx, result.length());
-                if (flag && !ctx.getWorld().isClientSide) {
+                if (flag && !ctx.world().isClientSide) {
                     ctx.getCaster().sendSystemMessage(Component.literal(result.toString()).withStyle(ChatFormatting.GOLD));
                 }
                 return flag;
@@ -67,7 +67,7 @@ public class InformationWord extends TargetSpellWord {
             }
             result.append("\n [entity_type: ").append(entity.getType()).append("] ");
             boolean flag = consumeMana(ctx, result.length());
-            if (flag && !ctx.getWorld().isClientSide) {
+            if (flag && !ctx.world().isClientSide) {
                 ctx.getCaster().sendSystemMessage(Component.literal(result.toString()).withStyle(ChatFormatting.GOLD));
             }
             return flag;

@@ -30,7 +30,7 @@ public class IgniteWord extends TargetSpellWord {
             BlockPos pos = target.getTargetPos();
             if (pos != null){
                 BlockPos relativePos = pos.relative(ctx.getHitDirection());
-                Level world = ctx.getWorld();
+                Level world = ctx.world();
                 if (world.isEmptyBlock(relativePos)){
                     if (!world.isClientSide && BlockUtil.canPlaceBlock(ctx.getCaster(), world, relativePos) && consumeMana(ctx, 10)) {
                         world.setBlockAndUpdate(relativePos, Blocks.FIRE.defaultBlockState());
@@ -39,7 +39,7 @@ public class IgniteWord extends TargetSpellWord {
                 ctx.addCooldown(1);
             }
         }
-        if (target.getTargetEntity() != null && !ctx.getWorld().isClientSide){
+        if (target.getTargetEntity() != null && !ctx.world().isClientSide){
             if (target.getTargetEntity() instanceof LivingEntity living && consumeMana(ctx, 10)) {
                 living.setSecondsOnFire(ctx.getMod("duration", 5).getInt());
             }

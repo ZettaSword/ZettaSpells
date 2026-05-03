@@ -1,7 +1,6 @@
 package zettasword.zetta_spells;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +12,7 @@ import java.util.List;
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Forge's config APIs
 @Mod.EventBusSubscriber(modid = ZettaSpells.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class Config
+public class ZSConfig
 {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
@@ -27,12 +26,17 @@ public class Config
 
     private static final ForgeConfigSpec.BooleanValue SPELLCREATION_CAST_FROM_SPELLBOOKS = BUILDER
             .comment("SpellCreation: You can cast your custom spell from your Spellbook you've made.")
-            .define("spellCreationCastFromSpellbooks", true);
+            .define("spellCreationCastFromSpellbooks", false);
 
     // a list of strings that are treated as resource locations for items
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOB_EFFECTS = BUILDER
             .comment("Banned Mob Effects (bans effects from applying using Apply spellword in custom spells.)")
-            .defineListAllowEmpty("banned_mob_effects", List.of("minecraft:saturation", "minecraft:harm", "minecraft:wither"), Config::validateMobEffectName);
+            .defineListAllowEmpty("banned_mob_effects", List.of("minecraft:saturation", "minecraft:harm", "minecraft:wither"), ZSConfig::validateMobEffectName);
+
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_SUMMONS = BUILDER
+            .comment("Banned Summons (bans entities from being summoned using Summon spellword in custom spells.)")
+            .defineListAllowEmpty("banned_summons", List.of("minecraft:wither"), ZSConfig::validateMobName);
+
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -40,10 +44,16 @@ public class Config
     public static boolean spellCreationEnabled;
     public static boolean spellCreationCastFromSpellbooks;
     public static List<? extends String> banned_mob_effects;
+    public static List<? extends String> banned_summons;
 
     private static boolean validateMobEffectName(final Object obj)
     {
         return obj instanceof final String itemName && ForgeRegistries.MOB_EFFECTS.containsKey(ResourceLocation.tryParse(itemName));
+    }
+
+    private static boolean validateMobName(final Object obj)
+    {
+        return obj instanceof final String itemName && ForgeRegistries.ENTITY_TYPES.containsKey(ResourceLocation.tryParse(itemName));
     }
 
     @SubscribeEvent
@@ -53,6 +63,7 @@ public class Config
         spellCreationEnabled = SPELLCREATION_ENABLED.get();
         spellCreationCastFromSpellbooks = SPELLCREATION_CAST_FROM_SPELLBOOKS.get();
         banned_mob_effects = BANNED_MOB_EFFECTS.get();
+        banned_summons = BANNED_SUMMONS.get();
 
         // convert the list of strings into a set of items
         //items = ITEM_STRINGS.get().stream()

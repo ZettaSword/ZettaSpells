@@ -17,20 +17,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.ZettaSpells;
-import zettasword.zetta_spells.entity.construct.CosmeticSigil;
+import zettasword.zetta_spells.entity.construct.CustomSigil;
 
-public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
+public class CustomSigilRenderer extends EntityRenderer<CustomSigil> {
     private final float rotationSpeed;
     private final boolean invisibleToEnemies;
 
-    public CosmeticSigilRenderer(EntityRendererProvider.Context p_174008_, float rotationSpeed, boolean invisibleToEnemies) {
+    public CustomSigilRenderer(EntityRendererProvider.Context p_174008_, float rotationSpeed, boolean invisibleToEnemies) {
         super(p_174008_);
         this.rotationSpeed = rotationSpeed;
         this.invisibleToEnemies = invisibleToEnemies;
     }
 
-    public void render(@NotNull CosmeticSigil entity, float p_114486_, float partialTicks,
+    public void render(@NotNull CustomSigil entity, float p_114486_, float partialTicks,
                        @NotNull PoseStack poseStack, MultiBufferSource p_114489_, int p_114490_) {
         if (this.invisibleToEnemies && entity.getCaster() != Minecraft.getInstance().player) {
             LivingEntity var8 = entity.getCaster();
@@ -109,7 +108,7 @@ public class CosmeticSigilRenderer extends EntityRenderer<CosmeticSigil> {
         poseStack.popPose();
     }
 
-    public @NotNull ResourceLocation getTextureLocation(@NotNull CosmeticSigil entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull CustomSigil entity) {
         return null;
     }
 }

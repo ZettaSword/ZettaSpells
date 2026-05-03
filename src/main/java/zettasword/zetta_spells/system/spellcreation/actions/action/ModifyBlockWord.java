@@ -28,7 +28,7 @@ public class ModifyBlockWord extends TargetSpellWord {
     @Override
     public boolean cast(SpellCreateContext ctx, SpellTarget target, List<String> words, int i) {
         String next = SpellCreator.next(words, i+1);
-        Level world = ctx.getWorld();
+        Level world = ctx.world();
         BlockPos pos = target.getTargetPos();
         if (!world.isEmptyBlock(pos)){
             if (next.isEmpty()) next = "nothing";

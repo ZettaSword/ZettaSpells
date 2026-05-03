@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
-import zettasword.zetta_spells.Config;
+import zettasword.zetta_spells.ZSConfig;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
@@ -47,7 +47,7 @@ public class ApplyEffectWord extends TargetSpellWord {
 
             MobEffect mobEffect = findMobEffect(effectName);
             if (mobEffect == null) return false;
-            if (Config.banned_mob_effects.contains(mobEffect.getDescriptionId())) return false;
+            if (ZSConfig.banned_mob_effects.contains(mobEffect.getDescriptionId())) return false;
 
             int duration = ctx.getMods().getOrDefault("duration", SVar.init(10)).getInt();
             int amplification = ctx.getMods().getOrDefault("amplification", SVar.init(1)).getInt();
@@ -55,7 +55,7 @@ public class ApplyEffectWord extends TargetSpellWord {
             if (consumeMana(ctx, amplification * (duration * 2))) {
                 ctx.addCooldown(Math.max(duration/5, 5));
                 // Server side: apply effect
-                if (!ctx.getWorld().isClientSide) {
+                if (!ctx.world().isClientSide) {
                     living.addEffect(new MobEffectInstance(
                             mobEffect,
                             duration * 20,           // ticks
@@ -65,21 +65,21 @@ public class ApplyEffectWord extends TargetSpellWord {
 
                     // Custom sigil
                     if (ctx.canCreateFx()) {
-                        CosmeticSigil sigil = new CosmeticSigil(ctx.getWorld());
+                        CosmeticSigil sigil = new CosmeticSigil(ctx.world());
                         sigil.setLocation(WizardryMainMod.location("textures/entity/arcane_workbench_rune.png"));
                         sigil.setLifetime(40);
                         sigil.setCaster(ctx.getCaster());
                         sigil.setPos(living.getPosition(1.0F));
                         sigil.addDeltaMovement(new Vec3(0, 0.5,0));
-                        ctx.getWorld().addFreshEntity(sigil);
+                        ctx.world().addFreshEntity(sigil);
                     }
                 }
                 // Client side: spawn visual feedback
-                if (ctx.getWorld().isClientSide && ctx.canCreateFx()) {
+                if (ctx.world().isClientSide && ctx.canCreateFx()) {
                     ParticleBuilder.create(EBParticles.BUFF)
                             .entity(living)
                             .color(mobEffect.getColor())
-                            .spawn(ctx.getWorld());
+                            .spawn(ctx.world());
                 }
                 success();
             }

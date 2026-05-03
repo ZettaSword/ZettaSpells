@@ -3,13 +3,9 @@ package zettasword.zetta_spells.system.spellcreation.actions.shape;
 import com.binaris.wizardry.api.content.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.AABB;
-import zettasword.zetta_spells.system.SpellTarget;
-import zettasword.zetta_spells.system.spellcreation.SVar;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
-import zettasword.zetta_spells.system.spellcreation.actions.bases.TargetSpellWord;
 
 import java.util.List;
 
@@ -44,7 +40,7 @@ public class EntityAreaWord extends SpellWord {
         int range = ctx.getMod("area", 5).getInt();
         BlockPos pos = ctx.getTarget().getTargetPos();
         if (pos != null){
-            List<Entity> entities = EntityUtil.getEntitiesInRange(ctx.getWorld(), pos.getX(), pos.getY(), pos.getZ(), range, Entity.class);
+            List<Entity> entities = EntityUtil.getEntitiesInRange(ctx.world(), pos.getX(), pos.getY(), pos.getZ(), range, Entity.class);
             entities.removeIf(t -> !ctx.filter().test(t));
             ctx.clearTargets();
             entities.forEach(ctx::addTarget);

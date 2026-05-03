@@ -18,7 +18,8 @@ import java.util.Optional;
 public class SpellWordItem extends Item {
     
     public static final String SPELLWORD_TAG = "SpellWord";
-    
+    public static final String DISCOVERED_TAG = "discovered";
+
     public SpellWordItem() {
         super(new Properties().stacksTo(1));
     }
@@ -28,6 +29,9 @@ public class SpellWordItem extends Item {
      */
     public static void setSpellWord(ItemStack stack, ResourceLocation spellWordId) {
         stack.getOrCreateTag().putString(SPELLWORD_TAG, spellWordId.toString());
+        if (!stack.getOrCreateTag().contains(DISCOVERED_TAG)){
+            stack.getOrCreateTag().putBoolean(DISCOVERED_TAG, false);
+        }
     }
     
     /**
@@ -47,7 +51,7 @@ public class SpellWordItem extends Item {
      * Gets the actual SpellWord instance from registry
      */
     public static Optional<SpellWord> getSpellWord(ItemStack stack) {
-        return getSpellWordId(stack).flatMap(SpellWords::getAction);
+        return getSpellWordId(stack).flatMap(SpellWords::getWord);
     }
     
     @Override

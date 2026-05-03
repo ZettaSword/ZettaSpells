@@ -56,7 +56,6 @@ import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
-import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.items.spellbook.FinishedSpellbookItem;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.spells.CustomPlayerSpell;
@@ -325,7 +324,7 @@ public class ZSEvents {
             WizardData wizardData = Services.OBJECT_DATA.getWizardData(player);
 
             if (!spellData.hasSpellBeenDiscovered(spell)) return;
-            if (Config.learningSystem){
+            if (ZSConfig.learningSystem){
                 Race.get(player).ifPresent((data) -> {
                     int knowledge = data.getSpellKnowledge(spell);
                     float chance = (float) EBConfig.FORFEIT_CHANCE.get();
@@ -366,7 +365,7 @@ public class ZSEvents {
             if (event.isCanceled()) return;
             Level level = event.getLevel();
             Spell spell = event.getSpell(); // For read-ability
-            if (Config.learningSystem){
+            if (ZSConfig.learningSystem){
                 if (Services.OBJECT_DATA.getSpellManagerData(player).hasSpellBeenDiscovered(spell) && !player.isCreative()) {
                     Race.get(player).ifPresent((data) -> {
                         data.addSpellKnowledge(spell, 1);

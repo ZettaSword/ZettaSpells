@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import zettasword.zetta_spells.ZettaSpells;
+import zettasword.zetta_spells.items.SpellWordItem;
+import zettasword.zetta_spells.system.GalacticTranslator;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 
 import javax.annotation.Nullable;
@@ -47,10 +49,17 @@ public abstract class SpellWord {
      */
     public void addTooltip(ItemStack context, @Nullable Level level,
                            List<Component> tooltip, TooltipFlag flag) {
-        Component description = Component.translatable(
-                "spellword." + registryName.getNamespace() + "." + registryName.getPath() + ".description").withStyle(ChatFormatting.GOLD);
+        boolean discovered = context.getOrCreateTag().getBoolean(SpellWordItem.DISCOVERED_TAG);
+
+        // I know this is messy, but at least it works for now I guess.
+        Component description = discovered ? Component.translatable(
+                "spellword." + registryName.getNamespace() + "." + registryName.getPath() + ".description").withStyle(ChatFormatting.GOLD)
+                : Component.literal(GalacticTranslator.toGalactic(Component.translatable("spellword." + registryName.getNamespace() +
+                    "." + registryName.getPath() + ".description").toString())).withStyle(ChatFormatting.GOLD);
+
         if (!description.getString().isEmpty()) {
             tooltip.add(description);
+            if (!discovered) tooltip.add(Component.translatable("spellword.zetta_spells.general_item_not_discovered").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.DARK_PURPLE));
         }
     }
 
@@ -81,15 +90,32 @@ public abstract class SpellWord {
 
     /** Helper method to easily consume amount of mana from the book. **/
     public static boolean consumeMana(SpellCreateContext ctx,int cost){
+        if (ctx.isExternalCast()){
+            ctx.addPreCost(cost);
+            return ctx.lastExternalMana() >= ctx.getPreCost();
+        }
         ItemStack stack = getSpellBook(ctx);
         if (stack.getItem() instanceof IManaItem manaStoringItem && manaStoringItem.getMana(stack) >= cost){
             manaStoringItem.consumeMana(stack, cost, ctx.getCaster());
+            ctx.addPreCost(cost);
             return true;
         }
         return false;
     }
 
+    public static int getLastUsedMana(SpellCreateContext ctx){
+        ItemStack stack = getSpellBook(ctx);
+        if (stack.getItem() instanceof IManaItem manaStoringItem){
+            return manaStoringItem.getMana(stack);
+        }
+        return 0;
+    }
+
     public static int getCurrentMana(SpellCreateContext ctx){
+        if (ctx.isExternalCast()){
+            return ctx.lastExternalMana() - ctx.getPreCost();
+        }
+        if (ctx.getCaster() == null) return 0;
         ItemStack stack = getSpellBook(ctx);
         if (stack.getItem() instanceof IManaItem manaStoringItem){
             return manaStoringItem.getMana(stack);
@@ -112,4 +138,7 @@ public abstract class SpellWord {
     public void fail(){
         this.success = false;
     }
+
+    /** Override this one to change if spellword should have item. **/
+    public boolean doesHaveItem(){return true;}
 }

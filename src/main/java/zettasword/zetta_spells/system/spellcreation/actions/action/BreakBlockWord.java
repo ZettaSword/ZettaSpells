@@ -32,7 +32,7 @@ public class BreakBlockWord extends TargetSpellWord {
 
     @Override
     public boolean cast(SpellCreateContext ctx, SpellTarget target, List<String> words, int i) {
-        Level world = ctx.getWorld();
+        Level world = ctx.world();
         BlockPos pos = target.getTargetPos();
         LivingEntity caster = ctx.getCaster();
         if (!world.isEmptyBlock(pos) && consumeMana(ctx, 10)) {

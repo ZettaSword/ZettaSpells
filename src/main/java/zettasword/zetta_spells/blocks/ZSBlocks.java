@@ -3,6 +3,8 @@ package zettasword.zetta_spells.blocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -39,4 +41,12 @@ public class ZSBlocks {
                     .strength(0.1f)
                     .sound(SoundType.WOOL), 9));
 
+
+    public static final RegistryObject<Block> WHITE_BLOCK = BLOCKS.register("white_block", () ->
+            new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.SNOW)
+                    .strength(-1.0F, 3600000.0F)
+                    .sound(SoundType.STONE)
+            )
+    );
 }

@@ -77,5 +77,13 @@ public class ZSEntities {
                     .build("magical_turret")
     );
 
+    public static final RegistryObject<EntityType<CustomSigil>> CUSTOM_SIGIL = ENTITY_TYPES.register("custom_sigil",
+            () -> EntityType.Builder.<CustomSigil>of(CustomSigil::new, MobCategory.MISC)
+                    .sized(10.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("custom_sigil")
+    );
+
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);
 }

@@ -63,14 +63,15 @@ public class SetSpellWordFunction extends LootItemConditionalFunction {
         if (allowedSpellWords != null && !allowedSpellWords.isEmpty()) {
             // Use provided filter list
             candidates = allowedSpellWords.stream()
-                .filter(id -> SpellWords.getAction(id).isPresent())
+                .filter(id -> SpellWords.getWord(id).isPresent())
                 .toList();
         } else {
             // Use all registered spellwords
             candidates = SpellWords.getWords().stream()
-                .map(SpellWord::getRegistryName)
-                .filter(Objects::nonNull)
-                .toList();
+                    .filter(SpellWord::doesHaveItem)
+                    .map(SpellWord::getRegistryName)
+                    .filter(Objects::nonNull)
+                    .toList();
         }
 
         if (candidates.isEmpty()) {
@@ -80,6 +81,8 @@ public class SetSpellWordFunction extends LootItemConditionalFunction {
             }
             return stack;
         }
+
+
 
         // Pick random spellword using loot context's RNG
         RandomSource random = lootContext.getRandom();

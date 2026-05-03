@@ -18,10 +18,16 @@
   "item.zetta_spells.necromancer_staff.equip.success": "Item equipped to minion!",
   "item.zetta_spells.necromancer_staff.equip.empty": "Hold an item in your other hand to equip!",
   "item.zetta_spells.necromancer_staff.equip.change_name": "Minion name was changed!",
+  "item.zetta_spells.lantern_of_knowledge": "Lantern Of Knowledge",
+  "item.zetta_spells.lantern_of_knowledge.desc": "Catch Remnants to charge it. Once charged - discover spell-word you found around the world.",
+  "item.zetta_spells.lantern_of_knowledge.charged": "Lantern is ready...",
+  "item.zetta_spells.lantern_of_knowledge.charge_up": "Charge: %s / 5",
+  "item.zetta_spells.lantern_of_knowledge.discovered": "Spell-word is discovered!",
   "block.zetta_spells.passable_block": "Magic Barrier Construct",
   "block.zetta_spells.ore_conversion_block": "Ore Conversion Construct",
   "block.zetta_spells.levitation_sigil_block": "Levitation Sigil Construct",
   "block.zetta_spells.advanced_levitation_sigil_block": "Advanced Levitation Sigil Construct",
+  "block.zetta_spells.white_block": "White Matter",
   "screen.zetta_spells.writer": "Spell",
   "gui.zetta_spells.textbox": "Write Spell here",
   "gui.zetta_spells.textbox_name": "Spellbook",
@@ -108,6 +114,7 @@
   "item.zetta_spells.spellword_item": "Spell-word Tablet",
 
   "spellword.zetta_spells.general_item_desc": "Craft Unfinished Spellbook and create your own spell with this word.",
+  "spellword.zetta_spells.general_item_not_discovered": "To discover this spell-word create Lantern of Knowledge, charge it with 5 Remnants, and use it on this tablet.",
 
   "spellword.zetta_spells.ray": "Ray",
   "spellword.zetta_spells.ray.description": "Fires a magical ray in the targeted direction, it will set target of the spell, it will be entity or block. Supports Filter. \n Example spell: 'Ray break!' \n 'Number range 30. Ray break!'",
@@ -155,6 +162,12 @@
   "spellword.zetta_spells.modify_block.description": "Allows you to modify some block states of blocks around you, you can learn those with the word 'info'. If it is numerical you can define  \n Example spell: 'Ray modify block lit' (example use for redstone lamp)",
 
   "spellword.zetta_spells.turn_fx": "Turn Fx",
-  "spellword.zetta_spells.turn_fx.description": "Generally removes the visual and audio output of the spell making it more silent. Can be: On/Off, True/False, Yes/No. \n Example spell: 'Turn fx off, Ray ignite!'"
+  "spellword.zetta_spells.turn_fx.description": "Generally removes the visual and audio output of the spell making it more silent. Can be: On/Off, True/False, Yes/No. \n Example spell: 'Turn fx off, Ray ignite!'",
+
+  "spellword.zetta_spells.teleport": "Teleport",
+  "spellword.zetta_spells.teleport.description": "Allows you to teleport yourself or others to the different position. Define relative position with vec/vector/coordinates 'vector target x y z'. \n Example spell: 'Vec target 0 5 0, Teleport!' \n Teleport someone else: 'Vec target 0 5 0, Ray, Teleport!'",
+
+  "spellword.zetta_spells.sigil": "Sigil",
+  "spellword.zetta_spells.sigil.description": "Creates a sigil on target place. Sigil activates when someone enters it, starting a spell (everything AFTER the 'sigil' word gets activated). \n Example spell: 'Ray sigil apply poison.'"
 
 }

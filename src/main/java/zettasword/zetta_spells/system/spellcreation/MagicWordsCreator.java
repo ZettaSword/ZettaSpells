@@ -41,7 +41,7 @@ public class MagicWordsCreator {
     }
 
     public static void spellCast(SpellCreateContext context, String spell) {
-        Level level = context.getWorld();
+        Level level = context.world();
         LivingEntity caster = context.getCaster();
         if (caster == null) return;
         SpellTarget target = new SpellTarget(caster);

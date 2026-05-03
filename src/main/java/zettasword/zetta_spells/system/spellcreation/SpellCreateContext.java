@@ -35,6 +35,10 @@ public class SpellCreateContext {
     private int cooldown = 0;
     /** Switch this false to disable casting visual effects and sounds, it is recommended to check it if you're doing something visual with the spell!**/
     private boolean createFx = true;
+    private boolean isExternalCast = false;
+    /** This allows to understand what the spell cost should be. **/
+    private int preCost = 0;
+    private int lastExternalMana = 0;
 
 
     public SpellCreateContext(Level world, LivingEntity caster, InteractionHand hand){
@@ -51,9 +55,23 @@ public class SpellCreateContext {
         this.mods.put("ignoreliving", SVar.init(false));
     }
 
+    public SpellCreateContext(Level world, LivingEntity caster, Entity target){
+        this.world = world;
+        this.caster = caster;
+        this.targets.add(new SpellTarget(target));
+        this.hand = InteractionHand.MAIN_HAND;
+        // Default modifications are stored here!
+        this.mods = new HashMap<>();
+        this.mods.put("range", SVar.init(14));
+        this.mods.put("amplification", SVar.init(1));
+        this.mods.put("duration", SVar.init(10));
+        this.mods.put("power", SVar.init(1));
+        this.mods.put("ignoreliving", SVar.init(false));
+    }
+
     public SpellCreateContext(){}
 
-    public Level getWorld() {
+    public Level world() {
         return world;
     }
 
@@ -238,5 +256,33 @@ public class SpellCreateContext {
 
     public void setCreateFx(boolean createFx) {
         this.createFx = createFx;
+    }
+
+    public boolean isExternalCast() {
+        return isExternalCast;
+    }
+
+    public void externalCast() {
+        isExternalCast = true;
+    }
+
+    public int getPreCost() {
+        return preCost;
+    }
+
+    public void setPreCost(int preCost) {
+        this.preCost = preCost;
+    }
+
+    public void addPreCost(int addition) {
+        this.preCost += addition;
+    }
+
+    public int lastExternalMana() {
+        return lastExternalMana;
+    }
+
+    public void setLastExternalMana(int lastExternalMana) {
+        this.lastExternalMana = lastExternalMana;
     }
 }

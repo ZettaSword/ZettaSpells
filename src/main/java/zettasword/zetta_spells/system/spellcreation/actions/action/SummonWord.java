@@ -7,19 +7,16 @@ import com.binaris.wizardry.api.content.entity.construct.ScaledConstructEntity;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.ResourceLocationException;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
+import zettasword.zetta_spells.ZSConfig;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.spells.TurnMinion;
 import zettasword.zetta_spells.system.ArcaneColor;
@@ -29,7 +26,6 @@ import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 
 import java.util.List;
-import java.util.UUID;
 
 public class SummonWord extends SpellWord {
     public SummonWord() {
@@ -81,7 +77,7 @@ public class SummonWord extends SpellWord {
         // ── Get target position ───────────────────────────────────────────
         Vec3 targetPos = target.getTargetPos().getCenter();
 
-        Level level = ctx.getWorld();
+        Level level = ctx.world();
 
         // ── Parse modifiers ──────────────────────────────────────
         int count = ctx.getMods().getOrDefault("count", SVar.init(1)).getIntSafe();
@@ -95,7 +91,8 @@ public class SummonWord extends SpellWord {
 
         // ── Mana cost: base + scaling ────────────────────────────
         int baseCost = 10;
-        int totalCost = (baseCost + (count * 5)) + duration + (health / 5) + (attack_value * 5);
+        int totalCost = count * (baseCost + duration + (health / 5) + (attack_value * 5));
+        if (ZSConfig.banned_summons.contains(entityType.getDescriptionId())) return false;
         if (!consumeMana(ctx, totalCost)) return false;
 
         // ── Server-side: spawn entities ───────────────────────────────────
@@ -105,9 +102,11 @@ public class SummonWord extends SpellWord {
                 Entity entity = entityType.create(level);
                 if (entity == null) break;
 
+
                 // Offset position slightly for multiple spawns (prevents clipping)
                 double offsetX = (count > 1) ? (level.random.nextFloat() - 0.5) * 0.5 : 0;
                 double offsetZ = (count > 1) ? (level.random.nextFloat() - 0.5) * 0.5 : 0;
+
 
                 entity.moveTo(
                         targetPos.x + offsetX,
@@ -118,19 +117,21 @@ public class SummonWord extends SpellWord {
                 );
 
                 if (entity instanceof Mob mob) {
-                    if (mob instanceof TamableAnimal tamable){
-                        tamable.setTame(true);
-                        tamable.setOwnerUUID(ctx.getCaster().getUUID());
+                    if (ctx.getCaster().getMaxHealth() * 3 >= mob.getMaxHealth()) {
+                        if (mob instanceof TamableAnimal tamable) {
+                            tamable.setTame(true);
+                            tamable.setOwnerUUID(ctx.getCaster().getUUID());
+                        }
+                        TurnMinion.turnMinion(ctx.getCaster(), new SpellModifiers(), mob);
+                        TurnMinion.setLifetime(mob, duration * 20);
+                        AttributeInstance attack = mob.getAttribute(Attributes.ATTACK_DAMAGE);
+                        if (attack != null) {
+                            attack.addPermanentModifier(new AttributeModifier("summon_attack", attack_value,
+                                    AttributeModifier.Operation.ADDITION));
+                        }
+                        if (name != null) mob.setCustomName(Component.literal(name.getString()));
+                        summon = true;
                     }
-                    TurnMinion.turnMinion(ctx.getCaster(), new SpellModifiers(), mob);
-                    TurnMinion.setLifetime(mob, duration * 20);
-                    AttributeInstance attack = mob.getAttribute(Attributes.ATTACK_DAMAGE);
-                    if (attack != null){
-                        attack.addPermanentModifier(new AttributeModifier("summon_attack", attack_value,
-                                AttributeModifier.Operation.ADDITION));
-                    }
-                    if (name != null) mob.setCustomName(Component.literal(name.getString()));
-                    summon = true;
                 }
 
                 if (entity instanceof MagicConstructEntity construct) {
@@ -157,13 +158,13 @@ public class SummonWord extends SpellWord {
         // ── Client-side: visual feedback only ─────────────────────────────
         // We create sigil at the place where entity will be!
         if (!level.isClientSide && ctx.canCreateFx()) {
-            CosmeticSigil sigil = new CosmeticSigil(ctx.getWorld());
+            CosmeticSigil sigil = new CosmeticSigil(ctx.world());
             sigil.setLocation(WizardryMainMod.location("textures/entity/arcane_workbench_rune.png"));
             sigil.setLifetime(40);
             sigil.setCaster(ctx.getCaster());
             sigil.setPos(targetPos);
             sigil.addDeltaMovement(new Vec3(0, 0.5,0));
-            ctx.getWorld().addFreshEntity(sigil);
+            ctx.world().addFreshEntity(sigil);
         }
 
         // Particle effect

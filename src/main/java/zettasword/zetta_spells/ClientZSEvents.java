@@ -16,6 +16,9 @@ public class ClientZSEvents {
         event.registerEntityRenderer(ZSEntities.COSMETIC_SIGIL.get(),
                 (ctx) -> new CosmeticSigilRenderer(ctx, 0.2F, false));
 
+        event.registerEntityRenderer(ZSEntities.CUSTOM_SIGIL.get(),
+                (ctx) -> new CustomSigilRenderer(ctx, 0.2F, false));
+
         event.registerEntityRenderer(ZSEntities.TENEBRIA_WILL_SIGIL.get(),
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
 

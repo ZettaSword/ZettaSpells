@@ -11,10 +11,7 @@ import zettasword.zetta_spells.system.spellcreation.actions.action.*;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.FilterWord;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.IfWord;
 import zettasword.zetta_spells.system.spellcreation.actions.operations.ShiftPosWord;
-import zettasword.zetta_spells.system.spellcreation.actions.shape.BlockAreaWord;
-import zettasword.zetta_spells.system.spellcreation.actions.shape.EntityAreaWord;
-import zettasword.zetta_spells.system.spellcreation.actions.shape.RayWord;
-import zettasword.zetta_spells.system.spellcreation.actions.shape.SelfWord;
+import zettasword.zetta_spells.system.spellcreation.actions.shape.*;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -33,6 +30,7 @@ public class SpellWords {
     public static final RegistryObject<SpellWord> SELF = regSpellWord(SelfWord::new);
     public static final RegistryObject<SpellWord> BLOCK_AREA = regSpellWord(BlockAreaWord::new);
     public static final RegistryObject<SpellWord> ENTITY_AREA = regSpellWord(EntityAreaWord::new);
+    //public static final RegistryObject<SpellWord> SIGIL = regSpellWord(SigilWord::new);
 
     // Actions
     public static final RegistryObject<SpellWord> APPLY_EFFECT = regSpellWord(ApplyEffectWord::new);
@@ -43,6 +41,7 @@ public class SpellWords {
     public static final RegistryObject<SpellWord> INFORMATION = regSpellWord(InformationWord::new);
     public static final RegistryObject<SpellWord> IGNITE = regSpellWord(IgniteWord::new);
     public static final RegistryObject<SpellWord> MODIFY_BLOCK = regSpellWord(ModifyBlockWord::new);
+    public static final RegistryObject<SpellWord> TELEPORT = regSpellWord(TeleportWord::new);
 
     // Operations
     public static final RegistryObject<SpellWord> FILTER = regSpellWord(FilterWord::new);
@@ -61,7 +60,7 @@ public class SpellWords {
         return SPELL_WORDS.register(sup.get().getRegistryName().getPath(), sup);
     }
 
-    public static Optional<SpellWord> getAction(ResourceLocation id) {
+    public static Optional<SpellWord> getWord(ResourceLocation id) {
         return Optional.ofNullable(SPELL_WORD.get().getValue(id));
     }
 
@@ -69,11 +68,11 @@ public class SpellWords {
         return SPELL_WORD.get().getValues().stream().toList();
     }
 
-    public static Optional<SpellWord> getAction(String id) {
+    public static Optional<SpellWord> getWord(String id) {
         if (!id.contains(":")) {
             id = ZettaSpells.MODID + ":" + id;
         }
         ResourceLocation loc = ResourceLocation.tryParse(id);
-        return loc != null ? getAction(loc) : Optional.empty();
+        return loc != null ? getWord(loc) : Optional.empty();
     }
 }

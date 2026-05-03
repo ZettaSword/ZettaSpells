@@ -3,7 +3,6 @@ package zettasword.zetta_spells.system.spellcreation.actions.action;
 import com.binaris.wizardry.api.content.util.BlockUtil;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +37,7 @@ public class PlaceBlockWord extends TargetSpellWord {
     public boolean cast(SpellCreateContext ctx, SpellTarget target, List<String> words, int i) {
         InteractionHand hand = ctx.getHand();
         LivingEntity caster = ctx.getCaster();
-        Level world = ctx.getWorld();
+        Level world = ctx.world();
         BlockPos pos = target.getTargetPos();
         if (pos == null) return false;
         InteractionHand opposite_hand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;

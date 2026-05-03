@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "MAV",
+    "SCS",
+    "SSS"
+  ],
+  "key": {
+    "S": { "item": "minecraft:gold_ingot" },
+    "A": { "item": "ebwizardry:astral_diamond" },
+    "C": { "item": "minecraft:lantern" },
+    "M": { "item": "ebwizardry:magic_silk" },
+    "V": { "item": "ebwizardry:mana_flask_small" }
+  },
+  "result": {
+    "item": "zetta_spells:lantern_of_knowledge",
+    "count": 1
+  },
+  "criteria": {
+    "has_as_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["ebwizardry:astral_diamond"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_as_diamond"]
+  ]
+}

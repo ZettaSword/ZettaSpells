@@ -6,13 +6,11 @@ import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.spell.internal.PlayerCastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.core.platform.Services;
-import com.binaris.wizardry.core.registry.EBRegistries;
 import com.binaris.wizardry.registry.EBRegistriesForge;
 import com.binaris.wizardry.setup.registries.Spells;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import zettasword.zetta_spells.system.spellcreation.SVar;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 
@@ -52,7 +50,7 @@ public class CastSpellWord extends SpellWord {
         if (!Services.OBJECT_DATA.getSpellManagerData(player).hasSpellBeenDiscovered(spell) && !player.isCreative()) return false;
         try {
             if (consumeMana(ctx, spell.getCost())) {
-                if (spell.isInstantCast()) spell.cast(new PlayerCastContext(ctx.getWorld(), player, ctx.getHand(), 0, data.getSpellModifiers()));
+                if (spell.isInstantCast()) spell.cast(new PlayerCastContext(ctx.world(), player, ctx.getHand(), 0, data.getSpellModifiers()));
                 else handleContinuousSpell(spell, player, data.getSpellModifiers(), ctx.getMod("duration", 5).getIntSafe(1));
             }
             ctx.addCooldown(spell.getCooldown());

@@ -1,6 +1,5 @@
 package zettasword.zetta_spells.system.spellcreation.actions.operations;
 
-import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.SpellCreator;
 import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
@@ -31,7 +30,7 @@ public class IfWord extends SpellWord {
 
         if (words.get(i).equals("light")){
             ctx.setIf(context ->
-                    context.getWorld().getLightEmission(context.getCaster().blockPosition()) >= context.getMod("light", 0).getInt());
+                    context.world().getLightEmission(context.getCaster().blockPosition()) >= context.getMod("light", 0).getInt());
         }
 
         // Inverse
@@ -47,7 +46,7 @@ public class IfWord extends SpellWord {
 
             if (next.equals("light")){
                 ctx.setIf(context ->
-                        context.getWorld().getLightEmission(context.getCaster().blockPosition()) <= context.getMod("light", 0).getInt());
+                        context.world().getLightEmission(context.getCaster().blockPosition()) <= context.getMod("light", 0).getInt());
             }
         }
         return false;

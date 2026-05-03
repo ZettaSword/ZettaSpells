@@ -456,7 +456,7 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [04апр.2026 01:30:43.621] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file forge-server.toml for forge tracking
 [04апр.2026 01:30:43.621] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.ModLoadingContext/]: Attempted to register an empty config for type COMMON on mod forge
 [04апр.2026 01:30:43.625] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.ClientZSEvents to MOD
-[04апр.2026 01:30:43.629] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.Config to MOD
+[04апр.2026 01:30:43.629] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.ZSConfig to MOD
 [04апр.2026 01:30:43.630] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.mob_effects.UndeadMobEffect to FORGE
 [04апр.2026 01:30:43.634] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.system.MinionSitManager to FORGE
 [04апр.2026 01:30:43.636] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing zettasword.zetta_spells.system.spellcreation.light.LuxClientLightBlocks to FORGE

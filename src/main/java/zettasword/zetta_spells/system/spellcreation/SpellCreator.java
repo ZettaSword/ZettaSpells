@@ -3,10 +3,10 @@ package zettasword.zetta_spells.system.spellcreation;
 import com.binaris.wizardry.WizardryMainMod;
 import com.binaris.wizardry.setup.registries.EBSounds;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import zettasword.zetta_spells.Config;
+import zettasword.zetta_spells.ZSConfig;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.TextProcessingUtil;
@@ -20,13 +20,15 @@ import java.util.List;
 public class SpellCreator {
 
     public static SpellCreateContext spellCast(SpellCreateContext context, String spell) {
-        if (!Config.spellCreationEnabled) return context;
+        if (!ZSConfig.spellCreationEnabled) return context;
         if (SpellWord.getCurrentMana(context) <= 0 && !context.isCreative()) return context;
-        Level world = context.getWorld();
+        Level world = context.world();
         LivingEntity caster = context.getCaster();
         if (caster == null) return context;
         List<SpellTarget> targets = context.getTargets();
         boolean creative = context.isCreative();
+
+        context.setLastExternalMana(SpellWord.getLastUsedMana(context));
 
         // Starting the spell-creation.
         List<String> words = TextProcessingUtil.extractWords(spell);

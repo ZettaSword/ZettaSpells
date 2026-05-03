@@ -12,9 +12,12 @@ import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.ZSEntities;
 
 public class CosmeticSigil extends ScaledConstructEntity {
-    public ResourceLocation location = ZettaSpells.location("textures/sigils/old/circle_arcane.png");
+    private ResourceLocation location = ZettaSpells.location("textures/sigils/old/circle_arcane.png");
     private static final EntityDataAccessor<Integer> DATA_LIFETIME =
             SynchedEntityData.defineId(CosmeticSigil.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<String> DATA_LOCATION =
+            SynchedEntityData.defineId(CosmeticSigil.class, EntityDataSerializers.STRING);
 
     public CosmeticSigil(EntityType<?> type, Level world) {
         super(type, world);
@@ -24,8 +27,11 @@ public class CosmeticSigil extends ScaledConstructEntity {
         super(ZSEntities.COSMETIC_SIGIL.get(), world);
     }
 
-    public ResourceLocation getLocation(){return this.location;}
-    public void setLocation(ResourceLocation location){ this.location = location;}
+    public ResourceLocation getLocation(){return ResourceLocation.parse(this.entityData.get(DATA_LOCATION));}
+    public void setLocation(ResourceLocation location){
+        this.location = location;
+        this.entityData.set(DATA_LOCATION, location.toString());
+    }
 
     @Override
     public CompoundTag serializeNBT() {
@@ -39,6 +45,7 @@ public class CosmeticSigil extends ScaledConstructEntity {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_LIFETIME, 600); // Default value
+        this.entityData.define(DATA_LOCATION,  ZettaSpells.location("textures/sigils/old/circle_arcane.png").toString()); // Default value
     }
 
     public void setLifetime(int lifetime) {

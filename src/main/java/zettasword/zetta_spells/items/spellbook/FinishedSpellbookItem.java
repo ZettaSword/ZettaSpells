@@ -1,6 +1,5 @@
 package zettasword.zetta_spells.items.spellbook;
 
-import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.item.IWorkbenchItem;
 import com.binaris.wizardry.api.content.spell.Spell;
@@ -22,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.Config;
+import zettasword.zetta_spells.ZSConfig;
 import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.TextProcessingUtil;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
@@ -104,7 +103,7 @@ public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, I
             int cost = TextProcessingUtil.extractWords(text).size();
             if (cost == 0) cost = 10;
             cost = Math.max(10, (cost * cost)/5);
-            if (Config.spellCreationCastFromSpellbooks){
+            if (ZSConfig.spellCreationCastFromSpellbooks){
                 if (this.getMana(stack) >= cost || player.isCreative()){
                     //Spellcasting.spellCast(level, player, hand, text);
                     // Caster can split spell onto pieces.
