@@ -1,5 +1,6 @@
 package zettasword.zetta_spells.spells;
 
+import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
@@ -48,12 +49,17 @@ public class CustomPlayerSpell extends Spell {
         int index = CastItemDataHelper.getCurrentSpellIndex(stack);
         String spell = getCustomSpell(stack, index);
         int cooldown = 0;
-        if (spell != null){
+        if (spell != null && stack.getItem() instanceof IManaItem manaItem){
             String[] texts = spell.split(";");
             for (String fragment : texts) {
                 if (fragment.isEmpty()) continue;
-                SpellCreateContext spellCtx = SpellCreator.spellCast(new SpellCreateContext(ctx.world(), caster, hand), fragment);
+                // Preparing context
+                SpellCreateContext spellCtx0 = new SpellCreateContext(ctx.world(), caster, hand);
+                spellCtx0.setMaxMana(manaItem.getMana(stack));
+                // Casting spell
+                SpellCreateContext spellCtx = SpellCreator.spellCast(spellCtx0, fragment);
                 if (spellCtx.isSpellFinished()) cooldown+=spellCtx.getCooldown();
+                manaItem.consumeMana(stack, Math.min(spellCtx.getCost(), manaItem.getManaCapacity(stack)), caster);
             }
             if (!caster.isCreative()){ CastItemDataHelper.setCurrentCooldown(stack, Math.max(cooldown, 5), ctx.world().getGameTime());}
             return true;

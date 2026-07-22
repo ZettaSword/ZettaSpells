@@ -111,8 +111,16 @@ public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, I
                     String[] texts = text.split(";");
                     for (String fragment : texts) {
                         if (fragment.isEmpty()) continue;
-                        SpellCreateContext spellCtx = SpellCreator.spellCast(new SpellCreateContext(level, player, hand), fragment);
-                        if (spellCtx.isSpellFinished()) cooldown += spellCtx.getCooldown();
+                        // Preparing context
+                        SpellCreateContext ctx = new SpellCreateContext(level, player, hand);
+                        ctx.setMaxMana(this.getMana(stack));
+                        ctx.addCost(cost);
+                        // Casting the spell
+                        SpellCreateContext spellCtx = SpellCreator.spellCast(ctx,fragment);
+                        if (spellCtx.isSpellFinished()){
+                            cooldown += spellCtx.getCooldown();
+                        }
+                        this.consumeMana(stack, Math.min(spellCtx.getCost(), this.getManaCapacity(stack)), player);
                     }
                     if(!player.isCreative()) player.getCooldowns().addCooldown(this,  Math.max(cooldown, 5));
                     if (!level.isClientSide) {

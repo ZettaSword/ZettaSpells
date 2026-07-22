@@ -90,17 +90,18 @@ public abstract class SpellWord {
 
     /** Helper method to easily consume amount of mana from the book. **/
     public static boolean consumeMana(SpellCreateContext ctx,int cost){
-        if (ctx.isExternalCast()){
+        ctx.addCost(cost);
+        return ctx.getCost() <= ctx.maxMana();
+        /*if (ctx.isExternalCast()){
             ctx.addPreCost(cost);
-            return ctx.lastExternalMana() >= ctx.getPreCost();
+            return ctx.maxMana() >= ctx.getCost();
         }
         ItemStack stack = getSpellBook(ctx);
         if (stack.getItem() instanceof IManaItem manaStoringItem && manaStoringItem.getMana(stack) >= cost){
             manaStoringItem.consumeMana(stack, cost, ctx.getCaster());
             ctx.addPreCost(cost);
             return true;
-        }
-        return false;
+        }*/
     }
 
     public static int getLastUsedMana(SpellCreateContext ctx){
@@ -113,7 +114,7 @@ public abstract class SpellWord {
 
     public static int getCurrentMana(SpellCreateContext ctx){
         if (ctx.isExternalCast()){
-            return ctx.lastExternalMana() - ctx.getPreCost();
+            return ctx.maxMana() - ctx.getCost();
         }
         if (ctx.getCaster() == null) return 0;
         ItemStack stack = getSpellBook(ctx);

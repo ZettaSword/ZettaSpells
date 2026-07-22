@@ -8,13 +8,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.compress.utils.Lists;
 import zettasword.zetta_spells.system.SpellTarget;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.ArrayList;
 
 /** Class for temporary storing some information about the spell being made. **/
 public class SpellCreateContext {
@@ -22,7 +22,7 @@ public class SpellCreateContext {
     private LivingEntity caster = null;
     private InteractionHand hand = null;
     private HashMap<String, SVar> mods = null;
-    private List<SpellTarget> targets = Lists.newArrayList();
+    private List<SpellTarget> targets = new ArrayList<>();
     private Direction hit_direction = Direction.UP;
     private String previous = "";
     private Predicate<Entity> filter = entity -> true;
@@ -35,10 +35,10 @@ public class SpellCreateContext {
     private int cooldown = 0;
     /** Switch this false to disable casting visual effects and sounds, it is recommended to check it if you're doing something visual with the spell!**/
     private boolean createFx = true;
-    private boolean isExternalCast = false;
+    private boolean isExternalCast = true;
     /** This allows to understand what the spell cost should be. **/
-    private int preCost = 0;
-    private int lastExternalMana = 0;
+    private int cost = 0;
+    private int maxMana = 0;
 
 
     public SpellCreateContext(Level world, LivingEntity caster, InteractionHand hand){
@@ -46,6 +46,18 @@ public class SpellCreateContext {
         this.caster = caster;
         this.targets.add(new SpellTarget(caster));
         this.hand = hand;
+        // Default modifications are stored here!
+        this.mods = new HashMap<>();
+        this.mods.put("range", SVar.init(14));
+        this.mods.put("amplification", SVar.init(1));
+        this.mods.put("duration", SVar.init(10));
+        this.mods.put("power", SVar.init(1));
+        this.mods.put("ignoreliving", SVar.init(false));
+    }
+
+    public SpellCreateContext(Level world, LivingEntity targeted){
+        this.world = world;
+        this.targets.add(new SpellTarget(targeted));
         // Default modifications are stored here!
         this.mods = new HashMap<>();
         this.mods.put("range", SVar.init(14));
@@ -79,6 +91,7 @@ public class SpellCreateContext {
         this.world = world;
     }
 
+    @Nullable
     public LivingEntity getCaster() {
         return caster;
     }
@@ -266,23 +279,23 @@ public class SpellCreateContext {
         isExternalCast = true;
     }
 
-    public int getPreCost() {
-        return preCost;
+    public int getCost() {
+        return cost;
     }
 
-    public void setPreCost(int preCost) {
-        this.preCost = preCost;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
-    public void addPreCost(int addition) {
-        this.preCost += addition;
+    public void addCost(int addition) {
+        this.cost += addition;
     }
 
-    public int lastExternalMana() {
-        return lastExternalMana;
+    public int maxMana() {
+        return maxMana;
     }
 
-    public void setLastExternalMana(int lastExternalMana) {
-        this.lastExternalMana = lastExternalMana;
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
     }
 }

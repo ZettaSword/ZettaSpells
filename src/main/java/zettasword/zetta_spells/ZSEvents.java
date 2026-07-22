@@ -14,7 +14,7 @@ import com.binaris.wizardry.api.content.util.RegistryUtils;
 import com.binaris.wizardry.content.Forfeit;
 import com.binaris.wizardry.content.ForfeitRegistry;
 import com.binaris.wizardry.content.menu.ArcaneWorkbenchMenu;
-import com.binaris.wizardry.core.config.EBConfig;
+import com.binaris.wizardry.core.config.EBServerConfig;
 import com.binaris.wizardry.core.event.WizardryEventBus;
 import com.binaris.wizardry.core.integrations.ArtifactChannel;
 import com.binaris.wizardry.core.platform.Services;
@@ -327,7 +327,7 @@ public class ZSEvents {
             if (ZSConfig.learningSystem){
                 Race.get(player).ifPresent((data) -> {
                     int knowledge = data.getSpellKnowledge(spell);
-                    float chance = (float) EBConfig.FORFEIT_CHANCE.get();
+                    float chance = EBServerConfig.FORFEIT_CHANCE.get();
                     if (ArtifactChannel.isEquipped(player, EBItems.AMULET_WISDOM.get())) chance *= 0.5F;
                     if (knowledge < 12){
                         Random random = wizardData.getRandom();

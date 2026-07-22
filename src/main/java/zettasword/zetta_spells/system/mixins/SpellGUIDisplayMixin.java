@@ -6,7 +6,8 @@ import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.util.CastItemDataHelper;
 import com.binaris.wizardry.client.SpellGUIDisplay;
 import com.binaris.wizardry.client.SpellHUDSkin;
-import com.binaris.wizardry.core.config.EBConfig;
+import com.binaris.wizardry.core.config.EBClientConfig;
+import com.binaris.wizardry.core.config.EBServerConfig;
 import com.binaris.wizardry.core.platform.Services;
 import com.binaris.wizardry.setup.registries.EBMobEffects;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -50,15 +51,15 @@ public abstract class SpellGUIDisplayMixin {
      */
     @Overwrite
     public static void renderSpellHUD(GuiGraphics guiGraphics, PoseStack stack, Player player, ItemStack wand, boolean mainHand, int width, int height, float partialTicks, boolean textLayer){
-        if (!EBConfig.SHOW_SPELL_HUD.get()) return;
+        if (!EBClientConfig.SHOW_SPELL_HUD.get()) return;
 
         if (!(wand.getItem() instanceof ICastItem))
             throw new IllegalArgumentException("The given stack must contain an ISpellCastingItem!");
 
-        boolean flipX = EBConfig.SPELL_HUD_FLIP_X.get();
-        boolean flipY = EBConfig.SPELL_HUD_FLIP_Y.get();
+        boolean flipX = EBClientConfig.SPELL_HUD_FLIP_X.get();
+        boolean flipY = EBClientConfig.SPELL_HUD_FLIP_Y.get();
 
-        if (EBConfig.SPELL_HUD_DYNAMIC_POSITIONING.get()) {
+        if (EBClientConfig.SPELL_HUD_DYNAMIC_POSITIONING.get()) {
             flipX = flipX == ((mainHand ? player.getMainArm() : player.getMainArm().getOpposite()) == HumanoidArm.LEFT);
         }
 

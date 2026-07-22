@@ -1,6 +1,6 @@
 package zettasword.zetta_spells.system.loot;
 
-import com.binaris.wizardry.core.config.EBConfig;
+import com.binaris.wizardry.core.config.EBServerConfig;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
@@ -43,7 +43,7 @@ public final class ZSLootTables {
      * You should add your injections here, not only add them to the list or just creating the members.
      */
     public static void initInjections() {
-        EBConfig.LOOT_INJECTION_LOCATIONS_TO_STRUCTURES.get().forEach(
+        EBServerConfig.LOOT_INJECTION_LOCATIONS_TO_STRUCTURES.get().forEach(
                 location -> LOOT_INJECTIONS.add(Pair.of(location, createAdditivePool(DUNGEON_ADDITIONS, 1)))
         );
 

@@ -6,7 +6,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import zettasword.zetta_spells.ZSConfig;
-import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.TextProcessingUtil;
@@ -27,8 +26,6 @@ public class SpellCreator {
         if (caster == null) return context;
         List<SpellTarget> targets = context.getTargets();
         boolean creative = context.isCreative();
-
-        context.setLastExternalMana(SpellWord.getLastUsedMana(context));
 
         // Starting the spell-creation.
         List<String> words = TextProcessingUtil.extractWords(spell);

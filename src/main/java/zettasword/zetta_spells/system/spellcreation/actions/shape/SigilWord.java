@@ -1,10 +1,8 @@
 package zettasword.zetta_spells.system.spellcreation.actions.shape;
 
-import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.CustomSigil;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
-import zettasword.zetta_spells.system.spellcreation.actions.SpellWord;
 import zettasword.zetta_spells.system.spellcreation.actions.bases.TargetSpellWord;
 
 import java.util.List;
@@ -51,7 +49,8 @@ public class SigilWord extends TargetSpellWord {
                 sigil.setLifetime(-1);
             }
             sigil.setOneTime(ctx.getMod("once", false).getBoolean());
-            sigil.setLastMana(ctx.lastExternalMana());
+            sigil.setMaxMana(ctx.maxMana());
+            sigil.setCost(ctx.getCost());
             sigil.setPos(target.getTargetPos().getCenter());
             sigil.setSpell(fin.toString());
             ctx.world().addFreshEntity(sigil);

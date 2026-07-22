@@ -2,20 +2,14 @@ package zettasword.zetta_spells.entity.construct;
 
 import com.binaris.wizardry.api.content.entity.construct.ScaledConstructEntity;
 import com.binaris.wizardry.api.content.util.EntityUtil;
-import com.binaris.wizardry.api.content.util.MagicDamageSource;
-import com.binaris.wizardry.content.spell.DefaultProperties;
-import com.binaris.wizardry.setup.registries.EBDamageSources;
-import com.binaris.wizardry.setup.registries.Spells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
@@ -40,7 +34,10 @@ public class CustomSigil extends ScaledConstructEntity {
     private static final EntityDataAccessor<Integer> DATA_COOLDOWN =
             SynchedEntityData.defineId(CustomSigil.class, EntityDataSerializers.INT);
 
-    private static final EntityDataAccessor<Integer> LAST_MANA =
+    private static final EntityDataAccessor<Integer> MAX_MANA =
+            SynchedEntityData.defineId(CustomSigil.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Integer> COST =
             SynchedEntityData.defineId(CustomSigil.class, EntityDataSerializers.INT);
 
     public CustomSigil(EntityType<?> type, Level world) {
@@ -73,7 +70,8 @@ public class CustomSigil extends ScaledConstructEntity {
         this.entityData.define(DATA_SPELL, "");
         this.entityData.define(DATA_ONE_TIME, true);
         this.entityData.define(DATA_COOLDOWN, 0);
-        this.entityData.define(LAST_MANA, 0);
+        this.entityData.define(MAX_MANA, 0);
+        this.entityData.define(COST, 0);
     }
 
     public void setSpell(String spell){
@@ -100,12 +98,20 @@ public class CustomSigil extends ScaledConstructEntity {
         this.entityData.set(DATA_COOLDOWN, cooldown);
     }
 
-    public void setLastMana(int value){
-        this.entityData.set(LAST_MANA, value);
+    public void setMaxMana(int value){
+        this.entityData.set(MAX_MANA, value);
     }
 
-    public int getLastMana(){
-        return this.entityData.get(LAST_MANA);
+    public int getMaxMana(){
+        return this.entityData.get(MAX_MANA);
+    }
+
+    public void setCost(int value){
+        this.entityData.set(COST, value);
+    }
+
+    public int getCost(){
+        return this.entityData.get(COST);
     }
 
     @Override
@@ -117,12 +123,22 @@ public class CustomSigil extends ScaledConstructEntity {
 
         if (cooldown == 0) {
             List<LivingEntity> targets = EntityUtil.getLivingWithinRadius(getBbWidth() / 2, this.getX(), this.getY(), this.getZ(), this.level());
-            for (LivingEntity target : targets) {
-                SpellCreateContext context = new SpellCreateContext(level(), this.getCaster(), target);
-                // Important thing here
-                context.externalCast();
-                context.setLastExternalMana(this.getLastMana());
-                SpellCreator.spellCast(context, this.getSpell());
+            if (this.getCaster() != null) {
+                for (LivingEntity target : targets) {
+                    SpellCreateContext context = new SpellCreateContext(level(), this.getCaster(), target);
+                    // Important thing here
+                    context.setMaxMana(this.getMaxMana());
+                    context.setCost(getCost());
+                    SpellCreator.spellCast(context, this.getSpell());
+                }
+            }else{
+                for (LivingEntity target : targets) {
+                    SpellCreateContext context = new SpellCreateContext(level(), target);
+                    // Important thing here
+                    context.setMaxMana(this.getMaxMana());
+                    context.setCost(getCost());
+                    SpellCreator.spellCast(context, this.getSpell());
+                }
             }
             this.setCooldown(40);
             if (isOneTime()){

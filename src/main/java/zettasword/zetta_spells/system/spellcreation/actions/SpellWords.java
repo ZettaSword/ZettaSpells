@@ -30,7 +30,7 @@ public class SpellWords {
     public static final RegistryObject<SpellWord> SELF = regSpellWord(SelfWord::new);
     public static final RegistryObject<SpellWord> BLOCK_AREA = regSpellWord(BlockAreaWord::new);
     public static final RegistryObject<SpellWord> ENTITY_AREA = regSpellWord(EntityAreaWord::new);
-    //public static final RegistryObject<SpellWord> SIGIL = regSpellWord(SigilWord::new);
+    public static final RegistryObject<SpellWord> SIGIL = regSpellWord(SigilWord::new);
 
     // Actions
     public static final RegistryObject<SpellWord> APPLY_EFFECT = regSpellWord(ApplyEffectWord::new);
