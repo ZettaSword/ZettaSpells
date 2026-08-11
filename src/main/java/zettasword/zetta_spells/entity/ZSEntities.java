@@ -8,6 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.*;
+import zettasword.zetta_spells.entity.custom.ExplodeItemEntity;
 
 public class ZSEntities {
     // 1. Create the DeferredRegister for EntityTypes
@@ -83,6 +84,14 @@ public class ZSEntities {
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("custom_sigil")
+    );
+
+    public static final RegistryObject<EntityType<ExplodeItemEntity>> EXPLODE_ITEM_ENTITY = ENTITY_TYPES.register("explode_item_entity",
+            () -> EntityType.Builder.<ExplodeItemEntity>of(ExplodeItemEntity::new, MobCategory.MISC)
+                    .sized(2.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("explode_item_entity")
     );
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);

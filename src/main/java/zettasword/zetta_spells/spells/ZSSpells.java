@@ -29,7 +29,13 @@ public class ZSSpells {
     //1.4.0
     public static final RegistryObject<Spell> TURN_SPELLCASTER = SPELLS.register("turn_spellcaster", TurnSpellcaster::new);
     public static final RegistryObject<Spell> CUSTOM_PLAYER_SPELL = SPELLS.register("custom_player_spell", CustomPlayerSpell::new);
-/*
+
+    //1.6.0
+    public static final RegistryObject<Spell> EXPLODE_ITEM = SPELLS.register("explode_item", ExplodeItem::new);
+    public static final RegistryObject<Spell> CHARGE_CANDLE = SPELLS.register("charge_candle", ChargeCandle::new); // Candle spell that charges different candles and allows it to locate ores, mark entities and etc.
+    public static final RegistryObject<Spell> CREATE_SPIRIT = SPELLS.register("create_spirit", CreateSpirit::new); // Creates Spirit from Dust in offhand, it will be your new pet. It's unrestricted version of Remnant. Through Evolving it you can turn it different forms: Slime, Anime Girl(GoG integration) or etc.
+    
+    /*
     public static final RegistryObject<Spell> MAGIC_TURRET = SPELLS.register("magic_turret", () -> new ConstructSpell<>(MagicalTurretEntity::new, false).floor(false)
             .assignProperties(SpellProperties.builder()
                     .assignBaseProperties(SpellTiers.ADVANCED, Elements.MAGIC, SpellType.CONSTRUCT, SpellAction.POINT, 50, 10, 100)

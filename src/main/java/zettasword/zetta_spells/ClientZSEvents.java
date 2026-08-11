@@ -1,5 +1,6 @@
 package zettasword.zetta_spells;
 
+import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,6 +36,7 @@ public class ClientZSEvents {
        // event.registerEntityRenderer(ZSEntities.GRAVITATIONAL_PULL_ENTITY.get(), ZSNothingRender::new);
         event.registerEntityRenderer(ZSEntities.MAGIC_CHAINS.get(), HelixChainRenderer::new);
         event.registerEntityRenderer(ZSEntities.DEATH_VESSEL.get(), ZSNothingRender::new);
+        event.registerEntityRenderer(ZSEntities.EXPLODE_ITEM_ENTITY.get(), ItemEntityRenderer::new);
 
         // Block Entities
 

@@ -38,6 +38,7 @@
   "entity.zetta_spells.tenebria_will_sigil": "Tenebria Will Sigil",
   "entity.zetta_spells.tenebria_protection_sigil": "Tenebria Protection Sigil",
   "entity.zetta_spells.minion_rabbit": "Rabbit",
+  "entity.zetta_spells.explode_item_entity": "Exploding Item",
   "enchantment.zetta_spells.enhance_armament": "Enhance Armament",
   "enchantment.zetta_spells.enhance_armament.desc": "Enhances capabilities to harm and to break blocks.",
   "enchantment.zetta_spells.release_recollection": "Release Recollection",
@@ -101,6 +102,9 @@
 
   "spell.zetta_spells.custom_player_spell": "Incantation",
   "spell.zetta_spells.custom_player_spell.desc": "Spell made by someone. To create it - You must use Unfinished Spellbook, then prepare your spell using it, and once complete, you can bind your spell on workbench.",
+
+  "spell.zetta_spells.explode_item": "Explode Item",
+  "spell.zetta_spells.explode_item.desc": "Take any stacking item in other hand, like eggs, and use this spell to infuse it and place where you're looking, for some mischievous purposes!",
 
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
