@@ -141,7 +141,7 @@ public class SummonWord extends SpellWord {
                         SVar width = ctx.getMod("width");
                         SVar height = ctx.getMod("height");
                         if (width != null && height != null && consumeMana(ctx, (width.getInt() * 10)+(height.getInt() * 10)))
-                            scaled.setSize(width.getInt(), height.getInt());
+                            scaled.setBaseSize(width.getInt(), height.getInt());
                     }
                     summon = true;
                 }

@@ -1,7 +1,7 @@
 package zettasword.zetta_spells.items;
 
+import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.item.IManaItem;
-import com.binaris.wizardry.api.content.util.DrawingUtils;
 import com.binaris.wizardry.content.entity.living.Remnant;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -48,7 +48,7 @@ public class LanternOfKnowledge extends Item implements IManaItem {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return DrawingUtils.mix(0xff8bfe, 0x8e2ee4, (float) stack.getDamageValue());
+        return ClientUtils.mixColor(0xff8bfe, 0x8e2ee4, (float) stack.getDamageValue());
     }
 
     @Nonnull

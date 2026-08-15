@@ -3,7 +3,7 @@ package zettasword.zetta_spells.spells;
 import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.spell.SpellAction;
-import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.PlayerCastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.api.content.util.CastItemDataHelper;
@@ -152,7 +152,7 @@ public class CustomPlayerSpell extends Spell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.MASTER, Elements.MAGIC, SpellType.UTILITY, SpellAction.POINT_DOWN, 20, 0, 5)
+                .assignBaseProperties(SpellTiers.MASTER, Elements.MAGIC, SpellTypes.UTILITY, SpellAction.POINT_DOWN, 20, 0, 5)
                 .add(DefaultProperties.RANGE, 14F)
                 .build();
     }

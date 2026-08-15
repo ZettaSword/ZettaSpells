@@ -5,7 +5,6 @@ import com.binaris.wizardry.api.content.item.ICastItem;
 import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.util.CastItemDataHelper;
 import com.binaris.wizardry.client.SpellGUIDisplay;
-import com.binaris.wizardry.client.SpellHUDSkin;
 import com.binaris.wizardry.core.config.EBClientConfig;
 import com.binaris.wizardry.core.config.EBServerConfig;
 import com.binaris.wizardry.core.platform.Services;
@@ -34,17 +33,22 @@ public abstract class SpellGUIDisplayMixin {
     @Shadow
     private static final int SPELL_SWITCH_TIME = 4;
 
-    @Invoker("getSkin")
-    public static SpellHUDSkin getSkin(String key){
-        throw new AssertionError("Unimplemented");
-    }
-
     @Invoker("getFormattedSpellName")
     private static Component getFormattedSpellName(Spell spell, Player player, int cooldown) {
         throw new AssertionError("Unimplemented");
     }
 
-    // NOT the best way to do it, I'm kinda scared doing THIS
+    @Invoker("drawBackground")
+    private static void drawBackground(GuiGraphics guiGraphics, int x, int y, boolean flipX, boolean flipY, ResourceLocation icon, float cooldownBarProgress, boolean creativeMode, boolean jammed) {
+        throw new AssertionError("Unimplemented");
+    }
+
+    @Invoker("drawText")
+    private static void drawText(GuiGraphics guiGraphics, int x, int y, boolean flipX, boolean flipY, Component prevSpellName, Component spellName, Component nextSpellName, float animationProgress) {
+        throw new AssertionError("Unimplemented");
+    }
+
+        // NOT the best way to do it, I'm kinda scared doing THIS
     /**
      * @author ZettaSword
      * @reason Trying to allow rendering custom spell's names.
@@ -63,9 +67,6 @@ public abstract class SpellGUIDisplayMixin {
             flipX = flipX == ((mainHand ? player.getMainArm() : player.getMainArm().getOpposite()) == HumanoidArm.LEFT);
         }
 
-        SpellHUDSkin skin = getSkin("default");
-        if (skin == null) return;
-
         stack.pushPose();
 
         int x = flipX ? width : 0;
@@ -77,16 +78,18 @@ public abstract class SpellGUIDisplayMixin {
 
         if (textLayer) {
             float animationProgress = Math.signum(switchTimer) * ((SPELL_SWITCH_TIME - Math.abs(switchTimer) + partialTicks) / SPELL_SWITCH_TIME);
-
             // My changes
             Spell previous = ((ICastItem) wand.getItem()).getPreviousSpell(wand);
             Spell current = ((ICastItem) wand.getItem()).getCurrentSpell(wand);
             Spell next = ((ICastItem) wand.getItem()).getNextSpell(wand);
             // My changes
 
-            Component prevSpellName = getFormattedSpellName(previous, player, 0);
-            Component spellName = getFormattedSpellName(current, player, cooldown);
-            Component nextSpellName = getFormattedSpellName(next, player, 0);
+
+            Component prevSpellName = getFormattedSpellName(((ICastItem) wand.getItem()).getPreviousSpell(wand), player, 0);
+            Component spellName = getFormattedSpellName(((ICastItem) wand.getItem()).getCurrentSpell(wand), player, cooldown);
+            Component nextSpellName = getFormattedSpellName(((ICastItem) wand.getItem()).getNextSpell(wand), player, 0);
+
+
 
             // My changes
             int currentIndex = CastItemDataHelper.getCurrentSpellIndex(wand);
@@ -110,9 +113,7 @@ public abstract class SpellGUIDisplayMixin {
                     if (name != null) nextSpellName = Component.literal(name).withStyle(ChatFormatting.LIGHT_PURPLE);
                 }
             }
-
-            // My changes
-            skin.drawText(guiGraphics, x, y, flipX, flipY, prevSpellName, spellName, nextSpellName, animationProgress);
+            drawText(guiGraphics, x, y, flipX, flipY, prevSpellName, spellName, nextSpellName, animationProgress);
         } else {
             boolean discovered = true;
 
@@ -130,7 +131,7 @@ public abstract class SpellGUIDisplayMixin {
                 progress = maxCooldown == 0 ? 1 : (maxCooldown - (float) cooldown + partialTicks) / maxCooldown;
             }
 
-            skin.drawBackground(stack, x, y, flipX, flipY, icon, progress, player.isCreative(), player.hasEffect(EBMobEffects.ARCANE_JAMMER.get()));
+            drawBackground(guiGraphics, x, y, flipX, flipY, icon, progress, player.isCreative(), player.hasEffect(EBMobEffects.ARCANE_JAMMER.get()));
         }
 
         stack.popPose();

@@ -3,6 +3,7 @@ package zettasword.zetta_spells.spells;
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.content.spell.DefaultProperties;
@@ -60,7 +61,7 @@ public class Resurrect extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.MASTER, Elements.NECROMANCY, SpellType.MINION, SpellAction.POINT, 300, 20, 5)
+                .assignBaseProperties(SpellTiers.MASTER, Elements.NECROMANCY, SpellTypes.MINION, SpellAction.POINT, 300, 20, 5)
                 .add(DefaultProperties.RANGE, 14F)
                 .build();
     }

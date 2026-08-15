@@ -3,7 +3,7 @@ package zettasword.zetta_spells.spells;
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.item.ICastItem;
 import com.binaris.wizardry.api.content.spell.SpellAction;
-import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.content.spell.DefaultProperties;
@@ -78,7 +78,7 @@ public class ExplodeItem extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.FIRE, SpellType.ATTACK, SpellAction.POINT, 40, 0, 40)
+                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.FIRE, SpellTypes.ATTACK, SpellAction.POINT, 40, 0, 40)
                 .add(DefaultProperties.RANGE, 8F)
                 .build();
     }

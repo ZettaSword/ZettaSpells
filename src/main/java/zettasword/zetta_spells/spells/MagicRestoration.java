@@ -2,6 +2,7 @@ package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
@@ -38,7 +39,7 @@ public class MagicRestoration extends BuffSpell {
 
     @Override
     protected @NotNull SpellProperties properties() {
-        return SpellProperties.builder().assignBaseProperties(SpellTiers.ADVANCED, Elements.MAGIC, SpellType.BUFF, SpellAction.POINT_UP, 200, 60, 600)
+        return SpellProperties.builder().assignBaseProperties(SpellTiers.ADVANCED, Elements.MAGIC, SpellTypes.BUFF, SpellAction.POINT_UP, 200, 60, 600)
                 .add(BuffSpell.getEffectDurationProperty(ZSEffects.MAGIC_RESTORATION.get()), 1200)
                 .add(BuffSpell.getEffectStrengthProperty(ZSEffects.MAGIC_RESTORATION.get()), 0)
                 .build();

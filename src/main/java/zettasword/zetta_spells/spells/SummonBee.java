@@ -2,6 +2,7 @@ package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.content.spell.DefaultProperties;
@@ -35,7 +36,7 @@ public class SummonBee extends MinionSpell<Bee> {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.EARTH, SpellType.MINION, SpellAction.SUMMON, 40, 0, 60)
+                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.EARTH, SpellTypes.MINION, SpellAction.SUMMON, 40, 0, 60)
                 .add(DefaultProperties.MINION_LIFETIME, 1200)
                 .add(DefaultProperties.MINION_COUNT, 4)
                 .add(DefaultProperties.SUMMON_RADIUS, 3)

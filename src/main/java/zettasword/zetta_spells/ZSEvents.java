@@ -317,7 +317,7 @@ public class ZSEvents {
 
     public static void onPreCast(SpellCastEvent.Pre event){
         if (event.getCaster() instanceof  Player player){
-            if (event.getSource() != SpellCastEvent.Source.WAND && event.getSource() != SpellCastEvent.Source.SCROLL) return;
+            if (event.getSource() != SpellCastEvent.Sources.WAND && event.getSource() != SpellCastEvent.Sources.SCROLL) return;
             if (player.isCreative()) return;
             Spell spell = event.getSpell();
             SpellManagerData spellData = Services.OBJECT_DATA.getSpellManagerData(player);

@@ -1,7 +1,7 @@
 package zettasword.zetta_spells.entity.renderers;
 
+import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.entity.construct.MagicConstructEntity;
-import com.binaris.wizardry.api.content.util.DrawingUtils;
 import com.binaris.wizardry.core.AllyDesignation;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
@@ -66,7 +66,7 @@ public class ZSSigilRenderer extends EntityRenderer<MagicConstructEntity> {
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) entity.tickCount * this.rotationSpeed));
         }
 
-        float s = entity.getBbWidth() * DrawingUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
+        float s = entity.getBbWidth() * ClientUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
         poseStack.scale(s, s, s);
 
 

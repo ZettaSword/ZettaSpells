@@ -4,6 +4,7 @@ import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.item.ICastItem;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.api.content.util.MagicDamageSource;
@@ -64,7 +65,7 @@ public class Origin extends RaySpell {
             if (stack.getItem() instanceof ICastItem) return false;
             boolean flag = false;
             if (!ctx.world().isClientSide) {
-                if ((stack.getItem() == Items.BLAZE_POWDER || stack.getItem() == Items.FIREWORK_STAR) && !MagicDamageSource.isEntityImmune(EBDamageSources.FIRE, target)) {
+                if ((stack.getItem() == Items.BLAZE_POWDER || stack.getItem() == Items.FIREWORK_STAR)) {
                     target.setSecondsOnFire(30);
                     MagicDamageSource.causeMagicDamage(ctx.caster(), target, 4, EBDamageSources.FIRE);
                     flag=true;
@@ -133,7 +134,7 @@ public class Origin extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.MAGIC, SpellType.ATTACK, SpellAction.POINT, 30, 10, 40)
+                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.MAGIC, SpellTypes.ATTACK, SpellAction.POINT, 30, 10, 40)
                 .add(DefaultProperties.RANGE, 14F)
                 .build();
     }

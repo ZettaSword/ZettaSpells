@@ -1,6 +1,6 @@
 package zettasword.zetta_spells.entity.renderers;
 
-import com.binaris.wizardry.api.content.util.DrawingUtils;
+import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.core.AllyDesignation;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
@@ -58,7 +58,7 @@ public class MagicalTurretEntityRenderer extends EntityRenderer<MagicalTurretEnt
         float f6 = 1.0F;  // width
         float f7 = 0.5F;  // offset X
         float f8 = 0.5F;  // offset Y
-        float s = entity.getBbWidth() * DrawingUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
+        float s = entity.getBbWidth() * ClientUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         Tesselator tessellator = Tesselator.getInstance();

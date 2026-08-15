@@ -46,9 +46,7 @@ public class GoldenAsDiamondItem extends Item {
         double range = 14;
         Vec3 look = player.getLookAngle();
         Vec3 origin = new Vec3(player.getX(), player.getY() + (double)player.getEyeHeight() - (double)0.25F, player.getZ());
-        if (level.isClientSide && ClientUtils.isFirstPerson(player)) {
-            origin = origin.add(look.scale(1.2));
-        }
+
         Vec3 endpoint = origin.add(look.scale(range));
         HitResult rayTrace = RayTracer.rayTrace(level, player, origin, endpoint, 0.0F, false, Entity.class, RayTracer.ignoreEntityFilter(player));
         if (rayTrace instanceof EntityHitResult entityHit) {

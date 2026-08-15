@@ -1,9 +1,9 @@
 package zettasword.zetta_spells.items.spellbook;
 
+import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.item.IWorkbenchItem;
 import com.binaris.wizardry.api.content.spell.Spell;
-import com.binaris.wizardry.api.content.util.DrawingUtils;
 import com.binaris.wizardry.api.content.util.RegistryUtils;
 import com.binaris.wizardry.api.content.util.WorkbenchUtils;
 import com.binaris.wizardry.content.item.SpellBookItem;
@@ -143,7 +143,7 @@ public class FinishedSpellbookItem extends SpellBookItem implements IManaItem, I
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return DrawingUtils.mix(16747518, 9318116, (float)stack.getDamageValue());
+        return ClientUtils.mixColor(16747518, 9318116, (float)stack.getDamageValue());
     }
 
     public int getMana(ItemStack stack) {

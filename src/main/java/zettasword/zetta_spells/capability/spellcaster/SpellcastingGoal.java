@@ -173,8 +173,7 @@ public class SpellcastingGoal extends Goal {
             boolean shouldStop = distanceSq > (double) this.maxAttackDistance
                     || !targetIsVisible
                     || WizardryEventBus.getInstance().fire(new SpellCastEvent.Tick(
-                    SpellCastEvent.Source.NPC, continuousSpell, attacker,
-                    this.spellContext.getModifiers(), currentTick))
+                    SpellCastEvent.Sources.NPC, continuousSpell, ctx))
                     || !continuousSpell.cast(ctx)
                     || this.continuousSpellTimer == 0;
 
@@ -186,8 +185,7 @@ public class SpellcastingGoal extends Goal {
             } else if (currentTick == 1) {
                 // First tick of continuous cast completed
                 WizardryEventBus.getInstance().fire(new SpellCastEvent.Post(
-                        SpellCastEvent.Source.NPC, continuousSpell, attacker,
-                        this.spellContext.getModifiers()));
+                        SpellCastEvent.Sources.NPC, continuousSpell, ctx));
             }
 
         }
@@ -231,13 +229,14 @@ public class SpellcastingGoal extends Goal {
     private boolean attemptCastSpell(Spell spell) {
         SpellModifiers modifiers = this.spellContext.getModifiers();
 
+        EntityCastContext ctx = new EntityCastContext(
+                attacker.level(), attacker, InteractionHand.MAIN_HAND, 0, target, modifiers);
+
         if (WizardryEventBus.getInstance().fire(new SpellCastEvent.Pre(
-                SpellCastEvent.Source.NPC, spell, attacker, modifiers))) {
+                SpellCastEvent.Sources.NPC, spell, ctx))) {
             return false;
         }
 
-        EntityCastContext ctx = new EntityCastContext(
-                attacker.level(), attacker, InteractionHand.MAIN_HAND, 0, target, modifiers);
 
         if (!spell.cast(ctx)) {
             return false;
@@ -246,7 +245,7 @@ public class SpellcastingGoal extends Goal {
         // Handle instant and continuous spells
         if (spell.isInstantCast()) {
             WizardryEventBus.getInstance().fire(new SpellCastEvent.Post(
-                    SpellCastEvent.Source.NPC, spell, attacker, modifiers));
+                    SpellCastEvent.Sources.NPC, spell, ctx));
             this.cooldown = this.baseCooldown + spell.getCooldown();
 
             // Send network packet for visual sync

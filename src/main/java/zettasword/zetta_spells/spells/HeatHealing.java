@@ -1,7 +1,7 @@
 package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.content.spell.SpellAction;
-import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
@@ -56,6 +56,6 @@ public class HeatHealing extends BuffSpell {
     }
 
     protected @NotNull SpellProperties properties() {
-        return SpellProperties.builder().assignBaseProperties(SpellTiers.APPRENTICE, Elements.FIRE, SpellType.ALTERATION, SpellAction.IMBUE, 20, 50, 50).add(DefaultProperties.HEALTH, 6.0F).add(BuffSpell.getEffectDurationProperty(ZSEffects.HEAT.get()), 15*20).add(BuffSpell.getEffectStrengthProperty(ZSEffects.HEAT.get()), 0).build();
+        return SpellProperties.builder().assignBaseProperties(SpellTiers.APPRENTICE, Elements.FIRE, SpellTypes.ALTERATION, SpellAction.IMBUE, 20, 50, 50).add(DefaultProperties.HEALTH, 6.0F).add(BuffSpell.getEffectDurationProperty(ZSEffects.HEAT.get()), 15*20).add(BuffSpell.getEffectStrengthProperty(ZSEffects.HEAT.get()), 0).build();
     }
 }

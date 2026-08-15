@@ -49,15 +49,12 @@ public class RayWord extends SpellWord {
         Level world = ctx.world();
         Vec3 look = caster.getLookAngle();
         Vec3 origin = new Vec3(caster.getX(), caster.getY() + (double)caster.getEyeHeight() - (double)0.25F, caster.getZ());
-        if (world.isClientSide && ClientUtils.isFirstPerson(caster)) {
-            origin = origin.add(look.scale(1.2));
-        }
 
         Vec3 targetPosClient = null;
 
         Vec3 endpoint = origin.add(look.scale(range));
         HitResult rayTrace = RayTracer.rayTrace(world, caster, origin, endpoint, 0.0F, false, Entity.class,
-                ctx.getMod("ignoreliving",false).getBoolean() ? EntityUtil::isLiving : RayTracer.ignoreEntityFilter(caster));
+                ctx.getMod("ignoreliving",false).getBoolean() ? (entity) -> entity instanceof LivingEntity : RayTracer.ignoreEntityFilter(caster));
 
         // So caster can't get chosen.
         if (rayTrace.getType() == HitResult.Type.MISS){

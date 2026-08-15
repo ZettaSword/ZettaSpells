@@ -4,6 +4,7 @@ import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.item.ICastItem;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellType;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.content.spell.DefaultProperties;
@@ -65,7 +66,7 @@ public class ReplaceArmor extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.NECROMANCY, SpellType.UTILITY, SpellAction.POINT, 10,  0, 20)
+                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.NECROMANCY, SpellTypes.UTILITY, SpellAction.POINT, 10,  0, 20)
                 .add(DefaultProperties.RANGE, 14F)
                 .build();
     }
