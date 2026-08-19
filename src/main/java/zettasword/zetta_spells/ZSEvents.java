@@ -232,7 +232,7 @@ public class ZSEvents {
 
     private static final String TAG_RESURRECTED = "zetta_spells:no_drop";
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
+    //@OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity dyingEntity = event.getEntity();
@@ -261,7 +261,7 @@ public class ZSEvents {
         }
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
+   // @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
