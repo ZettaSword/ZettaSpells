@@ -19,9 +19,13 @@ import com.binaris.wizardry.setup.registries.EBItems;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -59,14 +63,32 @@ public class TurnMinion extends RaySpell {
     @Override
     protected boolean onEntityHit(CastContext ctx, EntityHitResult entityHit, Vec3 origin) {
         if (entityHit.getEntity() instanceof Mob minion && (entityHit.getEntity() instanceof Enemy || entityHit.getEntity() instanceof NeutralMob)){
+            // If creative
             if (ctx.caster() instanceof Player player && player.isCreative()){
                 if (!ctx.world().isClientSide){
                     return turnMinion(ctx.caster(), ctx.modifiers(), minion);
+                }else{
+                    FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect"));
+                    if (fx != null){
+                        EntityEffect executor = new EntityEffect(fx, ctx.world(), minion, EntityEffect.AutoRotate.NONE);
+                        executor.setForcedDeath(false);
+                        executor.setAllowMulti(true);
+                        executor.start();
+                    }
                 }
             }
+            // If not
             if (minion.getHealth() > ctx.caster().getHealth()) return false;
             if (!ctx.world().isClientSide){
                 return turnMinion(ctx.caster(), ctx.modifiers(), minion);
+            }else{
+                FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect"));
+                if (fx != null){
+                    EntityEffect executor = new EntityEffect(fx, ctx.world(), minion, EntityEffect.AutoRotate.NONE);
+                    executor.setForcedDeath(false);
+                    executor.setAllowMulti(true);
+                    executor.start();
+                }
             }
             return true;
         }

@@ -7,14 +7,17 @@ import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.content.spell.DefaultProperties;
 import com.binaris.wizardry.content.spell.abstr.BuffSpell;
-import com.binaris.wizardry.setup.registries.EBItems;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 
+import com.lowdragmc.photon.client.fx.BlockEffect;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.mob_effects.HeatMobEffect;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
@@ -34,19 +37,42 @@ public class HeatHealing extends BuffSpell {
 
     protected boolean applyEffects(CastContext ctx, LivingEntity caster) {
         int bonusAmplifier = getStandardBonusAmplifier(ctx.modifiers().get("potency"));
-        if (caster.getHealth() < caster.getMaxHealth() && caster.getHealth() > 0.0F) {
+        if ((caster.getHealth() < caster.getMaxHealth() && caster.getHealth() > 0.0F)) {
             float excessHealth = caster.getHealth() + (Float)this.property(DefaultProperties.HEALTH) * ctx.modifiers().get("potency") - caster.getMaxHealth();
-            if (excessHealth > 0.0F && caster instanceof Player) {
-                if (!ctx.world().isClientSide())
-                    caster.addEffect(new MobEffectInstance(ZSEffects.HEAT.get(), ZSEffects.HEAT.get().isInstantenous() ? 1 : (int)((float) this.property(getEffectDurationProperty(ZSEffects.HEAT.get())) * ctx.modifiers().get(SpellModifiers.DURATION)), (Integer)this.property(getEffectStrengthProperty(ZSEffects.HEAT.get())) + bonusAmplifier, false, true));
-                burn(caster);
+            if (caster instanceof Player) {
+                if (excessHealth > 0.0F) {
+                    if (!ctx.world().isClientSide())
+                        caster.addEffect(new MobEffectInstance(ZSEffects.HEAT.get(), ZSEffects.HEAT.get().isInstantenous() ? 1 : (int) ((float) this.property(getEffectDurationProperty(ZSEffects.HEAT.get())) * ctx.modifiers().get(SpellModifiers.DURATION)), (Integer) this.property(getEffectStrengthProperty(ZSEffects.HEAT.get())) + bonusAmplifier, false, true));
+                    if (ctx.world().isClientSide) {
+                        FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
+                        if (fx != null) {
+                            EntityEffect executor = new EntityEffect(fx, ctx.world(), caster, EntityEffect.AutoRotate.NONE);
+                            executor.setForcedDeath(false);
+                            executor.setAllowMulti(true);
+                            executor.start();
+                        }
+                    }
+                    burn(caster);
+                }else{
+                    if (caster.getHealth() <= 0.0F) return false;
+                    if (ctx.world().isClientSide()) {
+                        caster.addEffect(new MobEffectInstance(ZSEffects.HEAT.get(), ZSEffects.HEAT.get().isInstantenous() ? 1 : (int) ((float) this.property(getEffectDurationProperty(ZSEffects.HEAT.get())) * ctx.modifiers().get(SpellModifiers.DURATION)), (Integer) this.property(getEffectStrengthProperty(ZSEffects.HEAT.get())) + bonusAmplifier, false, true));
+                        if (ctx.world().isClientSide){
+                            FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
+                            if (fx != null){
+                                EntityEffect executor = new EntityEffect(fx, ctx.world(), caster, EntityEffect.AutoRotate.NONE);
+                                executor.setForcedDeath(false);
+                                executor.setAllowMulti(true);
+                                executor.start();
+                            }
+                        }
+                    }
+                    heal(caster, (Float)this.property(DefaultProperties.HEALTH) * ctx.modifiers().get("potency", 1.0F));
+                }
             }
             return true;
         } else {
-            if (caster.getHealth() <= 0.0F) return false;
-            if (!ctx.world().isClientSide())
-                caster.addEffect(new MobEffectInstance(ZSEffects.HEAT.get(), ZSEffects.HEAT.get().isInstantenous() ? 1 : (int)((float) this.property(getEffectDurationProperty(ZSEffects.HEAT.get())) * ctx.modifiers().get(SpellModifiers.DURATION)), (Integer)this.property(getEffectStrengthProperty(ZSEffects.HEAT.get())) + bonusAmplifier, false, true));
-            burn(caster);
+            //burn(caster);
             return false;
         }
     }

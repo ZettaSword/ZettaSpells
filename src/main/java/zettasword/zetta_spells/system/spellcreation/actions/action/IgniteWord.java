@@ -1,7 +1,12 @@
 package zettasword.zetta_spells.system.spellcreation.actions.action;
 
 import com.binaris.wizardry.api.content.util.BlockUtil;
+import com.lowdragmc.photon.client.fx.BlockEffect;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -34,14 +39,33 @@ public class IgniteWord extends TargetSpellWord {
                 if (world.isEmptyBlock(relativePos)){
                     if (!world.isClientSide && BlockUtil.canPlaceBlock(ctx.getCaster(), world, relativePos) && consumeMana(ctx, 10)) {
                         world.setBlockAndUpdate(relativePos, Blocks.FIRE.defaultBlockState());
+                    }else{
+                        if (ctx.world().isClientSide){
+                            FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
+                            if (fx != null){
+                                BlockEffect executor = new BlockEffect(fx, ctx.world(), relativePos.above());
+                                executor.setForcedDeath(false);
+                                executor.setAllowMulti(true);
+                                executor.start();
+                            }
+                        }
                     }
                 }
                 ctx.addCooldown(1);
             }
         }
-        if (target.getTargetEntity() != null && !ctx.world().isClientSide){
-            if (target.getTargetEntity() instanceof LivingEntity living && consumeMana(ctx, 10)) {
+        if (target.getTargetEntity() != null && target.getTargetEntity() instanceof LivingEntity living){
+            if (!ctx.world().isClientSide && consumeMana(ctx, 10)) {
                 living.setSecondsOnFire(ctx.getMod("duration", 5).getInt());
+            }
+            if (ctx.world().isClientSide){
+                FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
+                if (fx != null){
+                    EntityEffect executor = new EntityEffect(fx, ctx.world(), living, EntityEffect.AutoRotate.NONE);
+                    executor.setForcedDeath(false);
+                    executor.setAllowMulti(true);
+                    executor.start();
+                }
             }
         }
         return false;

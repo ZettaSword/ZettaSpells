@@ -129,6 +129,7 @@ repositories {
     }
 
     maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven { url = "https://maven.firstdark.dev/snapshots" }
 }
 
 dependencies {
@@ -152,6 +153,10 @@ dependencies {
     //implementation fg.deobf("curse.maven:electroblobs-wizardry-redux-1405790:7940266")
     //implementation fg.deobf("curse.maven:electroblobs-wizardry-redux-1405790:8205805")
     implementation fg.deobf("curse.maven:electroblobs-wizardry-redux-1405790:8629140")
+
+    //implementation("com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all")
+    implementation fg.deobf("curse.maven:photon-871522:7501597")
+    implementation fg.deobf("curse.maven:ldlib-626676:8430516")
 
 
 

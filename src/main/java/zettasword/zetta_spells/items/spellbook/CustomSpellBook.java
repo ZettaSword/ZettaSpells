@@ -3,6 +3,7 @@ package zettasword.zetta_spells.items.spellbook;
 import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.util.RegistryUtils;
 import com.binaris.wizardry.content.item.SpellBookItem;
+import com.binaris.wizardry.setup.registries.EBItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

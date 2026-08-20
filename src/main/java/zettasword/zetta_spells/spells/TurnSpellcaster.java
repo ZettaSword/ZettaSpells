@@ -15,6 +15,10 @@ import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.Spells;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.BlockHitResult;
@@ -59,6 +63,15 @@ public class TurnSpellcaster extends RaySpell {
     @Override
     protected boolean onEntityHit(CastContext ctx, EntityHitResult entityHit, Vec3 origin) {
         if (entityHit.getEntity() instanceof Mob minion){
+            if (ctx.world().isClientSide){
+                FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect"));
+                if (fx != null){
+                    EntityEffect executor = new EntityEffect(fx, ctx.world(), minion, EntityEffect.AutoRotate.NONE);
+                    executor.setForcedDeath(false);
+                    executor.setAllowMulti(true);
+                    executor.start();
+                }
+            }
             return turnSpellcaster(ctx.caster(), ctx.modifiers(), minion);
         }
         return false;
