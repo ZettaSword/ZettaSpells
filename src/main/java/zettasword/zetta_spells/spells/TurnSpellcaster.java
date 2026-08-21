@@ -64,7 +64,7 @@ public class TurnSpellcaster extends RaySpell {
     protected boolean onEntityHit(CastContext ctx, EntityHitResult entityHit, Vec3 origin) {
         if (entityHit.getEntity() instanceof Mob minion){
             if (ctx.world().isClientSide){
-                FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect"));
+                FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect_golden"));
                 if (fx != null){
                     EntityEffect executor = new EntityEffect(fx, ctx.world(), minion, EntityEffect.AutoRotate.NONE);
                     executor.setForcedDeath(false);
