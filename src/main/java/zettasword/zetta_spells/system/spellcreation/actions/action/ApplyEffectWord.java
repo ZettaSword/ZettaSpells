@@ -3,6 +3,9 @@ package zettasword.zetta_spells.system.spellcreation.actions.action;
 import com.binaris.wizardry.WizardryMainMod;
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -76,6 +79,13 @@ public class ApplyEffectWord extends TargetSpellWord {
                 }
                 // Client side: spawn visual feedback
                 if (ctx.world().isClientSide && ctx.canCreateFx()) {
+                    FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect_golden"));
+                    if (fx != null){
+                        EntityEffect executor = new EntityEffect(fx, ctx.world(), living, EntityEffect.AutoRotate.NONE);
+                        executor.setForcedDeath(false);
+                        executor.setAllowMulti(true);
+                        executor.start();
+                    }
                     ParticleBuilder.create(EBParticles.BUFF)
                             .entity(living)
                             .color(mobEffect.getColor())

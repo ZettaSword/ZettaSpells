@@ -1,0 +1,177 @@
+{
+  "item.zetta_spells.unfinished_spellbook": "未完成的法术书",
+  "item.zetta_spells.finished_spellbook": "法术书",
+  "item.zetta_spells.finished_spellbook_fail": "法力不足，无法施放法术！",
+  "item.zetta_spells.finished_spellbook_copy": "法术已复制到剪切板上(Clipboard)!",
+  "item.zetta_spells.finished_spellbook_added": "法术已绑定到Chant上。",
+  "item.zetta_spells.golden_astral_diamond": "金质星芒宝钻",
+  "item.zetta_spells.golden_astral_diamond.desc": "在任何仆从身上使用，使其寿命延长至永恒。",
+  "item.zetta_spells.necromancer_staff": "死灵法师魔杖",
+  "item.zetta_spells.necromancer_staff.desc": "命令你的仆从去做某事。",
+  "item.zetta_spells.necromancer_staff.use1": "Master！待在原地。",
+  "item.zetta_spells.necromancer_staff.use2": " Master！跟随着你",
+  "item.zetta_spells.necromancer_staff.mode.command": "模式：命令仆从",
+  "item.zetta_spells.necromancer_staff.mode.equip": "模式：装备仆从",
+  "item.zetta_spells.necromancer_staff.mode.toggle": "按住Shift键右键切换模式",
+  "item.zetta_spells.necromancer_staff.mode.command.active": "魔杖设置：命令模式",
+  "item.zetta_spells.necromancer_staff.mode.equip.active": "魔杖设置：装备模式",
+  "item.zetta_spells.necromancer_staff.equip.success": "装备到仆从!",
+  "item.zetta_spells.necromancer_staff.equip.empty": "手持物品以装备！",
+  "item.zetta_spells.necromancer_staff.equip.change_name": "仆从名称已更改",
+  "item.zetta_spells.lantern_of_knowledge": "知识灯塔",
+  "item.zetta_spells.lantern_of_knowledge.desc": "收集遗灵(Remnants)能量来为它充能。一旦充能——你在世界各地找到的咒语词牌。",
+  "item.zetta_spells.lantern_of_knowledge.charged": "咒语词准备好了...",
+  "item.zetta_spells.lantern_of_knowledge.charge_up": "魔力值：%s / 5",
+  "item.zetta_spells.lantern_of_knowledge.discovered": "发现咒语词！",
+  "block.zetta_spells.passable_block": "魔法屏障符文",
+  "block.zetta_spells.ore_conversion_block": "矿石转化符文",
+  "block.zetta_spells.levitation_sigil_block": "悬浮符咒符文",
+  "block.zetta_spells.advanced_levitation_sigil_block": "进阶悬浮符咒符文",
+  "block.zetta_spells.white_block": "白色物质",
+  "screen.zetta_spells.writer": "咒语",
+  "gui.zetta_spells.textbox": "在这里写咒语",
+  "gui.zetta_spells.textbox_name": "法术书",
+  "gui.zetta_spells.textbox1": "名称",
+  "gui.zetta_spells.textbox2": "咒语",
+  "gui.zetta_spells.confirm": "确认",
+  "gui.narration.edit_box.multiline": "多行文本编辑器。使用箭头键进行导航，Ctrl+C/V 进行复制/粘贴，鼠标滚轮进行滑动。",
+  "entity.zetta_spells.tenebria_will_sigil": "Tenebria意志标记",
+  "entity.zetta_spells.tenebria_protection_sigil": "Tenebria保护标记",
+  "entity.zetta_spells.minion_rabbit": "兔子",
+  "entity.zetta_spells.explode_item_entity": "物品爆炸",
+  "enchantment.zetta_spells.enhance_armament": "武器增强",
+  "enchantment.zetta_spells.enhance_armament.desc": "增强了对物体造成伤害和破坏方块的能力。",
+  "enchantment.zetta_spells.release_recollection": "Release Recollection",
+  "enchantment.zetta_spells.release_recollection.desc": "Releases memories of what item knows.",
+  "enchantment.zetta_spells.frost_aspect": "冰霜",
+  "enchantment.zetta_spells.frost_aspect.desc": "每次命中使实体冻结10秒。",
+  "race.cooldown": "你需要等待，直到再做一次。",
+  "spell_knowledge.learning": "学习法术中，进度：%s %%",
+  "spell_knowledge.learned": "法术学习完成",
+
+  "spellbook.byAuthor": "法术书，著 %s",
+  "spellbook.shift_for_details": "按下Shift查看咒语",
+
+  "spell.zetta_spells.heat_healing": "炽热火疗",
+  "spell.zetta_spells.heat_healing.desc": "治疗施变效果显著。如果施法者生命值过高，火焰将开始燃烧，并在身后留下火焰。",
+
+  "spell.zetta_spells.magic_restoration": "魔力恢复",
+  "spell.zetta_spells.magic_restoration.desc": "在施法者身上创建一个符文，修复所持的一件物品的法力。它将法力的属性转变为无属性，然后将其转变为物品的法力，进行转移。",
+
+  "spell.zetta_spells.magic_barrier": "魔法屏障",
+  "spell.zetta_spells.magic_barrier.desc": "在方块上绘制小型符文，使邪恶生物无法穿越，但其他生物都可以。",
+
+  "spell.zetta_spells.turn_minion": "转变仆从",
+  "spell.zetta_spells.turn_minion.desc": "降低任何怪物的生命值至低于你的生命值，然后使用这个法术将其暂时变成你的仆从。之后对仆从使用金质星芒宝钻，使其效果变为无限时长。",
+
+  "spell.zetta_spells.ore_conversion": "矿石转化",
+  "spell.zetta_spells.ore_conversion.desc": "在方块上绘制小型符文，它能将扔进其中的矿石转换成另一种。9个煤炭=1个铁锭，6个铁锭=1个绿宝石. 24个绿宝石=一个钻石，64个钻石=1个星芒宝钻",
+
+  "spell.zetta_spells.levitation_sigil": "悬浮符咒",
+  "spell.zetta_spells.levitation_sigil.desc": "在方块上绘制小型符文，使生物向上悬浮。",
+
+  "spell.zetta_spells.advanced_levitation_sigil": "大师级悬浮符咒",
+  "spell.zetta_spells.advanced_levitation_sigil.desc": "在方块上绘制小型符文，将生物体送向天空。这是魔法世界中高级的法术水平，能够对生物体产生强大的效果。",
+
+  "spell.zetta_spells.resurrect": "复活",
+  "spell.zetta_spells.resurrect.desc": "因为这份手稿，你可以让一个死人复活成为你的仆从，但时间有限。除非你使用金质星芒宝钻。一些强大的灵魂无法被复活！",
+
+  "spell.zetta_spells.hex": "诅咒",
+  "spell.zetta_spells.hex.desc": "夜行骑士写下了这个咒语，它能将目标所有的负面效果转化为直接魔法伤害。目标身上的负面效果越多，诅咒的效果就越好！",
+
+  "spell.zetta_spells.summon_rabbit": "召唤兔子",
+  "spell.zetta_spells.summon_rabbit.desc": "你召唤了一些兔子，你可能会说，这些兔子非常棒。它们可以充当你的仆从。",
+
+  "spell.zetta_spells.origin": "起源",
+  "spell.zetta_spells.origin.desc": "在你敌人身上召唤起源，如果你在潜行，则在你身上召唤，根据你所持物品的不同会产生不同的效果！",
+
+  "spell.zetta_spells.summon_bee": "召唤蜜蜂",
+  "spell.zetta_spells.summon_bee.desc": "你召唤蜜蜂，让它们可以与你在一起，对抗你的敌人！",
+
+  "spell.zetta_spells.explosion": "爆炸",
+  "spell.zetta_spells.explosion.desc": "在指定地点引发爆炸的法术！",
+
+  "spell.zetta_spells.pull": "吸引",
+  "spell.zetta_spells.pull.desc": "把实体吸引到你身边……但不确定你是否想吸引僵尸。",
+
+  "spell.zetta_spells.summon_warden": "召唤坚守者",
+  "spell.zetta_spells.summon_warden.desc": "从深渊召唤坚守者来为你而战！",
+
+  "spell.zetta_spells.turn_spellcaster": "转换施法",
+  "spell.zetta_spells.turn_spellcaster.desc": "把怪物变成施法者！……我觉得对其他人使用它是个坏主意。",
+
+  "spell.zetta_spells.custom_player_spell": "自定义咒语",
+  "spell.zetta_spells.custom_player_spell.desc": "由某人制作的咒语。要创造它 - 你必须使用未完成的魔法书，然后用它准备你的咒语，一旦完成，你就可以在工坊中绑定你的咒语。",
+
+  "spell.zetta_spells.explode_item": "物品爆炸",
+  "spell.zetta_spells.explode_item.desc": "拿起副手上的任何堆叠物品，比如鸡蛋，然后使用这个咒语将其注入并放置在你所看的地方，出于一些恶作剧的目的！",
+
+  "effect.zetta_spells.undead": "亡灵祝福",
+  "effect.zetta_spells.undead.desc": "来自Tenebria的祝福，赋予亡灵暂时的生命，使所有亡灵变得被动。",
+
+  "effect.zetta_spells.heat": "过热",
+  "effect.zetta_spells.heat.desc": "当治疗者使用炽热火疗进行过量治疗时会发生的情况。",
+
+  "effect.zetta_spells.magic_restoration": "魔力恢复",
+  "effect.zetta_spells.magic_restoration.desc": "恢复施法者主手/副手的法力值。",
+
+  "item.zetta_spells.spellword_item": "咒语词牌",
+
+  "spellword.zetta_spells.general_item_desc": "制作未完成的法术书，并使用这个词创造你自己的法术。",
+  "spellword.zetta_spells.general_item_not_discovered": "要发现这个咒语词，请使用知识灯塔，用5个遗灵(Remnants)为其充能，然后将其用于这个石板上。",
+
+  "spellword.zetta_spells.ray": "Ray",
+  "spellword.zetta_spells.ray.description": "向目标方向发射一道魔法射线，它将设定法术的目标，可以是实体或方块。支持过滤器。\n示例咒语：'Ray break!' \n'Number range 30. Ray break!'",
+
+  "spellword.zetta_spells.self": "Self",
+  "spellword.zetta_spells.self.description": "将施法目标切换为法术的自身目标。\n示例咒语：'Ray apply slowness, self apply speed.'",
+
+  "spellword.zetta_spells.apply_effect": "Apply",
+  "spellword.zetta_spells.apply_effect.description": "施加一种你选择的状态效果，在你的法术中只需写'apply speed'即可获得速度。\n示例咒语：'Apply speed. Num range 30, Ray. Num duration 30, num amplification 2. Apply decay!'",
+
+  "spellword.zetta_spells.cast_spell": "Cast",
+  "spellword.zetta_spells.cast_spell.description": "你很容易施法咒语！示例咒语：'Cast magic_missile!'",
+
+  "spellword.zetta_spells.break_block": "Break",
+  "spellword.zetta_spells.break_block.description": "破坏目标方块。示例咒语：'Break!'",
+
+  "spellword.zetta_spells.block_area": "Affect Block Area",
+  "spellword.zetta_spells.block_area.description": "在指定区域内标记方块作为法术的目标。\n示例咒语：'Num range 15 Ray. Num area 4, affect block area, break!'",
+
+  "spellword.zetta_spells.entity_area": "Affect Entity Area",
+  "spellword.zetta_spells.entity_area.description": "在指定区域内标记实体作为法术的目标。支持过滤。\n示例咒语：'Num area 15, affect entity area! Num duration 30 Apply decay!' \n 'Num area 10 affect entity area, apply speed.'",
+
+  "spellword.zetta_spells.summon": "Summon",
+  "spellword.zetta_spells.summon.description": "你可以用这个词召唤几乎任何生物，不过你需要定义生命值、攻击、次数、持续时间。（你也可以定义名字）\n示例咒语：'Ray, number duration 15, num health 10, num attack 4, num count 1, summon zombie'\n召唤遗灵：'Number duration 15, num health 5, num attack 5, num count 5. Num shift 2, shift position up. Summon remnant!'",
+
+  "spellword.zetta_spells.filter": "Filter",
+  "spellword.zetta_spells.filter.description": "允许你过滤法术的目标，使其不同。应在使用形状词之前。支持：普通生物(living)，亡灵生物(undead)，无(none)。\n示例咒语：'Filter undead, num area 15 affect entity area, apply decay.'",
+
+  "spellword.zetta_spells.if": "If",
+  "spellword.zetta_spells.if.description": "定义一个在某些东西没有对齐时停止咒语的东西。你可以使用';'来分割咒语成片段。在示例咒语中，有两个片段。1个片段(Fragment) = 1个咒语(Spell)。\n支持：潜行(sneaking)、疾跑(sprinting)、光照(light)。\n示例咒语：'If sneaking ray apply levitation; If not sneaking apply levitation'",
+
+  "spellword.zetta_spells.shift_pos": "Shift Position",
+  "spellword.zetta_spells.shift_pos.description": "允许你相对于施法者移动当前第一个位置（通常是一个施法者位置或射线投射的目标位置）。你可以将其移动到：后面，前面，左边，右边，下面，上面，以及查看（查看基本上是你正在看向的东西）。\n示例咒语：'Ray break! Num shift 1 shift position forth break, shift position forth break.'\n隧穿术：'Ray break! Num shift 1 shift position up break, shift position right break, shift pos down break shift pos down break, shift pos left break, shift position left break, shift position up break shift position up break.'",
+
+  "spellword.zetta_spells.place_block": "Place",
+  "spellword.zetta_spells.place_block.description": "将方块放置到目标位置，你必须用另一只手握住它。\n示例咒语：'If not sneaking Num range 100, truth ignoreliving true ray! Shift position direction, place; If sneaking Num range 100, truth ignoreliving true, ray, break!'",
+
+  "spellword.zetta_spells.information": "Information",
+  "spellword.zetta_spells.information.description": "向您展示关于世界的信息！这个世界上有两种东西 - 块和实体。 \n示例咒语：'Ray info!'",
+
+  "spellword.zetta_spells.ignite": "Ignite",
+  "spellword.zetta_spells.ignite.description": "点燃目标方块或实体。\n示例咒语：'Ray ignite!'\n火焰屏障：'Apply fire_resistance, num area 5 affect block area, ignite!'",
+
+  "spellword.zetta_spells.modify_block": "Modify Block",
+  "spellword.zetta_spells.modify_block.description": "允许你修改周围方块的一些状态，你可以使用单词'info'来学习这些，你也可以定义数值型的。\n示例咒语：'Ray modify block lit'（红石灯的示例用法）",
+
+  "spellword.zetta_spells.turn_fx": "Turn Fx",
+  "spellword.zetta_spells.turn_fx.description": "通常会移除法术的视觉和音频输出，使其更加安静。可以是：On/Off, True/False, Yes/No。示例咒语：'Turn fx off, Ray ignite!'",
+
+  "spellword.zetta_spells.teleport": "Teleport",
+  "spellword.zetta_spells.teleport.description": "允许你将自己或他人传送到不同的位置。使用vec/vector/coordinates 'vector target x y z'。\n示例咒语：'Vec target 0 5 0, Teleport!'\n传送其他人：'Vec target 0 5 0, Ray, Teleport!'",
+
+  "spellword.zetta_spells.sigil": "Sigil",
+  "spellword.zetta_spells.sigil.description": "在目标位置创建一个符文。当有人进入符文时，符文会被激活，开始施放一个法术（'sigil' 之后的所有内容都会被激活）。\n示例咒语：'Ray sigil apply poison.'"
+
+}
