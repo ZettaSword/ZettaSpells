@@ -217,17 +217,34 @@ public class ZSEvents {
         });
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        if (!event.isWasDeath()) return; // Only copy data when player respawns after death
-
         // Revive the original player's capabilities to be able to read them
         event.getOriginal().reviveCaps();
 
         event.getOriginal().getCapability(RaceDataHolder.INSTANCE).ifPresent(old ->
                 event.getEntity().getCapability(RaceDataHolder.INSTANCE).ifPresent(holder ->
                         holder.copyFrom(old)));
+
+        event.getOriginal().invalidateCaps();
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        // Sync all capabilities to client after respawn to ensure the client has the correct data
+        Player player = event.getEntity();
+        if (!player.level().isClientSide()) {
+            player.getCapability(RaceDataHolder.INSTANCE).ifPresent(RaceDataHolder::sync);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        // Sync all capabilities to client after dimension change to ensure the client has the correct data
+        Player player = event.getEntity();
+        if (!player.level().isClientSide()) {
+            player.getCapability(RaceDataHolder.INSTANCE).ifPresent(RaceDataHolder::sync);
+        }
     }
 
     private static final String TAG_RESURRECTED = "zetta_spells:no_drop";

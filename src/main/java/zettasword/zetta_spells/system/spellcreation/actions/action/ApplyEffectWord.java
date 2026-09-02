@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import zettasword.zetta_spells.ZSConfig;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
@@ -79,12 +80,14 @@ public class ApplyEffectWord extends TargetSpellWord {
                 }
                 // Client side: spawn visual feedback
                 if (ctx.world().isClientSide && ctx.canCreateFx()) {
-                    FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect_golden"));
-                    if (fx != null){
-                        EntityEffect executor = new EntityEffect(fx, ctx.world(), living, EntityEffect.AutoRotate.NONE);
-                        executor.setForcedDeath(false);
-                        executor.setAllowMulti(true);
-                        executor.start();
+                    if (ZettaSpells.photon){
+                        FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect_golden"));
+                        if (fx != null) {
+                            EntityEffect executor = new EntityEffect(fx, ctx.world(), living, EntityEffect.AutoRotate.NONE);
+                            executor.setForcedDeath(false);
+                            executor.setAllowMulti(true);
+                            executor.start();
+                        }
                     }
                     ParticleBuilder.create(EBParticles.BUFF)
                             .entity(living)

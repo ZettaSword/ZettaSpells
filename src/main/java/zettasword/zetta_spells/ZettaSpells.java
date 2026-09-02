@@ -11,6 +11,8 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -37,6 +39,8 @@ public class ZettaSpells
     public static final String MODID = "zetta_spells";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static boolean photon = false;
 
     public ZettaSpells(FMLJavaModLoadingContext context)
     {
@@ -76,6 +80,10 @@ public class ZettaSpells
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, ZSConfig.SPEC);
+
+        if (ModList.get().isLoaded("photon") && ModList.get().isLoaded("ldlib")){
+            photon=true;
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

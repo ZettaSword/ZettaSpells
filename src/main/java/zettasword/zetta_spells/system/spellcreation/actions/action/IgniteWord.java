@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SpellCreateContext;
 import zettasword.zetta_spells.system.spellcreation.actions.bases.TargetSpellWord;
@@ -40,7 +41,7 @@ public class IgniteWord extends TargetSpellWord {
                     if (!world.isClientSide && BlockUtil.canPlaceBlock(ctx.getCaster(), world, relativePos) && consumeMana(ctx, 10)) {
                         world.setBlockAndUpdate(relativePos, Blocks.FIRE.defaultBlockState());
                     }else{
-                        if (ctx.world().isClientSide){
+                        if (ctx.world().isClientSide && ZettaSpells.photon){
                             FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
                             if (fx != null){
                                 BlockEffect executor = new BlockEffect(fx, ctx.world(), relativePos.above());
@@ -58,7 +59,7 @@ public class IgniteWord extends TargetSpellWord {
             if (!ctx.world().isClientSide && consumeMana(ctx, 10)) {
                 living.setSecondsOnFire(ctx.getMod("duration", 5).getInt());
             }
-            if (ctx.world().isClientSide){
+            if (ctx.world().isClientSide && ZettaSpells.photon){
                 FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
                 if (fx != null){
                     EntityEffect executor = new EntityEffect(fx, ctx.world(), living, EntityEffect.AutoRotate.NONE);

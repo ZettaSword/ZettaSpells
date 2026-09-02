@@ -25,6 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.capability.spellcaster.SpellcasterData;
 import zettasword.zetta_spells.capability.spellcaster.SpellcastingGoal;
 import zettasword.zetta_spells.system.ArcaneColor;
@@ -63,7 +64,7 @@ public class TurnSpellcaster extends RaySpell {
     @Override
     protected boolean onEntityHit(CastContext ctx, EntityHitResult entityHit, Vec3 origin) {
         if (entityHit.getEntity() instanceof Mob minion){
-            if (ctx.world().isClientSide){
+            if (ctx.world().isClientSide && ZettaSpells.photon){
                 FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:resurrect_golden"));
                 if (fx != null){
                     EntityEffect executor = new EntityEffect(fx, ctx.world(), minion, EntityEffect.AutoRotate.NONE);

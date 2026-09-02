@@ -19,6 +19,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.mob_effects.HeatMobEffect;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 
@@ -43,7 +44,7 @@ public class HeatHealing extends BuffSpell {
                 if (excessHealth > 0.0F) {
                     if (!ctx.world().isClientSide())
                         caster.addEffect(new MobEffectInstance(ZSEffects.HEAT.get(), ZSEffects.HEAT.get().isInstantenous() ? 1 : (int) ((float) this.property(getEffectDurationProperty(ZSEffects.HEAT.get())) * ctx.modifiers().get(SpellModifiers.DURATION)), (Integer) this.property(getEffectStrengthProperty(ZSEffects.HEAT.get())) + bonusAmplifier, false, true));
-                    if (ctx.world().isClientSide) {
+                    if (ctx.world().isClientSide && ZettaSpells.photon) {
                         FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
                         if (fx != null) {
                             EntityEffect executor = new EntityEffect(fx, ctx.world(), caster, EntityEffect.AutoRotate.NONE);
@@ -57,7 +58,7 @@ public class HeatHealing extends BuffSpell {
                     if (caster.getHealth() <= 0.0F) return false;
                     if (ctx.world().isClientSide()) {
                         caster.addEffect(new MobEffectInstance(ZSEffects.HEAT.get(), ZSEffects.HEAT.get().isInstantenous() ? 1 : (int) ((float) this.property(getEffectDurationProperty(ZSEffects.HEAT.get())) * ctx.modifiers().get(SpellModifiers.DURATION)), (Integer) this.property(getEffectStrengthProperty(ZSEffects.HEAT.get())) + bonusAmplifier, false, true));
-                        if (ctx.world().isClientSide){
+                        if (ctx.world().isClientSide && ZettaSpells.photon){
                             FX fx = FXHelper.getFX(ResourceLocation.parse("zetta_spells:fiery_empowerment"));
                             if (fx != null){
                                 EntityEffect executor = new EntityEffect(fx, ctx.world(), caster, EntityEffect.AutoRotate.NONE);

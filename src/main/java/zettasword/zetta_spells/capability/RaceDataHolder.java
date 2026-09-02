@@ -53,7 +53,9 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
 
     @Override
     public int getSpellKnowledge(Spell spell){
-        return this.spellsKnowledge.getOrDefault(spell, 0);
+        var knows = this.spellsKnowledge.get(spell);
+        if (knows == null || knows == 0) return 0;
+        return knows;
     }
 
     @Override
@@ -101,6 +103,7 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
             // Store as "modid:path" -> integer
             spellsTag.putInt(entry.getKey().getLocation().toString(), entry.getValue());
         }
+        ZettaSpells.LOGGER.warn("1. Spell Knowledge debug - PUTTING: {}", spellsKnowledge.toString());
         tag.put("spells_knowledge", spellsTag);
 
         return tag;
@@ -118,7 +121,7 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
 
         // Deserialize spellsKnowledge map
         if (tag.contains("spells_knowledge", Tag.TAG_COMPOUND)) {
-            spellsKnowledge.clear();
+            //spellsKnowledge.clear();
             CompoundTag spellsTag = tag.getCompound("spells_knowledge");
             for (String key : spellsTag.getAllKeys()) {
                 ResourceLocation spellId = ResourceLocation.tryParse(key);
@@ -126,6 +129,9 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
                     spellsKnowledge.put(Services.REGISTRY_UTIL.getSpell(spellId), spellsTag.getInt(key));
                 }
             }
+            ZettaSpells.LOGGER.warn("2. Spell Knowledge debug FOUND: {}", spellsKnowledge.toString());
+        }else{
+            ZettaSpells.LOGGER.warn("3. Spell Knowledge check FAILED!");
         }
     }
 
