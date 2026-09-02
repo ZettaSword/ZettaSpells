@@ -1,4 +1,4 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.necromancy;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.spell.SpellAction;

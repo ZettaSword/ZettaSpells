@@ -4,6 +4,19 @@ import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.core.registry.EBRegistries;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import zettasword.zetta_spells.spells.earth.SummonBee;
+import zettasword.zetta_spells.spells.earth.SummonRabbit;
+import zettasword.zetta_spells.spells.fire.ExplodeItem;
+import zettasword.zetta_spells.spells.fire.ExplosionSpell;
+import zettasword.zetta_spells.spells.fire.HeatHealing;
+import zettasword.zetta_spells.spells.magic.*;
+import zettasword.zetta_spells.spells.necromancy.Hex;
+import zettasword.zetta_spells.spells.necromancy.Resurrect;
+import zettasword.zetta_spells.spells.necromancy.TurnMinion;
+import zettasword.zetta_spells.spells.sorcery.AdvancedLevitationSigil;
+import zettasword.zetta_spells.spells.sorcery.LevitationSigil;
+import zettasword.zetta_spells.spells.sorcery.OreConversion;
+import zettasword.zetta_spells.spells.sorcery.Pull;
 
 public class ZSSpells {
     public static final DeferredRegister<Spell> SPELLS = DeferredRegister.create(EBRegistries.SPELL, "zetta_spells");

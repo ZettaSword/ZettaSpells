@@ -58,7 +58,7 @@ import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
 import zettasword.zetta_spells.items.spellbook.FinishedSpellbookItem;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
-import zettasword.zetta_spells.spells.CustomPlayerSpell;
+import zettasword.zetta_spells.spells.magic.CustomPlayerSpell;
 import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.loot.ZSLootTables;

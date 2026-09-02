@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import zettasword.zetta_spells.spells.CustomPlayerSpell;
+import zettasword.zetta_spells.spells.magic.CustomPlayerSpell;
 import zettasword.zetta_spells.spells.ZSSpells;
 
 @Mixin(value = SpellGUIDisplay.class, remap = false)

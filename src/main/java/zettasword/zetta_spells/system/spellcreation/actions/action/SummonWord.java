@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import zettasword.zetta_spells.ZSConfig;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
-import zettasword.zetta_spells.spells.TurnMinion;
+import zettasword.zetta_spells.spells.necromancy.TurnMinion;
 import zettasword.zetta_spells.system.ArcaneColor;
 import zettasword.zetta_spells.system.SpellTarget;
 import zettasword.zetta_spells.system.spellcreation.SVar;

@@ -1,13 +1,11 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.sorcery;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.spell.SpellAction;
-import com.binaris.wizardry.api.content.spell.SpellType;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.api.content.util.BlockUtil;
-import com.binaris.wizardry.content.entity.living.EvilWizard;
 import com.binaris.wizardry.content.spell.DefaultProperties;
 import com.binaris.wizardry.content.spell.abstr.RaySpell;
 import com.binaris.wizardry.setup.registries.Elements;
@@ -20,9 +18,9 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.blocks.ZSBlocks;
 
-public class MagicBarrier extends RaySpell {
+public class LevitationSigil extends RaySpell {
 
-    public MagicBarrier(){
+    public LevitationSigil(){
         this.ignoreLivingEntities(true);
     }
 
@@ -31,7 +29,7 @@ public class MagicBarrier extends RaySpell {
         BlockPos blockPos = blockHit.getBlockPos().relative(blockHit.getDirection());
         if (ctx.world().isEmptyBlock(blockPos)) {
             if (!ctx.world().isClientSide && BlockUtil.canPlaceBlock(ctx.caster(), ctx.world(), blockPos))
-                ctx.world().setBlockAndUpdate(blockPos, ZSBlocks.PASSABLE_BLOCK.get().defaultBlockState());
+                ctx.world().setBlockAndUpdate(blockPos, ZSBlocks.LEVITATION_SIGIL_BLOCK.get().defaultBlockState());
             return true;
         }
         return false;
@@ -49,13 +47,13 @@ public class MagicBarrier extends RaySpell {
 
     @Override
     protected void spawnParticle(CastContext ctx, double x, double y, double z, double vx, double vy, double vz) {
-        ParticleBuilder.create(EBParticles.SPARKLE).color(0x00ff6e).pos(x, y, z).collide(true).spawn(ctx.world());
+        ParticleBuilder.create(EBParticles.SPARKLE).color(0x7affa4).pos(x, y, z).collide(true).spawn(ctx.world());
     }
 
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.MAGIC, SpellTypes.DEFENCE, SpellAction.POINT, 15, 0, 10)
+                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.SORCERY, SpellTypes.UTILITY, SpellAction.POINT, 20, 120, 80)
                 .add(DefaultProperties.RANGE, 10F)
                 .build();
     }

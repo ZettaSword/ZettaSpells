@@ -1,45 +1,33 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.necromancy;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.data.MinionData;
 import com.binaris.wizardry.api.content.spell.SpellAction;
-import com.binaris.wizardry.api.content.spell.SpellType;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
-import com.binaris.wizardry.api.content.util.BlockUtil;
-import com.binaris.wizardry.content.entity.goal.MinionFollowOwnerGoal;
 import com.binaris.wizardry.content.spell.DefaultProperties;
-import com.binaris.wizardry.content.spell.abstr.MinionSpell;
 import com.binaris.wizardry.content.spell.abstr.RaySpell;
-import com.binaris.wizardry.content.spell.necromancy.SummonZombie;
 import com.binaris.wizardry.core.platform.Services;
-import com.binaris.wizardry.setup.registries.EBItems;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.ZettaSpells;
-import zettasword.zetta_spells.blocks.ZSBlocks;
 
 public class TurnMinion extends RaySpell {
     /**

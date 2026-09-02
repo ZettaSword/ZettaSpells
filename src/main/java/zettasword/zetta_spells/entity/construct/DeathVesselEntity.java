@@ -4,7 +4,6 @@ import com.binaris.wizardry.api.content.data.WizardData;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.core.platform.Services;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,7 +11,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import zettasword.zetta_spells.entity.ZSEntities;
-import zettasword.zetta_spells.spells.TurnMinion;
+import zettasword.zetta_spells.spells.necromancy.TurnMinion;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

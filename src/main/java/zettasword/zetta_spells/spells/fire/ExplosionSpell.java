@@ -1,4 +1,4 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.fire;
 
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
@@ -10,7 +10,6 @@ import com.binaris.wizardry.content.spell.abstr.RaySpell;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;

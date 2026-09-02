@@ -1,8 +1,7 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.sorcery;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.api.content.spell.SpellAction;
-import com.binaris.wizardry.api.content.spell.SpellType;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
@@ -19,9 +18,9 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.blocks.ZSBlocks;
 
-public class LevitationSigil extends RaySpell {
+public class AdvancedLevitationSigil extends RaySpell {
 
-    public LevitationSigil(){
+    public AdvancedLevitationSigil(){
         this.ignoreLivingEntities(true);
     }
 
@@ -30,7 +29,7 @@ public class LevitationSigil extends RaySpell {
         BlockPos blockPos = blockHit.getBlockPos().relative(blockHit.getDirection());
         if (ctx.world().isEmptyBlock(blockPos)) {
             if (!ctx.world().isClientSide && BlockUtil.canPlaceBlock(ctx.caster(), ctx.world(), blockPos))
-                ctx.world().setBlockAndUpdate(blockPos, ZSBlocks.LEVITATION_SIGIL_BLOCK.get().defaultBlockState());
+                ctx.world().setBlockAndUpdate(blockPos, ZSBlocks.ADVANCED_LEVITATION_SIGIL_BLOCK.get().defaultBlockState());
             return true;
         }
         return false;
@@ -54,7 +53,7 @@ public class LevitationSigil extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.APPRENTICE, Elements.SORCERY, SpellTypes.UTILITY, SpellAction.POINT, 20, 120, 80)
+                .assignBaseProperties(SpellTiers.MASTER, Elements.SORCERY, SpellTypes.UTILITY, SpellAction.POINT, 50, 0, 40)
                 .add(DefaultProperties.RANGE, 10F)
                 .build();
     }

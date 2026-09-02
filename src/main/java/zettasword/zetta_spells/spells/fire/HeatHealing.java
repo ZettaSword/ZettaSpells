@@ -1,4 +1,4 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.fire;
 
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
@@ -10,7 +10,6 @@ import com.binaris.wizardry.content.spell.abstr.BuffSpell;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 
-import com.lowdragmc.photon.client.fx.BlockEffect;
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;

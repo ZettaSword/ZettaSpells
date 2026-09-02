@@ -1,4 +1,4 @@
-package zettasword.zetta_spells.spells;
+package zettasword.zetta_spells.spells.magic;
 
 import com.binaris.wizardry.api.content.item.IManaItem;
 import com.binaris.wizardry.api.content.spell.Spell;

@@ -1,6 +1,5 @@
 package zettasword.zetta_spells.items;
 import com.binaris.wizardry.api.client.ParticleBuilder;
-import com.binaris.wizardry.api.client.util.ClientUtils;
 import com.binaris.wizardry.api.content.data.MinionData;
 import com.binaris.wizardry.api.content.util.RayTracer;
 import com.binaris.wizardry.core.platform.Services;
@@ -22,7 +21,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import zettasword.zetta_spells.spells.ReplaceArmor;
+import zettasword.zetta_spells.spells.necromancy.ReplaceArmor;
 import zettasword.zetta_spells.system.ArcaneColor;
 
 import java.util.List;
