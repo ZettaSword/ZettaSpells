@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.spells.earth.SummonBee;
 import zettasword.zetta_spells.spells.earth.SummonRabbit;
+import zettasword.zetta_spells.spells.earth.TreeChop;
 import zettasword.zetta_spells.spells.fire.ExplodeItem;
 import zettasword.zetta_spells.spells.fire.ExplosionSpell;
 import zettasword.zetta_spells.spells.fire.HeatHealing;
@@ -56,5 +57,8 @@ public class ZSSpells {
                     .build()
             ));
 */
+    // 2.0.0
+    public static final RegistryObject<Spell> TREE_CHOP = SPELLS.register("tree_chop", TreeChop::new);
+
     //TODO: Add sounds to sounds.json for all spells...
 }
