@@ -37,12 +37,17 @@ public class ZSConfig
             .comment("Banned Summons (bans entities from being summoned using Summon spellword in custom spells.)")
             .defineListAllowEmpty("banned_summons", List.of("minecraft:wither"), ZSConfig::validateMobName);
 
+    private static final ForgeConfigSpec.BooleanValue DEBUG = BUILDER
+            .comment("Debug. Is useful for me.")
+            .define("debug", false);
+
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static boolean learningSystem;
     public static boolean spellCreationEnabled;
     public static boolean spellCreationCastFromSpellbooks;
+    public static boolean debug;
     public static List<? extends String> banned_mob_effects;
     public static List<? extends String> banned_summons;
 
@@ -64,6 +69,7 @@ public class ZSConfig
         spellCreationCastFromSpellbooks = SPELLCREATION_CAST_FROM_SPELLBOOKS.get();
         banned_mob_effects = BANNED_MOB_EFFECTS.get();
         banned_summons = BANNED_SUMMONS.get();
+        debug = DEBUG.get();
 
         // convert the list of strings into a set of items
         //items = ITEM_STRINGS.get().stream()

@@ -18,6 +18,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.NetworkDirection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import zettasword.zetta_spells.ZSConfig;
 import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.network.RaceCapabilitySyncPacketS2C;
@@ -103,7 +104,8 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
             // Store as "modid:path" -> integer
             spellsTag.putInt(entry.getKey().getLocation().toString(), entry.getValue());
         }
-        ZettaSpells.LOGGER.warn("1. Spell Knowledge debug - PUTTING: {}", spellsKnowledge.toString());
+        if(ZSConfig.debug)
+            ZettaSpells.LOGGER.warn("1. Spell Knowledge debug - PUTTING: {}", spellsKnowledge.toString());
         tag.put("spells_knowledge", spellsTag);
 
         return tag;
@@ -129,9 +131,11 @@ public class RaceDataHolder implements INBTSerializable<CompoundTag>, IRaceData 
                     spellsKnowledge.put(Services.REGISTRY_UTIL.getSpell(spellId), spellsTag.getInt(key));
                 }
             }
-            ZettaSpells.LOGGER.warn("2. Spell Knowledge debug FOUND: {}", spellsKnowledge.toString());
+            if(ZSConfig.debug)
+                ZettaSpells.LOGGER.warn("2. Spell Knowledge debug FOUND: {}", spellsKnowledge.toString());
         }else{
-            ZettaSpells.LOGGER.warn("3. Spell Knowledge check FAILED!");
+            if(ZSConfig.debug)
+                ZettaSpells.LOGGER.warn("3. Spell Knowledge check FAILED!");
         }
     }
 
