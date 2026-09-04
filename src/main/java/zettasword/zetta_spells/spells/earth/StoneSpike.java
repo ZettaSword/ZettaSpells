@@ -42,9 +42,9 @@ public class StoneSpike extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.ADVANCED, Elements.EARTH, SpellTypes.ATTACK, SpellAction.POINT, 25, 60, 30)
+                .assignBaseProperties(SpellTiers.ADVANCED, Elements.EARTH, SpellTypes.ATTACK, SpellAction.POINT, 25, 20, 20)
                 .add(DefaultProperties.RANGE, 20.0F)
-                .add(DefaultProperties.DAMAGE, 8.0F)
+                .add(DefaultProperties.DAMAGE, 10.0F)
                 .build();
     }
 
@@ -74,6 +74,7 @@ public class StoneSpike extends RaySpell {
 
                 BlockState state = ctx.world().getBlockState(groundPos);
                 serverLevel.levelEvent(2001, groundPos, Block.getId(state));
+                serverLevel.levelEvent(2001, groundPos.above(), Block.getId(state));
 
                 ZSSigil sigil = SigilCreator.create(serverLevel, groundPos.getCenter(), 40, "earth");
                 serverLevel.addFreshEntity(sigil);

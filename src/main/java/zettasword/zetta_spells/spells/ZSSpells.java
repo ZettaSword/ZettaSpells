@@ -56,6 +56,7 @@ public class ZSSpells {
             ));
 */
     // 2.0.0
+    // TODO: ADD TEXTURES AND TRANSLATIONS TO THOSE SPELLS THAT ARE DOWN HERE!
     public static final RegistryObject<Spell> TREE_CHOP = SPELLS.register("tree_chop", TreeChop::new);
     public static final RegistryObject<Spell> STONE_SPIKE = SPELLS.register("stone_spike", StoneSpike::new);
     public static final RegistryObject<Spell> FLOWER_FIELD = SPELLS.register("flower_field", FlowerField::new);

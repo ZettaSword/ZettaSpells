@@ -17,7 +17,7 @@ public class SigilCreator {
             default -> new ZSSigilMagic(level);
         };
         sigil.lifetime = lifetime;
-        sigil.setPos(pos);
+        sigil.setPos(pos.add(new Vec3(0, 0.6,0)));
         return sigil;
     }
 }
