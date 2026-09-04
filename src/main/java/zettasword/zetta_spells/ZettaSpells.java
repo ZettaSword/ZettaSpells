@@ -138,4 +138,8 @@ public class ZettaSpells
     public static ResourceLocation location(String path) {
         return ResourceLocation.fromNamespaceAndPath("zetta_spells", path);
     }
+
+    public static ResourceLocation locationSigil(String path) {
+        return ResourceLocation.fromNamespaceAndPath("zetta_spells", "textures/sigils/" +path);
+    }
 }

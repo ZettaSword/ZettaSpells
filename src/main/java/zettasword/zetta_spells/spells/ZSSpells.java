@@ -4,10 +4,7 @@ import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.core.registry.EBRegistries;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import zettasword.zetta_spells.spells.earth.StoneSpike;
-import zettasword.zetta_spells.spells.earth.SummonBee;
-import zettasword.zetta_spells.spells.earth.SummonRabbit;
-import zettasword.zetta_spells.spells.earth.TreeChop;
+import zettasword.zetta_spells.spells.earth.*;
 import zettasword.zetta_spells.spells.fire.ExplodeItem;
 import zettasword.zetta_spells.spells.fire.ExplosionSpell;
 import zettasword.zetta_spells.spells.fire.HeatHealing;
@@ -61,6 +58,7 @@ public class ZSSpells {
     // 2.0.0
     public static final RegistryObject<Spell> TREE_CHOP = SPELLS.register("tree_chop", TreeChop::new);
     public static final RegistryObject<Spell> STONE_SPIKE = SPELLS.register("stone_spike", StoneSpike::new);
+    public static final RegistryObject<Spell> FLOWER_FIELD = SPELLS.register("flower_field", FlowerField::new);
 
     //TODO: Add sounds to sounds.json for all spells...
 }

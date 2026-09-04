@@ -40,5 +40,31 @@ public class ClientZSEvents {
 
         // Block Entities
 
+
+        // Sigils Cosmetic
+        event.registerEntityRenderer(ZSEntities.SIGIL_MAGIC.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_arcane.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_SORCERY.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_sorcery.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_EARTH.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_earth.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_FIRE.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_fire.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_HEALING.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_healing.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_ICE.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_ice.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_LIGHTNING.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_lightning.png"), 0.2F, false));
+
+        event.registerEntityRenderer(ZSEntities.SIGIL_NECROMANCY.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_necromancy.png"), 0.2F, false));
+
     }
 }

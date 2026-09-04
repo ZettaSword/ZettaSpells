@@ -12,7 +12,7 @@ import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.ZSEntities;
 
 public class CosmeticSigil extends ScaledConstructEntity {
-    private ResourceLocation location = ZettaSpells.location("textures/sigils/old/circle_arcane.png");
+   // private ResourceLocation location = ZettaSpells.location("textures/sigils/old/circle_arcane.png");
     private static final EntityDataAccessor<Integer> DATA_LIFETIME =
             SynchedEntityData.defineId(CosmeticSigil.class, EntityDataSerializers.INT);
 
@@ -28,16 +28,18 @@ public class CosmeticSigil extends ScaledConstructEntity {
     }
 
     public ResourceLocation getLocation(){return ResourceLocation.parse(this.entityData.get(DATA_LOCATION));}
+
+
     public void setLocation(ResourceLocation location){
-        this.location = location;
+        //this.location = location;
         this.entityData.set(DATA_LOCATION, location.toString());
     }
 
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = super.serializeNBT();
-        tag.putString("loc_namespace", this.location.getNamespace());
-        tag.putString("loc_path", this.location.getPath());
+        tag.putString("loc_namespace", getLocation().getNamespace());
+        tag.putString("loc_path", getLocation().getPath());
         return tag;
     }
 
@@ -61,7 +63,8 @@ public class CosmeticSigil extends ScaledConstructEntity {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
-        this.location = ResourceLocation.fromNamespaceAndPath(nbt.getString("loc_namespace"), nbt.getString("loc_path"));
+        if (nbt.contains("loc_namespace") && nbt.contains("loc_path"))
+            setLocation(ResourceLocation.fromNamespaceAndPath(nbt.getString("loc_namespace"), nbt.getString("loc_path")));
     }
 
     @Override
@@ -73,7 +76,7 @@ public class CosmeticSigil extends ScaledConstructEntity {
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.putString("loc_namespace", this.location.getNamespace());
-        tag.putString("loc_path", this.location.getPath());
+        tag.putString("loc_namespace", getLocation().getNamespace());
+        tag.putString("loc_path", getLocation().getPath());
     }
 }

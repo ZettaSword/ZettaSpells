@@ -1,6 +1,7 @@
 package zettasword.zetta_spells.spells.earth;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
+import com.binaris.wizardry.api.content.entity.construct.ScaledConstructEntity;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
@@ -26,6 +27,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.ZettaSpells;
+import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
+import zettasword.zetta_spells.entity.construct.sigils.ZSSigilEarth;
+import zettasword.zetta_spells.system.SigilCreator;
 
 // AI generated with Qwen, modified by me.
 public class StoneSpike extends RaySpell {
@@ -69,6 +74,9 @@ public class StoneSpike extends RaySpell {
 
                 BlockState state = ctx.world().getBlockState(groundPos);
                 serverLevel.levelEvent(2001, groundPos, Block.getId(state));
+
+                ZSSigil sigil = SigilCreator.create(serverLevel, groundPos.getCenter(), 40, "earth");
+                serverLevel.addFreshEntity(sigil);
             }
             
             return true;

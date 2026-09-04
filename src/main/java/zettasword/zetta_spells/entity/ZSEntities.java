@@ -8,6 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.*;
+import zettasword.zetta_spells.entity.construct.sigils.ZSSigilFire;
 import zettasword.zetta_spells.entity.custom.ExplodeItemEntity;
 
 public class ZSEntities {
@@ -16,7 +17,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<TenebriaWillSigil>> TENEBRIA_WILL_SIGIL = ENTITY_TYPES.register("tenebria_will_sigil",
             () -> EntityType.Builder.<TenebriaWillSigil>of(TenebriaWillSigil::new, MobCategory.MISC)
-                    .sized(2.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(2.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("tenebria_will_sigil")
@@ -24,7 +25,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<CosmeticSigil>> COSMETIC_SIGIL = ENTITY_TYPES.register("cosmetic_sigil",
             () -> EntityType.Builder.<CosmeticSigil>of(CosmeticSigil::new, MobCategory.MISC)
-                    .sized(2.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(0.5F, 0.1F)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("cosmetic_sigil")
@@ -32,7 +33,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<SystemCall>> SYSTEM_CALL = ENTITY_TYPES.register("system_call",
             () -> EntityType.Builder.<SystemCall>of(SystemCall::new, MobCategory.MISC)
-                    .sized(2.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(2.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("system_call")
@@ -40,7 +41,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<TenebriaProtectionSigil>> TENEBRIA_PROTECTION_SIGIL = ENTITY_TYPES.register("tenebria_protection_sigil",
             () -> EntityType.Builder.<TenebriaProtectionSigil>of(TenebriaProtectionSigil::new, MobCategory.MISC)
-                    .sized(10.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(10.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("tenebria_protection_sigil")
@@ -48,7 +49,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<CosmeticSigil>> NOX_SIGIL = ENTITY_TYPES.register("nox_sigil",
             () -> EntityType.Builder.<CosmeticSigil>of(CosmeticSigil::new, MobCategory.MISC)
-                    .sized(10.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(10.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("nox_sigil")
@@ -56,7 +57,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<MagicChains>> MAGIC_CHAINS = ENTITY_TYPES.register("magic_chains",
             () -> EntityType.Builder.<MagicChains>of(MagicChains::new, MobCategory.MISC)
-                    .sized(10.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(10.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("magic_chains")
@@ -64,7 +65,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<DeathVesselEntity>> DEATH_VESSEL = ENTITY_TYPES.register("death_vessel",
             () -> EntityType.Builder.<DeathVesselEntity>of(DeathVesselEntity::new, MobCategory.MISC)
-                    .sized(2.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(2.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("death_vessel")
@@ -72,7 +73,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<MagicalTurretEntity>> MAGICAL_TURRET = ENTITY_TYPES.register("magical_turret",
             () -> EntityType.Builder.<MagicalTurretEntity>of(MagicalTurretEntity::new, MobCategory.MISC)
-                    .sized(2.0f, 0.5f) // Width, Height (Adjust to fit your model)
+                    .sized(2.0f, 0.5f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("magical_turret")
@@ -80,7 +81,7 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<CustomSigil>> CUSTOM_SIGIL = ENTITY_TYPES.register("custom_sigil",
             () -> EntityType.Builder.<CustomSigil>of(CustomSigil::new, MobCategory.MISC)
-                    .sized(10.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(10.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("custom_sigil")
@@ -88,11 +89,78 @@ public class ZSEntities {
 
     public static final RegistryObject<EntityType<ExplodeItemEntity>> EXPLODE_ITEM_ENTITY = ENTITY_TYPES.register("explode_item_entity",
             () -> EntityType.Builder.<ExplodeItemEntity>of(ExplodeItemEntity::new, MobCategory.MISC)
-                    .sized(2.0f, 2.0f) // Width, Height (Adjust to fit your model)
+                    .sized(2.0f, 2.0f)
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("explode_item_entity")
     );
+
+    // Sigils for cosmetic.
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_MAGIC = ENTITY_TYPES.register("sigil_magic",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_magic")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_SORCERY = ENTITY_TYPES.register("sigil_sorcery",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_sorcery")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_FIRE = ENTITY_TYPES.register("sigil_fire",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_fire")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_ICE = ENTITY_TYPES.register("sigil_ice",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_ice")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_EARTH = ENTITY_TYPES.register("sigil_earth",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_earth")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_LIGHTNING = ENTITY_TYPES.register("sigil_lightning",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_lightning")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_NECROMANCY = ENTITY_TYPES.register("sigil_necromancy",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_necromancy")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> SIGIL_HEALING = ENTITY_TYPES.register("sigil_healing",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("sigil_healing")
+    );
+
+
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);
 }
