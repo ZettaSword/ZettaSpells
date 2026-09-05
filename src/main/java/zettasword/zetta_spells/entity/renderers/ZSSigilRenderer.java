@@ -66,7 +66,7 @@ public class ZSSigilRenderer extends EntityRenderer<MagicConstructEntity> {
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) entity.tickCount * this.rotationSpeed));
         }
 
-        float s = entity.getBbWidth() * ClientUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
+        float s = entity.getBbWidth() * ClientUtils.smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 20);
         poseStack.scale(s, s, s);
 
 

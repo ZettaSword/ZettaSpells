@@ -160,6 +160,8 @@ public class ZSEntities {
                     .build("sigil_healing")
     );
 
+    // Entity Living
+
 
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);

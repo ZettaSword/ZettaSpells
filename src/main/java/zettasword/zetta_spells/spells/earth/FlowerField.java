@@ -20,12 +20,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.ZSConfig;
+import zettasword.zetta_spells.system.ArcaneColor;
 import zettasword.zetta_spells.system.particles.Alteria;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class FlowerField extends Spell {
     public FlowerField() {
@@ -50,7 +51,7 @@ public class FlowerField extends Spell {
                     BlockPos pos = center.offset(dx, dy, dz);
                     if (level.getBlockState(pos.relative(Direction.UP)) == Blocks.AIR.defaultBlockState()) {
                         if (!level.isClientSide) {
-                            List<Block> flowers = new java.util.ArrayList<>(getFlowerPool());
+                            ArrayList<Block> flowers = getFlowerPool();
                             Collections.shuffle(flowers);
                             Block pick = flowers.get(0);
                             BlockState flowerState = pick.defaultBlockState();
@@ -66,8 +67,24 @@ public class FlowerField extends Spell {
                             }
                         }
                         if (level.isClientSide){
+                            List<Integer> colors = Lists.newArrayList();
+                            colors.add(0xc12529); // red poppy
+                            colors.add(0x34a5e7); // blue orchid
+                            colors.add(0xffde41); // dandelion
+                            colors.add(0x476aea); // cornflower
+                            colors.add(0xd6e8e8); // azure bluet
+                            colors.add(0xe3c2bb); // crystal flower 1
+                            colors.add(0xd7bc8d); // crystal flower 2
+                            colors.add(0x9e96dc); // crystal flower 3
+
+                            Collections.shuffle(colors);
+                            int chosen_color = colors.get(0);
                             if (level.random.nextFloat() <= 0.2) {
-                                ParticleBuilder.create(EBParticles.SPARKLE).pos(pos.above()).gravity(true).color(0.3f, 0.7f, 0).spawn(ctx.world());
+                                //ParticleBuilder.create(EBParticles.SPARKLE).pos(pos.above()).gravity(true).color(0.3f, 0.7f, 0).spawn(ctx.world());
+                                // 0.3f, 0.7f, 0 = Green!
+                                //
+                                ParticleBuilder.create(EBParticles.LEAF).pos(pos.above()).velocity(0, -0.1, 0).collide(true).time(60)
+                                        .color(chosen_color).spawn(ctx.world());
                             }
                         }
                     }
@@ -155,7 +172,15 @@ public class FlowerField extends Spell {
         return spawnRandomFlowers(level, entity, 2, 0.6f);
     }
 
-    public static List<Block> getFlowerPool(){
-        return List.of(EBBlocks.CRYSTAL_FLOWER.get(), Blocks.CORNFLOWER, Blocks.DANDELION, Blocks.POPPY, Blocks.OXEYE_DAISY, Blocks.AZURE_BLUET, Blocks.BLUE_ORCHID);
+    public static ArrayList<Block> getFlowerPool(){
+        ArrayList<Block> list = Lists.newArrayList();
+        list.add(EBBlocks.CRYSTAL_FLOWER.get());
+        list.add(Blocks.CORNFLOWER);
+        list.add(Blocks.DANDELION);
+        list.add(Blocks.POPPY);
+        list.add(Blocks.OXEYE_DAISY);
+        list.add(Blocks.AZURE_BLUET);
+        list.add(Blocks.BLUE_ORCHID);
+        return list;
     }
 }

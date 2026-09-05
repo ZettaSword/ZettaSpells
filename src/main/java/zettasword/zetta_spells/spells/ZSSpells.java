@@ -1,7 +1,14 @@
 package zettasword.zetta_spells.spells;
 
 import com.binaris.wizardry.api.content.spell.Spell;
+import com.binaris.wizardry.api.content.spell.SpellAction;
+import com.binaris.wizardry.api.content.spell.SpellTypes;
+import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
+import com.binaris.wizardry.content.spell.abstr.BuffSpell;
 import com.binaris.wizardry.core.registry.EBRegistries;
+import com.binaris.wizardry.setup.registries.Elements;
+import com.binaris.wizardry.setup.registries.SpellTiers;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.spells.earth.*;
@@ -60,6 +67,15 @@ public class ZSSpells {
     public static final RegistryObject<Spell> TREE_CHOP = SPELLS.register("tree_chop", TreeChop::new);
     public static final RegistryObject<Spell> STONE_SPIKE = SPELLS.register("stone_spike", StoneSpike::new);
     public static final RegistryObject<Spell> FLOWER_FIELD = SPELLS.register("flower_field", FlowerField::new);
+    public static final RegistryObject<Spell> SUMMON_IRON_GOLEM = SPELLS.register("summon_iron_golem", SummonIronGolem::new);
+    public static final RegistryObject<Spell> WIND_ATTRIBUTE = SPELLS.register("wind_attribute", () -> new BuffSpell(140F/255F, 216F/255F, 185F/255F,
+            () -> MobEffects.MOVEMENT_SPEED).assignProperties(
+            SpellProperties.builder()
+                        .assignBaseProperties(SpellTiers.ADVANCED, Elements.EARTH, SpellTypes.UTILITY, SpellAction.IMBUE, 400, 120, 1200)
+                        .add(BuffSpell.getEffectDurationProperty(MobEffects.MOVEMENT_SPEED), 2400)
+            .add(BuffSpell.getEffectStrengthProperty(MobEffects.MOVEMENT_SPEED), 2)
+            .build()
+        ));
 
     //TODO: Add sounds to sounds.json for all spells...
 }

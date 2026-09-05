@@ -1,6 +1,7 @@
 package zettasword.zetta_spells;
 
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
+import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,6 +66,8 @@ public class ClientZSEvents {
 
         event.registerEntityRenderer(ZSEntities.SIGIL_NECROMANCY.get(),
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_necromancy.png"), 0.2F, false));
+
+        // Entity Living
 
     }
 }
