@@ -3,13 +3,140 @@
     "category": "spells",
     "sounds": [
       "fire/fire"
-    ]
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.magic_restoration": {
+    "sounds": [
+      "ebwizardry:conjure"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.magic_barrier": {
+    "sounds": [
+      "ebwizardry:conjure"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.turn_minion": {
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.ore_conversion": {
+    "sounds": [
+      "ebwizardry:conjure"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.levitation_sigil": {
+    "sounds": [
+      "ebwizardry:conjure"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.advanced_levitation_sigil": {
+    "sounds": [
+      "ebwizardry:conjure"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.resurrect": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.hex": {
+    "category": "spells",
+    "sounds": [
+      "mob/guardian/curse"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
   },
   "spell.summon_rabbit": {
     "category": "spells",
     "sounds": [
       "ebwizardry:summon1",
       "ebwizardry:summon2"
-    ]
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.origin": {
+    "sounds": [
+      "ebwizardry:conjure"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.summon_bee": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.explosion": {
+    "category": "spells",
+    "sounds": [
+      "random/explode1",
+      "random/explode2",
+      "random/explode3",
+      "random/explode4"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.pull.end": {
+    "sounds": [
+      "ebwizardry:aura_end"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.pull.loop": {
+    "sounds": [
+      "ebwizardry:aura_loop"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.pull.start": {
+    "sounds": [
+      "ebwizardry:aura_start"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.turn_spellcaster": {
+    "sounds": [
+      "ebwizardry:conjure_large"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.custom_player_spell": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:magic"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.explode_item": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.tree_chop": {
+    "category": "spells",
+    "sounds": [
+      "dig/grass1",
+      "dig/grass2",
+      "dig/grass3",
+      "dig/grass4"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
   }
 }

@@ -1,7 +1,6 @@
 package zettasword.zetta_spells;
 
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
-import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,13 +21,13 @@ public class ClientZSEvents {
                 (ctx) -> new CustomSigilRenderer(ctx, 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.TENEBRIA_WILL_SIGIL.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
+                (ctx) -> new ZSSigilOldRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.SYSTEM_CALL.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/system_call.png"), 0.2F, false));
+                (ctx) -> new ZSSigilOldRenderer(ctx, ZettaSpells.location("textures/sigils/system_call.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.TENEBRIA_PROTECTION_SIGIL.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
+                (ctx) -> new ZSSigilOldRenderer(ctx, ZettaSpells.location("textures/sigils/tenebria_will.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.MAGICAL_TURRET.get(),
                 (ctx) -> new MagicalTurretEntityRenderer(ctx, 0.2F, false));
@@ -50,7 +49,7 @@ public class ClientZSEvents {
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_sorcery.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.SIGIL_EARTH.get(),
-                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_earth.png"), 0.2F, false));
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/circle_earth.png"), 0.2F, false));
 
         event.registerEntityRenderer(ZSEntities.SIGIL_FIRE.get(),
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_fire.png"), 0.2F, false));

@@ -1,6 +1,6 @@
 package zettasword.zetta_spells.entity.renderers;
 
-import com.binaris.wizardry.api.client.util.ClientUtils;
+import com.binaris.wizardry.api.content.entity.construct.MagicConstructEntity;
 import com.binaris.wizardry.core.AllyDesignation;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
@@ -18,21 +18,20 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.ZettaSpells;
-import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
 
-public class ZSSigilRenderer extends EntityRenderer<ZSSigil> {
+public class ZSSigilOldRenderer extends EntityRenderer<MagicConstructEntity> {
     private final ResourceLocation texture;
     private final float rotationSpeed;
     private final boolean invisibleToEnemies;
 
-    public ZSSigilRenderer(EntityRendererProvider.Context p_174008_, ResourceLocation texture, float rotationSpeed, boolean invisibleToEnemies) {
+    public ZSSigilOldRenderer(EntityRendererProvider.Context p_174008_, ResourceLocation texture, float rotationSpeed, boolean invisibleToEnemies) {
         super(p_174008_);
         this.texture = texture;
         this.rotationSpeed = rotationSpeed;
         this.invisibleToEnemies = invisibleToEnemies;
     }
 
-    public void render(@NotNull ZSSigil entity, float p_114486_, float partialTicks,
+    public void render(@NotNull MagicConstructEntity entity, float p_114486_, float partialTicks,
                        @NotNull PoseStack poseStack, MultiBufferSource p_114489_, int p_114490_) {
         if (this.invisibleToEnemies && entity.getCaster() != Minecraft.getInstance().player) {
             LivingEntity var8 = entity.getCaster();
@@ -63,16 +62,17 @@ public class ZSSigilRenderer extends EntityRenderer<ZSSigil> {
             poseStack.mulPose(Axis.ZP.rotationDegrees((float) entity.tickCount * this.rotationSpeed));
         }
 
-        float s = entity.getBbWidth() * ClientUtils.smoothScaleFactor(entity.getLifetime(), entity.tickCount, partialTicks, 10, 10);
+        float s = entity.getBbWidth() * smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
         poseStack.scale(s, s, s);
-        float alpha = ClientUtils.smoothScaleFactor(entity.getLifetime(), entity.tickCount, partialTicks, 10, 10);
+        float alpha = smoothScaleFactor(entity.lifetime, entity.tickCount, partialTicks, 10, 10);
+        ZettaSpells.LOGGER.warn("ALPHA: {}",alpha);
 
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         Tesselator tessellator = Tesselator.getInstance();
         BufferBuilder buffer = tessellator.getBuilder();
 
-        //RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
 
         // Render TOP face
         buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
@@ -93,13 +93,51 @@ public class ZSSigilRenderer extends EntityRenderer<ZSSigil> {
         BufferUploader.drawWithShader(buffer.end());
         poseStack.popPose();
 
-        //RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         RenderSystem.disableBlend();
         poseStack.popPose();
     }
 
-    public @NotNull ResourceLocation getTextureLocation(@NotNull ZSSigil entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull MagicConstructEntity entity) {
         return null;
+    }
+
+    public static float smoothScaleFactor(int lifetime, int ticksExisted, float partialTicks, int startLength, int endLength) {
+        float age = ticksExisted + partialTicks;
+        ZettaSpells.LOGGER.warn("[Initial data]: 1) lifetime: {} ; 2) ticksExisted {} ; 3) partialTicks {} ; 4) startLength {} ; 5) endLength {} ; 6) age {}",
+                lifetime, ticksExisted, partialTicks, startLength, endLength, age);
+
+        float s;
+
+        // 1. Handle invalid/infinite lifetime (defaults to -1 in many Minecraft classes)
+        if (lifetime < 0) {
+            s = Mth.clamp(age / startLength, 0.0F, 1.0F);
+            ZettaSpells.LOGGER.warn("[lifetime < 0 scenario]: 1) age / startLength: {} ; 2) s: {}", age / startLength, s);
+        }
+        // 2. Phase 1: Fade in
+        else if (age < startLength) {
+            s = age / startLength;
+            ZettaSpells.LOGGER.warn("[age < startLength scenario]: 1) age / startLength: {} ; 2) s: {}", age / startLength, s);
+        }
+        // 3. Phase 3: Fade out
+        else if (age > lifetime - endLength) {
+            s = (lifetime - age) / endLength;
+            ZettaSpells.LOGGER.warn("[age > lifetime - endLength scenario]: 1) (lifetime - age): {} ; 2) (lifetime - age) / endLength : {} ; 3) s: {}", (lifetime - age), (lifetime - age) / endLength, s);
+        }
+        // 4. Phase 2: Fully visible (middle duration)
+        else {
+            s = 1.0F;
+            ZettaSpells.LOGGER.warn("[Fully visible (middle duration) scenario]: 1) {}", s);
+        }
+
+        // Ensure strict bounds just in case
+        s = Mth.clamp(s, 0.0F, 1.0F);
+        ZettaSpells.LOGGER.warn("[After clamp]: 1) {}", s);
+
+        // Apply your easing curve
+        s = (float) Math.pow(s, 0.4);
+        ZettaSpells.LOGGER.warn("[After easing curve]: 1) {}", s);
+        return s;
     }
 }

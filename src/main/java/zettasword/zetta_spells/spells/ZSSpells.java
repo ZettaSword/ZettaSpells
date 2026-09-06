@@ -77,5 +77,6 @@ public class ZSSpells {
             .build()
         ));
 
+    public static final RegistryObject<Spell> GROUND_ASCEND = SPELLS.register("ground_ascend", GroundAscend::new);
     //TODO: Add sounds to sounds.json for all spells...
 }
