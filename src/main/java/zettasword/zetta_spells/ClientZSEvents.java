@@ -1,5 +1,8 @@
 package zettasword.zetta_spells;
 
+import com.binaris.wizardry.WizardryMainMod;
+import com.binaris.wizardry.client.renderer.entity.MagicArrowRenderer;
+import com.binaris.wizardry.content.entity.projectile.IceLanceEntity;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -67,6 +70,9 @@ public class ClientZSEvents {
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/old/circle_necromancy.png"), 0.2F, false));
 
         // Entity Living
+
+        // Projectiles
+        event.registerEntityRenderer(ZSEntities.ORBITING_ICE_LANCE.get(), ctx -> new MagicArrowRenderer<>(ctx, WizardryMainMod.location("textures/entity/ice_lance.png")));
 
     }
 }

@@ -37,6 +37,7 @@ public class StoneSpike extends RaySpell {
 
     public StoneSpike() {
         super();
+        soundValues(0.4f, 1.3f, 0.1f);
     }
 
     @Override

@@ -15,6 +15,7 @@ import zettasword.zetta_spells.spells.earth.*;
 import zettasword.zetta_spells.spells.fire.ExplodeItem;
 import zettasword.zetta_spells.spells.fire.ExplosionSpell;
 import zettasword.zetta_spells.spells.fire.HeatHealing;
+import zettasword.zetta_spells.spells.ice.IceLancesSpell;
 import zettasword.zetta_spells.spells.magic.*;
 import zettasword.zetta_spells.spells.necromancy.Hex;
 import zettasword.zetta_spells.spells.necromancy.Resurrect;
@@ -78,5 +79,5 @@ public class ZSSpells {
         ));
 
     public static final RegistryObject<Spell> GROUND_ASCEND = SPELLS.register("ground_ascend", GroundAscend::new);
-    //TODO: Add sounds to sounds.json for all spells...
+    public static final RegistryObject<Spell> ICE_LANCES = SPELLS.register("ice_lances", IceLancesSpell::new);
 }

@@ -138,5 +138,37 @@
       "dig/grass4"
     ],
     "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.stone_spike": {
+    "sounds": [
+      "ebwizardry:rumble"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.flower_field": {
+    "sounds": [
+      "ebwizardry:grow"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.summon_iron_golem": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.wind_attribute": {
+    "sounds": [
+      "ebwizardry:buff"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.ground_ascend": {
+    "sounds": [
+      "ebwizardry:rumble"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
   }
 }

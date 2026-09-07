@@ -10,9 +10,10 @@ import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.*;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilFire;
 import zettasword.zetta_spells.entity.custom.ExplodeItemEntity;
+import zettasword.zetta_spells.entity.projectiles.OrbitingIceLanceEntity;
 
 public class ZSEntities {
-    // 1. Create the DeferredRegister for EntityTypes
+    // Sigils
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ZettaSpells.MODID);
 
     public static final RegistryObject<EntityType<TenebriaWillSigil>> TENEBRIA_WILL_SIGIL = ENTITY_TYPES.register("tenebria_will_sigil",
@@ -162,6 +163,13 @@ public class ZSEntities {
 
     // Entity Living
 
+    // Projectiles.
+    public static final RegistryObject<EntityType<OrbitingIceLanceEntity>> ORBITING_ICE_LANCE = ENTITY_TYPES.register("orbiting_ice_lance",
+            ()-> EntityType.Builder.<OrbitingIceLanceEntity>of(OrbitingIceLanceEntity::new, MobCategory.MISC)
+                    .sized(1,1)
+                    .clientTrackingRange(125)
+                    .updateInterval(10)
+                    .build("orbiting_ice_lance"));
 
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);
