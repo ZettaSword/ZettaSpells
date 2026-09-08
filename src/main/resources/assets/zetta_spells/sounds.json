@@ -170,5 +170,17 @@
       "ebwizardry:rumble"
     ],
     "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.ice_lances": {
+    "sounds": [
+      "ebwizardry:ice"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.falling_ground": {
+    "sounds": [
+      "ebwizardry:rumble"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
   }
 }

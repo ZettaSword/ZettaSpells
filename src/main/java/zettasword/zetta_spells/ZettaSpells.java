@@ -23,6 +23,7 @@ import org.spongepowered.asm.launch.MixinBootstrap;
 import zettasword.zetta_spells.blocks.ZSBlocks;
 import zettasword.zetta_spells.enchantments.ZSEnchantments;
 import zettasword.zetta_spells.entity.ZSEntities;
+import zettasword.zetta_spells.entity.renderers.RenderCircles;
 import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
@@ -75,8 +76,9 @@ public class ZettaSpells
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
-        // Registering all EBWiz Redux stuff
+        // Registering all EBWiz Redux stuff and not just that
         ZSEvents.register();
+        RenderCircles.register();
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, ZSConfig.SPEC);

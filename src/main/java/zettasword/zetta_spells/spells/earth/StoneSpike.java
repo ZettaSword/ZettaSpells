@@ -77,7 +77,7 @@ public class StoneSpike extends RaySpell {
                 serverLevel.levelEvent(2001, groundPos, Block.getId(state));
                 serverLevel.levelEvent(2001, groundPos.above(), Block.getId(state));
 
-                ZSSigil sigil = SigilCreator.create(serverLevel, groundPos.getCenter(), 40, "earth");
+                ZSSigil sigil = SigilCreator.create(serverLevel, groundPos.getCenter().add(new Vec3(0, 0.6,0)), 40, "earth");
                 serverLevel.addFreshEntity(sigil);
             }
             

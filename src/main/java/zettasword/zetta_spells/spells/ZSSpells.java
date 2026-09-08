@@ -80,4 +80,5 @@ public class ZSSpells {
 
     public static final RegistryObject<Spell> GROUND_ASCEND = SPELLS.register("ground_ascend", GroundAscend::new);
     public static final RegistryObject<Spell> ICE_LANCES = SPELLS.register("ice_lances", IceLancesSpell::new);
+    public static final RegistryObject<Spell> FALLING_GROUND = SPELLS.register("falling_ground", FallingGround::new);
 }

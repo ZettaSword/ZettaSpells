@@ -58,11 +58,13 @@ import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
+import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
 import zettasword.zetta_spells.items.spellbook.FinishedSpellbookItem;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.spells.magic.CustomPlayerSpell;
 import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.Alchemy;
+import zettasword.zetta_spells.system.SigilCreator;
 import zettasword.zetta_spells.system.loot.ZSLootTables;
 import zettasword.zetta_spells.system.particles.Alteria;
 
@@ -425,7 +427,15 @@ public class ZSEvents {
                 }
             }
         }
+        // Visual effects
+        if (event.getCaster() != null && !event.isCanceled()){
+            LivingEntity caster = event.getCaster();
+            ZSSigil sigil = SigilCreator.create(event.getLevel(), caster.getPosition(1.0F), 30, event.getSpell().getElement().getName());
+            sigil.setSizeMultiplier(1);
+            event.getLevel().addFreshEntity(sigil);
+        }
     }
+
 
     @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent

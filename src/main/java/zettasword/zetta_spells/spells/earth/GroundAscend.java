@@ -102,7 +102,7 @@ public class GroundAscend extends RaySpell {
     @Override
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
-                .assignBaseProperties(SpellTiers.MASTER, Elements.EARTH, SpellTypes.ALTERATION, SpellAction.POINT, 2500, 120, 1200)
+                .assignBaseProperties(SpellTiers.MASTER, Elements.EARTH, SpellTypes.ALTERATION, SpellAction.POINT, 1000, 120, 120)
                 .add(DefaultProperties.RANGE, 30F)
                 .build();
     }
@@ -264,7 +264,7 @@ public class GroundAscend extends RaySpell {
             }
         }
 
-        ZSSigil sigil = SigilCreator.create(level, center.getCenter(), 200, "earth");
+        ZSSigil sigil = SigilCreator.create(level, center.getCenter().add(new Vec3(0, 0.6,0)), 200, "earth");
         sigil.setSizeMultiplier(16);
         level.addFreshEntity(sigil);
 

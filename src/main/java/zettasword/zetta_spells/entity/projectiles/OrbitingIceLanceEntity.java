@@ -122,6 +122,23 @@ public class OrbitingIceLanceEntity extends MagicArrowEntity {
         return super.getDeltaMovement();
     }
 
+    /// Ticks when the arrow is in the air
+    @Override
+    public void ticksInAir() {
+        super.ticksInAir();
+        if (this.level().isClientSide){
+            if (this.isOrbiting() && this.tickCount % 5 == 0) {
+                ParticleBuilder.create(EBParticles.SNOW).pos(this.position().add(
+                        new Vec3(0.5f * level().random.nextFloat(),0.5f * level().random.nextFloat(),0.5f * level().random.nextFloat())
+                        ))
+                        .gravity(false).time(5).spawn(level());
+            }
+            if (!this.isOrbiting() && this.tickCount % 2 == 0){
+                ParticleBuilder.create(EBParticles.SNOW).pos(this.position()).gravity(true).spawn(level());
+            }
+        }
+    }
+
     @Override
     public void tick() {
         // Smoothly track the owner while in orbit mode

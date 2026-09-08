@@ -92,18 +92,19 @@ public class IceLancesSpell extends Spell {
     protected @NotNull SpellProperties properties() {
         return SpellProperties.builder()
                 .assignBaseProperties(
-                        SpellTiers.ADVANCED, 
+                        SpellTiers.MASTER,
                         Elements.ICE, 
                         SpellTypes.PROJECTILE, 
                         SpellAction.POINT, 
                         120,
                         0,
-                        20
+                        15
                 )
                 .add(DefaultProperties.RANGE, 20F)
-                .add(DefaultProperties.DAMAGE, 5F)
+                .add(DefaultProperties.DAMAGE, 12F)
                 .add(DefaultProperties.SPEED, 3.0F)
-                .add(DefaultProperties.EFFECT_DURATION, 100)
+                .add(DefaultProperties.EFFECT_DURATION, 400)
+                .add(DefaultProperties.EFFECT_STRENGTH, 0)
                 .build();
     }
 }

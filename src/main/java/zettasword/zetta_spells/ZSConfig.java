@@ -41,6 +41,10 @@ public class ZSConfig
             .comment("Debug. Is useful for me.")
             .define("debug", false);
 
+    private static final ForgeConfigSpec.BooleanValue CIRCLES_WHEN_CASTING_CONTINUOUS = BUILDER
+            .comment("Will circles appear in first and third person when casting continuous spells?")
+            .define("circlesWhenCastingContinuous", true);
+
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -50,6 +54,7 @@ public class ZSConfig
     public static boolean debug;
     public static List<? extends String> banned_mob_effects;
     public static List<? extends String> banned_summons;
+    public static boolean circlesWhenCastingContinuous;
 
     private static boolean validateMobEffectName(final Object obj)
     {
@@ -70,6 +75,7 @@ public class ZSConfig
         banned_mob_effects = BANNED_MOB_EFFECTS.get();
         banned_summons = BANNED_SUMMONS.get();
         debug = DEBUG.get();
+        circlesWhenCastingContinuous = CIRCLES_WHEN_CASTING_CONTINUOUS.get();
 
         // convert the list of strings into a set of items
         //items = ITEM_STRINGS.get().stream()

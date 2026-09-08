@@ -18,7 +18,7 @@ public class SigilCreator {
         };
         sigil.lifetime = lifetime;
         sigil.setLifetime(lifetime);
-        sigil.setPos(pos.add(new Vec3(0, 0.6,0)));
+        sigil.setPos(pos);
         return sigil;
     }
 }
