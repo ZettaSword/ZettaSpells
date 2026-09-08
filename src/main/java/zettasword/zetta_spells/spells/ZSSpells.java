@@ -20,10 +20,7 @@ import zettasword.zetta_spells.spells.magic.*;
 import zettasword.zetta_spells.spells.necromancy.Hex;
 import zettasword.zetta_spells.spells.necromancy.Resurrect;
 import zettasword.zetta_spells.spells.necromancy.TurnMinion;
-import zettasword.zetta_spells.spells.sorcery.AdvancedLevitationSigil;
-import zettasword.zetta_spells.spells.sorcery.LevitationSigil;
-import zettasword.zetta_spells.spells.sorcery.OreConversion;
-import zettasword.zetta_spells.spells.sorcery.Pull;
+import zettasword.zetta_spells.spells.sorcery.*;
 
 public class ZSSpells {
     public static final DeferredRegister<Spell> SPELLS = DeferredRegister.create(EBRegistries.SPELL, "zetta_spells");
@@ -81,4 +78,5 @@ public class ZSSpells {
     public static final RegistryObject<Spell> GROUND_ASCEND = SPELLS.register("ground_ascend", GroundAscend::new);
     public static final RegistryObject<Spell> ICE_LANCES = SPELLS.register("ice_lances", IceLancesSpell::new);
     public static final RegistryObject<Spell> FALLING_GROUND = SPELLS.register("falling_ground", FallingGround::new);
+    public static final RegistryObject<Spell> STARFALL = SPELLS.register("starfall", Starfall::new);
 }

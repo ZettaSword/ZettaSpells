@@ -10,6 +10,7 @@ import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.*;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilFire;
 import zettasword.zetta_spells.entity.custom.ExplodeItemEntity;
+import zettasword.zetta_spells.entity.custom.FallingStarEntity;
 import zettasword.zetta_spells.entity.projectiles.OrbitingIceLanceEntity;
 
 public class ZSEntities {
@@ -161,6 +162,22 @@ public class ZSEntities {
                     .build("sigil_healing")
     );
 
+    public static final RegistryObject<EntityType<ZSSigilFire>> STARFALL_SIGIL = ENTITY_TYPES.register("starfall_sigil",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("starfall_sigil")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilFire>> STARFLOOR = ENTITY_TYPES.register("starfloor",
+            () -> EntityType.Builder.<ZSSigilFire>of(ZSSigilFire::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("starfloor")
+    );
+
     // Entity Living
 
     // Projectiles.
@@ -171,6 +188,12 @@ public class ZSEntities {
                     .updateInterval(10)
                     .build("orbiting_ice_lance"));
 
+    public static final RegistryObject<EntityType<FallingStarEntity>> FALLING_STAR = ENTITY_TYPES.register("falling_star",
+            ()-> EntityType.Builder.<FallingStarEntity>of(FallingStarEntity::new, MobCategory.MISC)
+                    .sized(2.0F,2.0F)
+                    .clientTrackingRange(125)
+                    .updateInterval(10)
+                    .build("falling_star"));
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);
 }

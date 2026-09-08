@@ -182,5 +182,11 @@
       "ebwizardry:rumble"
     ],
     "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.starfall": {
+    "sounds": [
+      "ebwizardry:conjure_large"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
   }
 }

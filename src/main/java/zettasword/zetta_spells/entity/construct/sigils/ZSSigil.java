@@ -23,6 +23,7 @@ public class ZSSigil extends ScaledConstructEntity {
 
     public void setLifetime(int lifetime) {
         this.entityData.set(DATA_LIFETIME, lifetime);
+        this.lifetime = lifetime;
     }
 
     public int getLifetime() {
