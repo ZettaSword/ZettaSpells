@@ -43,6 +43,13 @@ public class Starfall extends RaySpell {
             starfallSigil.setSizeMultiplier(8F);
             starfallSigil.setCaster(ctx.caster());
             ctx.world().addFreshEntity(starfallSigil);
+
+            StarFloor floor = new StarFloor(ctx.world());
+            floor.setPos(entityHit.getEntity().blockPosition().getCenter().add(0, +0.6, 0));
+            floor.setLifetime(400);
+            floor.setSizeMultiplier(8F);
+            floor.setCaster(ctx.caster());
+            ctx.world().addFreshEntity(floor);
         }
         return true;
     }
