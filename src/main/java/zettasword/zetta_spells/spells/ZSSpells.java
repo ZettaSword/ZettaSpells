@@ -21,6 +21,7 @@ import zettasword.zetta_spells.spells.magic.*;
 import zettasword.zetta_spells.spells.necromancy.Hex;
 import zettasword.zetta_spells.spells.necromancy.Resurrect;
 import zettasword.zetta_spells.spells.necromancy.TurnMinion;
+import zettasword.zetta_spells.spells.necromancy.TurnOffMind;
 import zettasword.zetta_spells.spells.sorcery.*;
 
 public class ZSSpells {
@@ -82,4 +83,8 @@ public class ZSSpells {
     public static final RegistryObject<Spell> STARFALL = SPELLS.register("starfall", Starfall::new);
     public static final RegistryObject<Spell> SUMMON_WOOD_GOLEM = SPELLS.register("summon_wood_golem", SummonWoodGolem::new);
     public static final RegistryObject<Spell> LIGHTNING_DOMAIN = SPELLS.register("lightning_domain", LightningDomain::new);
+    public static final RegistryObject<Spell> TURN_OFF_MIND = SPELLS.register("turn_off_mind", TurnOffMind::new);
+    public static final RegistryObject<Spell> DISABLE_GRAVITY = SPELLS.register("disable_gravity", DisableGravity::new);
+
+    // TODO: ADD MISSING SOUNDS!
 }

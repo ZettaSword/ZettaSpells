@@ -106,6 +106,8 @@
   "spell.zetta_spells.explode_item": "Explode Item",
   "spell.zetta_spells.explode_item.desc": "Take any stacking item in other hand, like eggs, and use this spell to infuse it and place where you're looking, for some mischievous purposes!",
 
+  "spell.zetta_spells.turn_off_mind.refuse": "Entity resists. Try lowering its health.",
+
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
 
@@ -172,6 +174,7 @@
   "spellword.zetta_spells.teleport.description": "Allows you to teleport yourself or others to the different position. Define relative position with vec/vector/coordinates 'vector target x y z'. \n Example spell: 'Vec target 0 5 0, Teleport!' \n Teleport someone else: 'Vec target 0 5 0, Ray, Teleport!'",
 
   "spellword.zetta_spells.sigil": "Sigil",
-  "spellword.zetta_spells.sigil.description": "Creates a sigil on target place. Sigil activates when someone enters it, starting a spell (everything AFTER the 'sigil' word gets activated). \n Example spell: 'Ray sigil apply poison.'"
+  "spellword.zetta_spells.sigil.description": "Creates a sigil on target place. Sigil activates when someone enters it, starting a spell (everything AFTER the 'sigil' word gets activated). \n Example spell: 'Ray sigil apply poison.'",
+  "zetta_spells.learning_failed": "You slowly learn spell further."
 
 }

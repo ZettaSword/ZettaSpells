@@ -1,16 +1,12 @@
 package zettasword.zetta_spells.spells.lightning;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
-import com.binaris.wizardry.api.content.spell.Spell;
 import com.binaris.wizardry.api.content.spell.SpellAction;
 import com.binaris.wizardry.api.content.spell.SpellTypes;
-import com.binaris.wizardry.api.content.spell.internal.EntityCastContext;
-import com.binaris.wizardry.api.content.spell.internal.PlayerCastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
 import com.binaris.wizardry.api.content.util.EntityUtil;
 import com.binaris.wizardry.api.content.util.MagicDamageSource;
-import com.binaris.wizardry.content.entity.projectile.SparkBombEntity;
 import com.binaris.wizardry.content.spell.DefaultProperties;
 import com.binaris.wizardry.core.AllyDesignation;
 import com.binaris.wizardry.setup.registries.EBDamageSources;
@@ -18,8 +14,6 @@ import com.binaris.wizardry.setup.registries.EBMobEffects;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
-import net.minecraft.util.ParticleUtils;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,48 +21,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
+import zettasword.zetta_spells.spells.types.DomainSpell;
 import zettasword.zetta_spells.system.Alchemy;
 import zettasword.zetta_spells.system.SigilCreator;
 
 import java.util.Collections;
 import java.util.List;
 
-public class LightningDomain extends Spell {
+public class LightningDomain extends DomainSpell {
 
     public LightningDomain(){
-    }
-
-    /// This cast method is meant to be used for spells that are cast by a player source. This is useful for spells that
-    /// are meant to be cast by players, as it provides more information about the caster and the context of the cast.
-    ///
-    /// Override this method to implement the casting behavior for spells that are meant to be cast by players.
-    ///
-    /// @param ctx The context of the spell cast, containing information about the world, caster, hand used, modifiers, etc.
-    /// @return true if the spell was successfully cast, false otherwise. If this returns false, the spell will not be
-    /// considered as having been cast, so no cooldown will be applied.
-    @Override
-    public boolean cast(PlayerCastContext ctx) {
-        Level world = ctx.world();
-        LivingEntity caster = ctx.caster();
-        SpellModifiers mods = ctx.modifiers();
-        return createDomain(world, caster, mods, ctx.castingTicks());
-    }
-
-    /// This cast method is meant to be used for spells that are cast by an entity source, like a mob. This is
-    /// useful for spells that are meant to be cast by entities, as it provides more information about the caster and the
-    /// context of the cast.
-    ///
-    /// Override this method to implement the casting behavior for spells that are meant to be cast by entities.
-    ///
-    /// @param ctx The context of the spell cast, containing information about the world, caster, modifiers, etc.
-    /// @return true if the spell was successfully cast, false otherwise. If this returns false, the spell will not be
-    /// considered as having been cast, so no cooldown will be applied.
-    @Override
-    public boolean cast(EntityCastContext ctx) {
-        Level world = ctx.world();
-        LivingEntity caster = ctx.caster();
-        SpellModifiers mods = ctx.modifiers();
-        return createDomain(world, caster, mods, ctx.castingTicks());
     }
 
     public boolean createDomain(Level world, LivingEntity caster, SpellModifiers mods, int ticks) {

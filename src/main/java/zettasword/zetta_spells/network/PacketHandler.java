@@ -37,8 +37,14 @@ public class PacketHandler {
         // In PacketHandler.register():
         INSTANCE.messageBuilder(RaceCapabilitySyncPacketS2C.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(RaceCapabilitySyncPacketS2C::encode)
-                .decoder(RaceCapabilitySyncPacketS2C::decode)  // ✅ Must be static method reference
+                .decoder(RaceCapabilitySyncPacketS2C::decode)
                 .consumerMainThread(RaceCapabilitySyncPacketS2C::handle)
+                .add();
+
+        INSTANCE.messageBuilder(MayFlyPacketS2C.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(MayFlyPacketS2C::encode)
+                .decoder(MayFlyPacketS2C::decode)
+                .consumerMainThread(MayFlyPacketS2C::handle)
                 .add();
     }
 }

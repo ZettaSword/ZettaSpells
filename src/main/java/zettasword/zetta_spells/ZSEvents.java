@@ -336,6 +336,7 @@ public class ZSEvents {
     }
 
     public static void onPreCast(SpellCastEvent.Pre event){
+        if (event.isCanceled()) return;
         if (event.getCaster() instanceof  Player player){
             if (event.getSource() != SpellCastEvent.Sources.WAND && event.getSource() != SpellCastEvent.Sources.SCROLL) return;
             if (player.isCreative()) return;
@@ -357,6 +358,13 @@ public class ZSEvents {
                         boolean shouldTrigger = roll < chance;
                         if (shouldTrigger){
                             forfeit.apply(event.getLevel(), player);
+                            if (!player.level().isClientSide){
+                                data.addSpellKnowledge(spell, 1);
+                                player.displayClientMessage(Component.translatable("zetta_spells.learning_failed"), true);
+                            }
+                            if (player.level().isClientSide){
+                                player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP);
+                            }
 
                             if (player instanceof ServerPlayer) EBAdvancementTriggers.SPELL_FAILURE.triggerFor(player);
                             EntityUtil.playSoundAtPlayer(player, forfeit.getSound(), 1, 1);
@@ -384,6 +392,7 @@ public class ZSEvents {
     }
 
     public static void onAfterCast(SpellCastEvent.Post event){
+        if (event.isCanceled()) return;
         if (event.getCaster() instanceof Player player){
             if (event.isCanceled()) return;
             Level level = event.getLevel();
