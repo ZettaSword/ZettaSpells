@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.renderers.*;
+import zettasword.zetta_spells.entity.renderers.living.WoodGolemRenderer;
 
 @Mod.EventBusSubscriber(modid = ZettaSpells.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientZSEvents {
@@ -75,6 +76,9 @@ public class ClientZSEvents {
         event.registerEntityRenderer(ZSEntities.STARFLOOR.get(),
                 (ctx) -> new StarFloorRenderer(ctx, ZettaSpells.location("textures/sigils/circle_sorcery.png"), 0.4F, false));
 
+
+        // Living entities
+        event.registerEntityRenderer(ZSEntities.WOOD_GOLEM.get(), WoodGolemRenderer::new);
 
         // Projectiles
         event.registerEntityRenderer(ZSEntities.ORBITING_ICE_LANCE.get(), ctx -> new MagicArrowRenderer<>(ctx, WizardryMainMod.location("textures/entity/ice_lance.png")));

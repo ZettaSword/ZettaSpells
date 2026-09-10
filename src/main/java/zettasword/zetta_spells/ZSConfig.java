@@ -20,6 +20,28 @@ public class ZSConfig
             .comment("Is learning system is active? (It allows you cast spell, and slowly getting better at this spell, increasing potency and decreasing cost)")
             .define("learningSystem", true);
 
+    private static final ForgeConfigSpec.ConfigValue<Float> LEARNING_POTENCY = BUILDER
+            .comment("Max multiplier for this spell modifier. This spell modifier tells general power of the spell.")
+            .define("learningPotency", 100.0F);
+
+    private static final ForgeConfigSpec.ConfigValue<Float> LEARNING_COST = BUILDER
+            .comment("Min multiplier for this spell modifier. This modifier tells cost of the spell.")
+            .define("learningCost", 0.5F);
+
+    private static final ForgeConfigSpec.ConfigValue<Float> LEARNING_BLAST = BUILDER
+            .comment("Max multiplier for this spell modifier. This modifier modifies area of the spells.")
+            .define("learningBlast", 20.0F);
+
+    private static final ForgeConfigSpec.ConfigValue<Float> LEARNING_RANGE = BUILDER
+            .comment("Max multiplier for this spell modifier. This modifier modifies range of the spells.")
+            .define("learningRange", 50.0F);
+
+
+    private static final ForgeConfigSpec.ConfigValue<Float> LEARNING_HEALTH = BUILDER
+            .comment("Max multiplier for this spell modifier. This modifier modifies minion healths of the spells.")
+            .define("learningHealth", 10.0F);
+
+
     private static final ForgeConfigSpec.BooleanValue SPELLCREATION_ENABLED = BUILDER
             .comment("SpellCreation enabled? (Players can create own spells with Unfinished Spellbook and put it on the wand.)")
             .define("spellCreationEnabled", true);
@@ -45,6 +67,10 @@ public class ZSConfig
             .comment("Will circles appear in first and third person when casting continuous spells?")
             .define("circlesWhenCastingContinuous", true);
 
+    private static final ForgeConfigSpec.BooleanValue CIRCLES_ON_CAST = BUILDER
+            .comment("Will circles appear after you cast the spell?")
+            .define("circlesOnCast", true);
+
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -55,6 +81,12 @@ public class ZSConfig
     public static List<? extends String> banned_mob_effects;
     public static List<? extends String> banned_summons;
     public static boolean circlesWhenCastingContinuous;
+    public static boolean circlesOnCast;
+    public static float learningPotency;
+    public static float learningCost;
+    public static float learningBlast;
+    public static float learningRange;
+    public static float learningHealth;
 
     private static boolean validateMobEffectName(final Object obj)
     {
@@ -76,6 +108,13 @@ public class ZSConfig
         banned_summons = BANNED_SUMMONS.get();
         debug = DEBUG.get();
         circlesWhenCastingContinuous = CIRCLES_WHEN_CASTING_CONTINUOUS.get();
+        circlesOnCast = CIRCLES_ON_CAST.get();
+
+        learningPotency = LEARNING_POTENCY.get();
+        learningCost = LEARNING_COST.get();
+        learningBlast = LEARNING_BLAST.get();
+        learningRange = LEARNING_RANGE.get();
+        learningHealth = LEARNING_HEALTH.get();
 
         // convert the list of strings into a set of items
         //items = ITEM_STRINGS.get().stream()

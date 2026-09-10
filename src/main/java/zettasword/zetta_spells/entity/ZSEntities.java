@@ -11,6 +11,7 @@ import zettasword.zetta_spells.entity.construct.*;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilFire;
 import zettasword.zetta_spells.entity.custom.ExplodeItemEntity;
 import zettasword.zetta_spells.entity.custom.FallingStarEntity;
+import zettasword.zetta_spells.entity.living.WoodGolem;
 import zettasword.zetta_spells.entity.projectiles.OrbitingIceLanceEntity;
 
 public class ZSEntities {
@@ -179,6 +180,12 @@ public class ZSEntities {
     );
 
     // Entity Living
+    public static final RegistryObject<EntityType<WoodGolem>> WOOD_GOLEM = ENTITY_TYPES.register("wood_golem",
+            ()-> EntityType.Builder.<WoodGolem>of(WoodGolem::new, MobCategory.CREATURE)
+                    .sized(1.4f, 2.9f)
+                    .clientTrackingRange(125)
+                    .updateInterval(10)
+                    .build("wood_golem"));
 
     // Projectiles.
     public static final RegistryObject<EntityType<OrbitingIceLanceEntity>> ORBITING_ICE_LANCE = ENTITY_TYPES.register("orbiting_ice_lance",

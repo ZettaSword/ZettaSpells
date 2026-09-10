@@ -16,6 +16,7 @@ import zettasword.zetta_spells.spells.fire.ExplodeItem;
 import zettasword.zetta_spells.spells.fire.ExplosionSpell;
 import zettasword.zetta_spells.spells.fire.HeatHealing;
 import zettasword.zetta_spells.spells.ice.IceLancesSpell;
+import zettasword.zetta_spells.spells.lightning.LightningDomain;
 import zettasword.zetta_spells.spells.magic.*;
 import zettasword.zetta_spells.spells.necromancy.Hex;
 import zettasword.zetta_spells.spells.necromancy.Resurrect;
@@ -79,4 +80,6 @@ public class ZSSpells {
     public static final RegistryObject<Spell> ICE_LANCES = SPELLS.register("ice_lances", IceLancesSpell::new);
     public static final RegistryObject<Spell> FALLING_GROUND = SPELLS.register("falling_ground", FallingGround::new);
     public static final RegistryObject<Spell> STARFALL = SPELLS.register("starfall", Starfall::new);
+    public static final RegistryObject<Spell> SUMMON_WOOD_GOLEM = SPELLS.register("summon_wood_golem", SummonWoodGolem::new);
+    public static final RegistryObject<Spell> LIGHTNING_DOMAIN = SPELLS.register("lightning_domain", LightningDomain::new);
 }

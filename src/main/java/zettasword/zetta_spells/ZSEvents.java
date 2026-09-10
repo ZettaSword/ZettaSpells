@@ -29,7 +29,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -59,6 +58,7 @@ import zettasword.zetta_spells.entity.construct.CosmeticSigil;
 import zettasword.zetta_spells.entity.construct.DeathVesselEntity;
 import zettasword.zetta_spells.entity.construct.SystemCall;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
+import zettasword.zetta_spells.entity.living.WoodGolem;
 import zettasword.zetta_spells.items.spellbook.FinishedSpellbookItem;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
 import zettasword.zetta_spells.spells.magic.CustomPlayerSpell;
@@ -253,7 +253,6 @@ public class ZSEvents {
 
     private static final String TAG_RESURRECTED = "zetta_spells:no_drop";
 
-    //@OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity dyingEntity = event.getEntity();
@@ -368,8 +367,11 @@ public class ZSEvents {
                     // Adding to spell potency and more!
                     if (knowledge > 0 && !event.getLevel().isClientSide){
                         SpellModifiers mods = event.getModifiers();
-                        mods.set(SpellModifiers.POTENCY, Math.min(mods.get(SpellModifiers.POTENCY) + (knowledge * 0.0001F), 100.0F)); // Yeah, crazy stuff, I know.
-                        mods.set(SpellModifiers.COST, Math.max(mods.get(SpellModifiers.POTENCY) - (knowledge * 0.0001F), 0.5F));
+                        mods.set(SpellModifiers.POTENCY, Math.min(mods.get(SpellModifiers.POTENCY, 1.0F) + (knowledge * 0.0001F), ZSConfig.learningPotency)); // Yeah, crazy stuff, I know.
+                        mods.set(SpellModifiers.COST, Math.max(mods.get(SpellModifiers.COST, 1.0F) - (knowledge * 0.0001F), ZSConfig.learningCost));
+                        mods.set(SpellModifiers.BLAST, Math.max(mods.get(SpellModifiers.BLAST, 1.0F) + (knowledge * 0.0001F), ZSConfig.learningBlast));
+                        mods.set(SpellModifiers.RANGE, Math.max(mods.get(SpellModifiers.RANGE, 1.0F) + (knowledge * 0.0001F), ZSConfig.learningRange));
+                        mods.set(SpellModifiers.HEALTH_MODIFIER, Math.max(mods.get(SpellModifiers.HEALTH_MODIFIER, 1.0F) + (knowledge * 0.0001F), ZSConfig.learningHealth));
                         event.getModifiers().combine(mods);
                     }
                 });
@@ -428,7 +430,7 @@ public class ZSEvents {
             }
         }
         // Visual effects
-        if (event.getCaster() != null && !event.isCanceled()){
+        if (event.getCaster() != null && !event.isCanceled() && ZSConfig.circlesOnCast){
             LivingEntity caster = event.getCaster();
             ZSSigil sigil = SigilCreator.create(event.getLevel(), caster.getPosition(1.0F), 30, event.getSpell().getElement().getName());
             sigil.setSizeMultiplier(1);
