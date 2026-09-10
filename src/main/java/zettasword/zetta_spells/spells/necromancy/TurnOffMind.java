@@ -35,7 +35,7 @@ public class TurnOffMind extends RaySpell {
         if (entityHit.getEntity() instanceof Mob mob){
             if (mob.getHealth() < ctx.caster().getHealth()) {
                 if (!ctx.world().isClientSide) {
-                    mob.setNoAi(true);
+                    mob.setNoAi(!mob.isNoAi());
                     mob.getBrain().clearMemories();
                     //mob.removeFreeWill();
 
