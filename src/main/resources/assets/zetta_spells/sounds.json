@@ -147,7 +147,10 @@
   },
   "spell.flower_field": {
     "sounds": [
-      "ebwizardry:grow"
+      "dig/grass1",
+      "dig/grass2",
+      "dig/grass3",
+      "dig/grass4"
     ],
     "subtitle": "subtitles.ebwizardry.spell_casting"
   },
@@ -186,6 +189,65 @@
   "spell.starfall": {
     "sounds": [
       "ebwizardry:conjure_large"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.summon_wood_golem": {
+    "category": "spells",
+    "sounds": [
+      "ebwizardry:summon1",
+      "ebwizardry:summon2"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.lightning_domain.end": {
+    "sounds": [
+      "ebwizardry:lightning_ray_end"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.lightning_domain.loop": {
+    "sounds": [
+      "ebwizardry:lightning_ray_loop"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.lightning_domain.start": {
+    "sounds": [
+      "ebwizardry:lightning_ray_start"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.turn_off_mind": {
+    "sounds": [
+      "mob/wither/hurt1",
+      "mob/wither/hurt2",
+      "mob/wither/hurt3",
+      "mob/wither/hurt4"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.disable_gravity": {
+    "sounds": [
+      "ebwizardry:buff"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.mahou_impact.end": {
+    "sounds": [
+      "ebwizardry:beam_end"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.mahou_impact.loop": {
+    "sounds": [
+      "ebwizardry:beam_loop"
+    ],
+    "subtitle": "subtitles.ebwizardry.spell_casting"
+  },
+  "spell.mahou_impact.start": {
+    "sounds": [
+      "ebwizardry:beam_start"
     ],
     "subtitle": "subtitles.ebwizardry.spell_casting"
   }

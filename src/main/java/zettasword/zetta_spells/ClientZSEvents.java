@@ -5,14 +5,25 @@ import com.binaris.wizardry.client.renderer.entity.MagicArrowRenderer;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import zettasword.zetta_spells.entity.ZSEntities;
 import zettasword.zetta_spells.entity.renderers.*;
 import zettasword.zetta_spells.entity.renderers.living.WoodGolemRenderer;
+import zettasword.zetta_spells.particle.ParticleStoneSpike;
+import zettasword.zetta_spells.particle.ZSParticles;
 
 @Mod.EventBusSubscriber(modid = ZettaSpells.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientZSEvents {
+
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(
+                ZSParticles.EARTH_SPIKE.get(),
+                ParticleStoneSpike.StoneSpikeProvider::new
+        );
+    }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -75,6 +86,9 @@ public class ClientZSEvents {
 
         event.registerEntityRenderer(ZSEntities.STARFLOOR.get(),
                 (ctx) -> new StarFloorRenderer(ctx, ZettaSpells.location("textures/sigils/circle_sorcery.png"), 0.4F, false));
+
+        event.registerEntityRenderer(ZSEntities.MAHOU_SIGIL.get(),
+                (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/circle_mahou.png"), 2.0F, false));
 
 
         // Living entities

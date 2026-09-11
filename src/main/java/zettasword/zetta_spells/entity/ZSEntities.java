@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.*;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilFire;
+import zettasword.zetta_spells.entity.construct.sigils.ZSSigilMahou;
 import zettasword.zetta_spells.entity.custom.ExplodeItemEntity;
 import zettasword.zetta_spells.entity.custom.FallingStarEntity;
 import zettasword.zetta_spells.entity.living.WoodGolem;
@@ -169,6 +170,14 @@ public class ZSEntities {
                     .clientTrackingRange(160)
                     .updateInterval(10)
                     .build("starfall_sigil")
+    );
+
+    public static final RegistryObject<EntityType<ZSSigilMahou>> MAHOU_SIGIL = ENTITY_TYPES.register("mahou_sigil",
+            () -> EntityType.Builder.<ZSSigilMahou>of(ZSSigilMahou::new, MobCategory.MISC)
+                    .sized(2.0f, 0.5f)
+                    .clientTrackingRange(160)
+                    .updateInterval(10)
+                    .build("mahou_sigil")
     );
 
     public static final RegistryObject<EntityType<ZSSigilFire>> STARFLOOR = ENTITY_TYPES.register("starfloor",

@@ -7,9 +7,11 @@ import com.binaris.wizardry.api.content.spell.SpellTypes;
 import com.binaris.wizardry.api.content.spell.internal.CastContext;
 import com.binaris.wizardry.api.content.spell.internal.SpellModifiers;
 import com.binaris.wizardry.api.content.spell.properties.SpellProperties;
+import com.binaris.wizardry.api.content.util.EntityUtil;
 import com.binaris.wizardry.api.content.util.MagicDamageSource;
 import com.binaris.wizardry.content.spell.DefaultProperties;
 import com.binaris.wizardry.content.spell.abstr.RaySpell;
+import com.binaris.wizardry.core.AllyDesignation;
 import com.binaris.wizardry.setup.registries.EBDamageSources;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.SpellTiers;
@@ -30,7 +32,10 @@ import org.jetbrains.annotations.NotNull;
 import zettasword.zetta_spells.ZettaSpells;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilEarth;
+import zettasword.zetta_spells.particle.ZSParticles;
 import zettasword.zetta_spells.system.SigilCreator;
+
+import java.util.List;
 
 // AI generated with Qwen, modified by me.
 public class StoneSpike extends RaySpell {
@@ -54,11 +59,11 @@ public class StoneSpike extends RaySpell {
         if (entityHit.getEntity() instanceof LivingEntity living) {
             
             if (!ctx.world().isClientSide) {
-                float potency = ctx.modifiers().get(SpellModifiers.POTENCY);
-                float durationMod = ctx.modifiers().get(SpellModifiers.DURATION);
+                float potency = ctx.modifiers().get(SpellModifiers.POTENCY, 1.0F);
+                float durationMod = ctx.modifiers().get(SpellModifiers.DURATION, 1.0F);
 
                 float damage = this.property(DefaultProperties.DAMAGE) * potency;
-                living.hurt(MagicDamageSource.causeDirectMagicDamage(ctx.caster(), EBDamageSources.MAGIC), damage);
+                living.hurt(MagicDamageSource.causeDirectMagicDamage(ctx.caster(), EBDamageSources.POISON), damage);
 
                 double knockup = 0.5 + (potency * 0.1);
                 living.push(0, knockup, 0);
@@ -93,8 +98,30 @@ public class StoneSpike extends RaySpell {
             ServerLevel serverLevel = (ServerLevel) ctx.world();
             serverLevel.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                     SoundEvents.STONE_HIT, SoundSource.PLAYERS, 0.5F, 1.0F);
+
+            BlockState state = ctx.world().getBlockState(pos);
+            serverLevel.levelEvent(2001, pos, Block.getId(state));
+            serverLevel.levelEvent(2001, pos.above(), Block.getId(state));
+
+            ZSSigil sigil = SigilCreator.create(serverLevel, pos.getCenter().add(new Vec3(0, 0.6,0)), 40, "earth");
+            serverLevel.addFreshEntity(sigil);
+            float potency = ctx.modifiers().get(SpellModifiers.POTENCY, 1.0F);
+            float blast = ctx.modifiers().get(SpellModifiers.BLAST, 1.0F);
+            float damage = this.property(DefaultProperties.DAMAGE) * potency;
+
+            List<LivingEntity> list = EntityUtil.getLivingWithinRadius(3*blast, pos.getX(), pos.getY(), pos.getZ(), ctx.world());
+            if (ctx.caster() != null) {
+                list.removeIf(e -> e == ctx.caster());
+                list.removeIf(e -> !AllyDesignation.isValidTarget(ctx.caster(), e));
+            }
+            double knockup = 0.25 + (potency * 0.1);
+            for (LivingEntity living : list){
+                living.hurt(MagicDamageSource.causeDirectMagicDamage(ctx.caster(), EBDamageSources.POISON), damage/2F);
+                living.push(0, knockup, 0);
+                living.hasImpulse = true;
+            }
         }
-        return false;
+        return true;
     }
 
     @Override

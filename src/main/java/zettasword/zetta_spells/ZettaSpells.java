@@ -27,6 +27,7 @@ import zettasword.zetta_spells.entity.renderers.RenderCircles;
 import zettasword.zetta_spells.items.ZSItems;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.mob_effects.ZSEffects;
+import zettasword.zetta_spells.particle.ZSParticles;
 import zettasword.zetta_spells.spells.ZSSpells;
 import zettasword.zetta_spells.system.commands.SpellKnowledgeCommand;
 import zettasword.zetta_spells.system.loot.ZSLootFunctions;
@@ -64,6 +65,7 @@ public class ZettaSpells
         // Register items
         ZSItems.ITEMS.register(modEventBus);
         ZSSpells.SPELLS.register(modEventBus);
+        ZSParticles.PARTICLES.register(modEventBus);
         //ZSBiomes.BIOMES.register(modEventBus);
         //ZSLootFunctions.register(modEventBus);
         MixinBootstrap.init();

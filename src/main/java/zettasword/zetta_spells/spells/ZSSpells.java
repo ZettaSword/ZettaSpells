@@ -85,6 +85,7 @@ public class ZSSpells {
     public static final RegistryObject<Spell> LIGHTNING_DOMAIN = SPELLS.register("lightning_domain", LightningDomain::new);
     public static final RegistryObject<Spell> TURN_OFF_MIND = SPELLS.register("turn_off_mind", TurnOffMind::new);
     public static final RegistryObject<Spell> DISABLE_GRAVITY = SPELLS.register("disable_gravity", DisableGravity::new);
+    public static final RegistryObject<Spell> MAHOU_IMPACT = SPELLS.register("mahou_impact", MahouImpact::new);
 
     // TODO: ADD MISSING SOUNDS!
 }

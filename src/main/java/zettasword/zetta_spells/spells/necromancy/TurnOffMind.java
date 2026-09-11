@@ -42,7 +42,7 @@ public class TurnOffMind extends RaySpell {
                     ZSSigil sigil = SigilCreator.create(ctx.world(), mob.position(), 40, "necromancy");
                     ctx.world().addFreshEntity(sigil);
                     sigil = SigilCreator.create(ctx.world(), mob.position(), 30, "necromancy");
-                    sigil.setDeltaMovement(0, 0.1, 0);
+                    sigil.setDeltaMovement(0, 0.5, 0);
                     ctx.world().addFreshEntity(sigil);
                 }
             }else{

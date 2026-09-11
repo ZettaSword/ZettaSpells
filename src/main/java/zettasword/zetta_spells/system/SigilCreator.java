@@ -14,6 +14,7 @@ public class SigilCreator {
             case "necromancy" -> new ZSSigilNecromancy(level);
             case "healing" -> new ZSSigilHealing(level);
             case "sorcery" -> new ZSSigilSorcery(level);
+            case "mahou" -> new ZSSigilMahou(level);
             default -> new ZSSigilMagic(level);
         };
         sigil.lifetime = lifetime;

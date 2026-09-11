@@ -68,6 +68,15 @@ public class LightningDomain extends DomainSpell {
         return false;
     }
 
+    @Override
+    protected void playSound(Level world, LivingEntity entity, int castTicks, int duration) {
+        this.playSoundLoop(world, entity, castTicks);
+    }
+
+    @Override
+    protected void playSound(Level world, double x, double y, double z, int ticksInUse, int duration) {
+        this.playSoundLoop(world, x, y, z, ticksInUse, duration);
+    }
 
 
     @Override

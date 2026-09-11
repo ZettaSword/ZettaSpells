@@ -31,8 +31,4 @@ public class MayFlyPacketS2C {
         );
         ctx.get().setPacketHandled(true);
     }
-
-    public boolean getMayFly() {
-        return mayFly;
-    }
 }

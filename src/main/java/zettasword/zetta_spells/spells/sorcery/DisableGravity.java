@@ -17,9 +17,11 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkDirection;
 import org.jetbrains.annotations.NotNull;
+import zettasword.zetta_spells.entity.construct.sigils.ZSSigil;
 import zettasword.zetta_spells.network.MayFlyPacketS2C;
 import zettasword.zetta_spells.network.PacketHandler;
 import zettasword.zetta_spells.network.RaceCapabilitySyncPacketS2C;
+import zettasword.zetta_spells.system.SigilCreator;
 
 import javax.annotation.Nullable;
 
@@ -42,6 +44,9 @@ public class DisableGravity extends Spell {
             Player player = ctx.caster();
             boolean to_set = !player.getAbilities().mayfly;
             player.getAbilities().mayfly=to_set;
+            player.setDeltaMovement(0,0,0);
+            ZSSigil sigil = SigilCreator.create(ctx.world(), player.getPosition(1.0F).add(new Vec3(0, 0.6,0)), 40, "sorcery");
+            ctx.world().addFreshEntity(sigil);
 
             MayFlyPacketS2C packet = new MayFlyPacketS2C(to_set);
             PacketHandler.INSTANCE.sendTo(packet, ((ServerPlayer)player).connection.connection, NetworkDirection.PLAY_TO_CLIENT);
