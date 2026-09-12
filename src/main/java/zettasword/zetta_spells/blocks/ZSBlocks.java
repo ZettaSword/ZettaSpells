@@ -49,4 +49,14 @@ public class ZSBlocks {
                     .sound(SoundType.STONE)
             )
     );
+
+    public static final RegistryObject<Block> WARP_POINT = BLOCKS.register("warp_point",
+            () -> new WarpPointBlock(Block.Properties.copy(Blocks.WHITE_CARPET)
+                    .lightLevel((state) -> 15)
+                    .noOcclusion()
+                    .strength(0.1f)
+                    .sound(SoundType.WOOL)));
+
+
+
 }

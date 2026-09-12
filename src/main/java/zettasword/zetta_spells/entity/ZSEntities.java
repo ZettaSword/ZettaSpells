@@ -7,6 +7,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zettasword.zetta_spells.ZettaSpells;
+import zettasword.zetta_spells.blocks.WarpPointBlock;
+import zettasword.zetta_spells.blocks.ZSBlocks;
+import zettasword.zetta_spells.blocks.entities.WarpPointBlockEntity;
 import zettasword.zetta_spells.entity.construct.*;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilFire;
 import zettasword.zetta_spells.entity.construct.sigils.ZSSigilMahou;
@@ -212,4 +215,9 @@ public class ZSEntities {
                     .build("falling_star"));
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_E_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ZettaSpells.MODID);
+
+    public static final RegistryObject<BlockEntityType<WarpPointBlockEntity>> WARP_POINT = BLOCK_E_TYPES.register("warp_point",
+            () -> BlockEntityType.Builder.of(WarpPointBlockEntity::new, ZSBlocks.WARP_POINT.get()).build(null));
+
+
 }

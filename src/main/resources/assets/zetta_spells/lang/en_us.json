@@ -48,6 +48,7 @@
   "race.cooldown": "You need to wait until doing it once more.",
   "spell_knowledge.learning": "Learning spell. Progress: %s %%",
   "spell_knowledge.learned": "Spell Learned!",
+  "zetta_spells.learning_failed": "You slowly learn spell further. Keep casting!",
 
   "spellbook.byAuthor": "Spellbook by %s",
   "spellbook.shift_for_details": "Press shift to see the Spell.",
@@ -107,6 +108,12 @@
   "spell.zetta_spells.explode_item.desc": "Take any stacking item in other hand, like eggs, and use this spell to infuse it and place where you're looking, for some mischievous purposes!",
 
   "spell.zetta_spells.turn_off_mind.refuse": "Entity resists. Try lowering its health.",
+
+  "spell.zetta_spells.link_warp_points.first_selected": "First warp point selected. Cast on another warp point to link them.",
+  "spell.zetta_spells.link_warp_points.success": "Warp points linked successfully!",
+  "spell.zetta_spells.link_warp_points.not_linked": "This warp point is not linked to anything.",
+  "spell.zetta_spells.link_warp_points.no_linked_point": "Teleport failed — first warp point may have been destroyed.",
+  "spell.zetta_spells.link_warp_points.no_target_point": "Teleport failed — the target warp point may have been destroyed.",
 
   "effect.zetta_spells.undead": "Blessing of Undead",
   "effect.zetta_spells.undead.desc": "Blessing from Tenebria, granting temporary life as Undead, making all Undead passive.",
@@ -174,7 +181,4 @@
   "spellword.zetta_spells.teleport.description": "Allows you to teleport yourself or others to the different position. Define relative position with vec/vector/coordinates 'vector target x y z'. \n Example spell: 'Vec target 0 5 0, Teleport!' \n Teleport someone else: 'Vec target 0 5 0, Ray, Teleport!'",
 
   "spellword.zetta_spells.sigil": "Sigil",
-  "spellword.zetta_spells.sigil.description": "Creates a sigil on target place. Sigil activates when someone enters it, starting a spell (everything AFTER the 'sigil' word gets activated). \n Example spell: 'Ray sigil apply poison.'",
-  "zetta_spells.learning_failed": "You slowly learn spell further."
-
-}
+  "spellword.zetta_spells.sigil.description": "Creates a sigil on target place. Sigil activates when someone enters it, starting a spell (everything AFTER the 'sigil' word gets activated). \n Example spell: 'Ray sigil apply poison.'"}

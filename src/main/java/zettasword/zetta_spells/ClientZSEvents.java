@@ -89,7 +89,7 @@ public class ClientZSEvents {
 
         event.registerEntityRenderer(ZSEntities.MAHOU_SIGIL.get(),
                 (ctx) -> new ZSSigilRenderer(ctx, ZettaSpells.location("textures/sigils/circle_mahou.png"), 2.0F, false));
-
+        
 
         // Living entities
         event.registerEntityRenderer(ZSEntities.WOOD_GOLEM.get(), WoodGolemRenderer::new);

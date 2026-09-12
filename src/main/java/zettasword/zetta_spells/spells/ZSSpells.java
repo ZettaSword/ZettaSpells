@@ -86,6 +86,8 @@ public class ZSSpells {
     public static final RegistryObject<Spell> TURN_OFF_MIND = SPELLS.register("turn_off_mind", TurnOffMind::new);
     public static final RegistryObject<Spell> DISABLE_GRAVITY = SPELLS.register("disable_gravity", DisableGravity::new);
     public static final RegistryObject<Spell> MAHOU_IMPACT = SPELLS.register("mahou_impact", MahouImpact::new);
+    public static final RegistryObject<Spell> PLACE_WARP_POINT = SPELLS.register("place_warp_point", PlaceWarpPoint::new);
+    public static final RegistryObject<Spell> LINK_WARP_POINTS = SPELLS.register("link_warp_points", LinkWarpPoints::new);
 
     // TODO: ADD MISSING SOUNDS!
 }
