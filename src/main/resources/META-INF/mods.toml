@@ -69,5 +69,19 @@ versionRange = "[1.1.17,)"
 ordering = "AFTER"
 side = "BOTH"
 
+[[dependencies.zetta_spells]]
+modId = "accessories"
+mandatory = false
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.zetta_spells]]
+modId = "curios"
+mandatory = false
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
 [[mixins.zetta_spells]]
 config = "zetta_spells.mixins.json"

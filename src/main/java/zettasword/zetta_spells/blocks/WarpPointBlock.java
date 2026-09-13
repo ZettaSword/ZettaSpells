@@ -2,6 +2,7 @@ package zettasword.zetta_spells.blocks;
 
 import com.binaris.wizardry.api.client.ParticleBuilder;
 import com.binaris.wizardry.client.renderer.entity.RemnantRenderer;
+import com.binaris.wizardry.core.integrations.ArtifactChannel;
 import com.binaris.wizardry.setup.registries.Elements;
 import com.binaris.wizardry.setup.registries.client.EBParticles;
 import net.minecraft.ChatFormatting;
@@ -34,6 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zettasword.zetta_spells.blocks.entities.WarpPointBlockEntity;
+import zettasword.zetta_spells.items.ZSItems;
 
 public class WarpPointBlock extends Block implements EntityBlock {
 
@@ -49,6 +51,9 @@ public class WarpPointBlock extends Block implements EntityBlock {
     @Override
     public void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Entity entity) {
         if (entity instanceof LivingEntity living && !level.isClientSide()){
+            // Return if it's player with Lost Teleporter Ring.
+            if (living instanceof Player player && ArtifactChannel.isEquipped(player, ZSItems.LOST_TELEPORTER_RING.get()))
+                return;
             BlockEntity e = level.getBlockEntity(blockPos);
             if (e instanceof WarpPointBlockEntity warp){
                 if (warp.hasTarget()){
@@ -72,6 +77,8 @@ public class WarpPointBlock extends Block implements EntityBlock {
         if (player.getPortalCooldown() > 0){
             return InteractionResult.PASS;
         }
+
+        if (!ArtifactChannel.isEquipped(player, ZSItems.LOST_TELEPORTER_RING.get())) return InteractionResult.PASS;
 
         if (level.isClientSide) return InteractionResult.SUCCESS;
 

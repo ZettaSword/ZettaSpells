@@ -88,6 +88,7 @@ public class ZSSpells {
     public static final RegistryObject<Spell> MAHOU_IMPACT = SPELLS.register("mahou_impact", MahouImpact::new);
     public static final RegistryObject<Spell> PLACE_WARP_POINT = SPELLS.register("place_warp_point", PlaceWarpPoint::new);
     public static final RegistryObject<Spell> LINK_WARP_POINTS = SPELLS.register("link_warp_points", LinkWarpPoints::new);
+    public static final RegistryObject<Spell> WORM = SPELLS.register("worm", Worm::new);
 
     // TODO: ADD MISSING SOUNDS!
 }

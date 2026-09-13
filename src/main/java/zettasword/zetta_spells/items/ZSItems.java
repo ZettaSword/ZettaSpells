@@ -1,7 +1,9 @@
 package zettasword.zetta_spells.items;
 
+import com.binaris.wizardry.core.integrations.ArtifactChannel;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -29,6 +31,7 @@ public class ZSItems {
     public static final RegistryObject<Item> SPELLWORD_ITEM = ITEMS.register("spellword_item", SpellWordItem::new);
     public static final RegistryObject<Item> LANTERN_OF_KNOWLEDGE = ITEMS.register("lantern_of_knowledge", LanternOfKnowledge::new);
    //public static final RegistryObject<Item> CUSTOM_SPELLBOOK = ITEMS.register("custom_spellbook", CustomSpellBook::new);
+    public static final RegistryObject<Item> LOST_TELEPORTER_RING = ITEMS.register("lost_teleporter_ring", () -> ArtifactChannel.createArtifact(Rarity.RARE, null));
 
     // Block Items
 
@@ -37,4 +40,5 @@ public class ZSItems {
 
     public static final RegistryObject<Item> WHITE_BLOCK_ITEM = ITEMS.register("white_block",
             () -> new BlockItem(ZSBlocks.WHITE_BLOCK.get(), new Item.Properties()));
+
 }
